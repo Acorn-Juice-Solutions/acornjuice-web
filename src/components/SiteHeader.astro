@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+import logo from '~/assets/logo.png';
 import LanguageSwitcher from './LanguageSwitcher.astro';
 import { type Locale, useTranslator } from '~/utils/i18n';
 
@@ -20,12 +22,14 @@ const about = locale === 'es' ? '/es/sobre/' : '/about/';
 <header class="site-header">
   <div class="container header-row">
     <a class="brand" href={home} aria-label={t('site.name')}>
-      <img
+      <Image
         class="brand-logo"
-        src="/assets/logo.png"
-        width="512"
-        height="512"
+        src={logo}
+        width={72}
+        height={72}
+        densities={[1, 2]}
         alt=""
+        loading="eager"
         decoding="async"
         fetchpriority="high"
       />
