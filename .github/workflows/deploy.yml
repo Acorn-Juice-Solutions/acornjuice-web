@@ -68,7 +68,7 @@ jobs:
           path: ./dist
       - run: npm run test:hreflang
       - run: npm run test:schema
-      - name: Link check (internal + acornjuice.com only)
+      - name: Link check (internal links only)
         run: npm run test:links
 
   a11y:

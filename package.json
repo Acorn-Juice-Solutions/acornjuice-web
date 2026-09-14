@@ -15,7 +15,7 @@
     "test:hreflang": "node scripts/check-hreflang.mjs",
     "test:schema": "node scripts/check-schema.mjs",
     "test:page-types": "node scripts/check-page-types.mjs",
-    "test:links": "linkinator ./dist --recurse --skip 'mailto:' --skip 'https?://(?!acornjuice\\.com|localhost)'",
+    "test:links": "linkinator ./dist --config linkinator.config.json",
     "test:axe": "playwright test",
     "test:lighthouse": "lhci autorun",
     "test": "npm run check && npm run test:i18n && npm run test:hreflang && npm run test:schema && npm run test:page-types"

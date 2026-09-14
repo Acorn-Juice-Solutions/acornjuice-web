@@ -20,10 +20,10 @@ const targetHreflang = targetLocale === 'es' ? 'es-ES' : 'en';
   href={targetPath}
   hreflang={targetHreflang}
   lang={targetHreflang}
-  aria-label={t('language.switcher_label')}
+  title={t('language.switcher_label')}
 >
-  <span aria-hidden="true">{t('language.other_short')}</span>
-  <span class="visually-hidden">{t('language.other')}</span>
+  <span>{t('language.other_short')}</span>
+  <span class="visually-hidden">&nbsp;{t('language.other')}</span>
 </a>
 
 <style>

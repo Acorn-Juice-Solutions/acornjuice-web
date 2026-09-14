@@ -23,6 +23,24 @@ for (const page of KEY_PAGES) {
       JSON.stringify(results.violations, null, 2),
     ).toEqual([]);
   });
+
+  // Separate pass for label-content-name-mismatch (WCAG 2.5.3). axe-core tags
+  // it as best-practice only, so it isn't picked up by the wcag* tag filter
+  // above. Lighthouse enforces it, so we mirror that here to catch regressions
+  // like aria-label overriding visible link text.
+  test(`${page.name} passes label-content-name-mismatch`, async ({
+    page: browser,
+  }) => {
+    await browser.goto(page.path);
+    const results = await new AxeBuilder({ page: browser })
+      .withRules(['label-content-name-mismatch'])
+      .analyze();
+
+    expect(
+      results.violations,
+      JSON.stringify(results.violations, null, 2),
+    ).toEqual([]);
+  });
 }
 
 test('contact form is keyboard navigable', async ({ page }) => {
@@ -42,6 +60,14 @@ test('contact form is keyboard navigable', async ({ page }) => {
 
   await page.keyboard.press('Tab');
   await expect(page.locator('input[name="data_consent"]')).toBeFocused();
+
+  // The consent label contains an inline privacy-policy link, which is part of
+  // the natural tab order between the checkbox and the submit button. Assert
+  // that step explicitly instead of assuming Tab jumps straight to submit.
+  await page.keyboard.press('Tab');
+  await expect(
+    page.locator('.form-consent a[href$="/privacy/"]'),
+  ).toBeFocused();
 
   await page.keyboard.press('Tab');
   await expect(page.locator('.contact-submit')).toBeFocused();

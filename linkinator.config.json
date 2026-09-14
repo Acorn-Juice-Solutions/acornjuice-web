@@ -1,0 +1,7 @@
+{
+  "recurse": true,
+  "skip": [
+    "^mailto:",
+    "^https?://(?!localhost|127\\.0\\.0\\.1)"
+  ]
+}
