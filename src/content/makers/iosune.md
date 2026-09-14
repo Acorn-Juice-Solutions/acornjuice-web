@@ -18,8 +18,11 @@ skills:
     - "Databases"
     - "AWS"
     - "Serverless"
-    - "3D modelling & rendering"
+    - "3D modelling"
+    - "Texturing"
     - "Rigging"
+    - "Sculpting"
+    - "3D rendering"
   es:
     - "Java"
     - ".NET"
@@ -30,10 +33,15 @@ skills:
     - "Bases de datos"
     - "AWS"
     - "Serverless"
-    - "Modelado y renderizado 3D"
+    - "Modelado 3D"
+    - "Texturizado"
     - "Rigging"
+    - "Esculpido"
+    - "Renderizado 3D"
 linkedin: "https://www.linkedin.com/in/iosunegoni"
 github: "https://github.com/Neonexus29"
+artstation: "https://www.artstation.com/iosune3d/profile"
+vimeo: "https://vimeo.com/120832860"
 consentedToPublish: true
 order: 20
 ---

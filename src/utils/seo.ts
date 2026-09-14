@@ -98,7 +98,12 @@ function baseNodes(locale: Locale): GraphNode[] {
     name: 'Iosune Goñi',
     jobTitle: 'Co-founder & Developer',
     worksFor: { '@id': ORG_ID },
-    sameAs: ['https://www.linkedin.com/in/iosunegoni'],
+    sameAs: [
+      'https://www.linkedin.com/in/iosunegoni',
+      'https://github.com/Neonexus29',
+      'https://www.artstation.com/iosune3d',
+      'https://vimeo.com/120832860',
+    ],
   });
 
   nodes.push({

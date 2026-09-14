@@ -90,6 +90,8 @@ const makers = defineCollection({
     skills: bilingualArray,
     linkedin: z.url(),
     github: z.url().optional(),
+    artstation: z.url().optional(),
+    vimeo: z.url().optional(),
     avatar: z.string().optional(),
     /**
      * Consent gate: makers are NEVER rendered publicly until this is true.
