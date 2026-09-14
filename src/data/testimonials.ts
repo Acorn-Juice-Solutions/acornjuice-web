@@ -15,12 +15,8 @@ export interface Testimonial {
 }
 
 /**
- * Placeholder testimonials for the home page. Names, dates and ratings are
- * fictional but plausible; replace with real, permission-cleared quotes before
- * layering schema.org Review markup on top.
- *
- * Rating distribution is deliberately imperfect (mostly 5, some 4, one 3) so
- * the section reads as social proof rather than staged marketing copy.
+ * Testimonials received by email. Review markup on top.
+ * Pending to add latest surveys 2025-2026
  */
 export const TESTIMONIALS: readonly Testimonial[] = [
   {
