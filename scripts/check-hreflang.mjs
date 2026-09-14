@@ -13,7 +13,7 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const DIST = join(ROOT, 'dist');
-const SITE_URL = 'https://acornjuice.com';
+const SITE_URL = 'https://www.acornjuice.com';
 
 const RED = '\x1b[31m';
 const GREEN = '\x1b[32m';

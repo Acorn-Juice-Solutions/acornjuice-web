@@ -1,7 +1,7 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
-const SITE = 'https://acornjuice.com';
+const SITE = 'https://www.acornjuice.com';
 
 export default defineConfig({
   site: SITE,

@@ -1,6 +1,6 @@
 import type { Locale } from './i18n';
 
-const SITE_URL = 'https://acornjuice.com';
+const SITE_URL = 'https://www.acornjuice.com';
 
 export const ORG_ID = `${SITE_URL}/#organization`;
 export const LOGO_ID = `${SITE_URL}/#logo`;

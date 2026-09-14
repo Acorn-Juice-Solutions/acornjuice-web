@@ -31,7 +31,7 @@ export const PAGE_PAIRS: readonly PagePair[] = [
   { en: '/thanks/', es: '/es/gracias/', noindex: true },
 ];
 
-const SITE_URL = 'https://acornjuice.com';
+const SITE_URL = 'https://www.acornjuice.com';
 
 /** Look up the pair (en+es paths) that contains the given path. */
 export function getPair(currentPath: string): PagePair {
