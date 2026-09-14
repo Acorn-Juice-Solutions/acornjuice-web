@@ -1,5 +1,12 @@
 ---
 import '~/styles/globals.css';
+// Import the primary latin font subsets as URLs so we can emit <link rel=preload>
+// tags with the same hashed filenames Vite bakes into the inlined @font-face
+// rules. This turns the (inlined) HTML → font critical dependency into two
+// parallel fetches instead of a serial chain, which is what Lighthouse's
+// network-dependency-tree insight scores against.
+import interLatinUrl from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
+import newsreaderLatinUrl from '@fontsource-variable/newsreader/files/newsreader-latin-wght-normal.woff2?url';
 import SiteHeader from '~/components/SiteHeader.astro';
 import SiteFooter from '~/components/SiteFooter.astro';
 import StructuredData from '~/components/StructuredData.astro';
@@ -109,6 +116,21 @@ const gaId = analyticsEnabled() ? GA_MEASUREMENT_ID : '';
     <meta name="author" content="Acorn Juice Solutions" />
 
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <link
+      rel="preload"
+      href={interLatinUrl}
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href={newsreaderLatinUrl}
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
 
     <StructuredData graph={graph} />
 
