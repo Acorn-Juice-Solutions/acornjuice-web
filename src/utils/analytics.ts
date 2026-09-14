@@ -6,7 +6,7 @@
  * with the real `G-XXXXXXXXXX`. Until it is set, the value stays empty and no
  * analytics script is loaded even after consent.
  */
-export const GA_MEASUREMENT_ID = '';
+export const GA_MEASUREMENT_ID = 'G-BBTBREVTWR';
 
 export function analyticsEnabled(): boolean {
   return GA_MEASUREMENT_ID.trim().length > 0;
