@@ -64,7 +64,13 @@
       "infra_body": "Automatización DevOps, provisión de entornos, monitorización y networking — incluyendo configuración de routers Mikrotik para setups on-prem o híbridos."
     },
     "contact_heading": "Escríbenos",
-    "contact_lede": "¿Tienes una pregunta, una idea o un proyecto que quieras que miremos? Cuéntanos."
+    "contact_lede": "¿Tienes una pregunta, una idea o un proyecto que quieras que miremos? Cuéntanos.",
+    "testimonials": {
+      "heading": "Qué dicen nuestros clientes",
+      "lede": "Una pequeña selección de opiniones de equipos con los que hemos trabajado desde 2019.",
+      "aria_region": "Opiniones de clientes",
+      "aria_rating": "{count} de 5 estrellas"
+    }
   },
   "about": {
     "title": "Sobre Acorn Juice Solutions",
