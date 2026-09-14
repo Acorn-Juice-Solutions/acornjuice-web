@@ -1,7 +1,7 @@
 # acornjuice-web
 
 Corporate landing for **Acorn Juice Solutions SL** — served at
-[https://acornjuice.com](https://acornjuice.com).
+[https://www.acornjuice.com](https://www.acornjuice.com).
 
 Bilingual (EN + ES) static site built with [Astro](https://astro.build/),
 deployed to GitHub Pages. See `.my-notes/` (local, not tracked) for the
