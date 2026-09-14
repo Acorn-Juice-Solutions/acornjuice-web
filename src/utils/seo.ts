@@ -25,8 +25,15 @@ export type SchemaGraph = {
   '@graph': GraphNode[];
 };
 
-/** Base Organization + Persons + Logo, present on every page. */
-function baseNodes(): GraphNode[] {
+/**
+ * Base Organization + Persons + Logo + WebSite, present on every page.
+ *
+ * The WebSite node lives here (not on a per-page basis) because generic
+ * WebPage nodes reference it via `isPartOf`; keeping it in the base graph
+ * guarantees every `#website` reference resolves and avoids dangling @id
+ * pointers flagged by `scripts/check-schema.mjs`.
+ */
+function baseNodes(locale: Locale): GraphNode[] {
   const nodes: GraphNode[] = [];
 
   // Javier is the senior partner — he appears first in both the visible maker
@@ -94,19 +101,16 @@ function baseNodes(): GraphNode[] {
     sameAs: ['https://www.linkedin.com/in/iosunegoni'],
   });
 
-  return nodes;
-}
-
-/** WebSite node (typically added on the home page). */
-export function websiteNode(locale: Locale): GraphNode {
-  return {
+  nodes.push({
     '@type': 'WebSite',
     '@id': `${SITE_URL}/#website`,
     url: `${SITE_URL}/`,
     name: 'Acorn Juice Solutions',
     inLanguage: locale === 'es' ? 'es-ES' : 'en',
     publisher: { '@id': ORG_ID },
-  };
+  });
+
+  return nodes;
 }
 
 /** Generic WebPage node — used on legal / thanks / etc. */
@@ -130,12 +134,16 @@ export function webpageNode(opts: {
 
 /**
  * Build the final JSON-LD graph to inject in the page.
- * Callers pass any page-specific extra nodes (WebSite, WebPage, Software/MobileApplication,
- * CollectionPage + ItemList, …) and they are appended to the base.
+ * Callers pass any page-specific extra nodes (WebPage, Software/MobileApplication,
+ * CollectionPage + ItemList, …) and they are appended to the base. The base
+ * already includes Organization, Persons, Logo and WebSite.
  */
-export function buildGraph(extraNodes: GraphNode[] = []): SchemaGraph {
+export function buildGraph(
+  locale: Locale,
+  extraNodes: GraphNode[] = [],
+): SchemaGraph {
   return {
     '@context': 'https://schema.org',
-    '@graph': [...baseNodes(), ...extraNodes],
+    '@graph': [...baseNodes(locale), ...extraNodes],
   };
 }

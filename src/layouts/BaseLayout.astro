@@ -20,7 +20,7 @@ import {
 interface Props {
   title: string;
   description: string;
-  extraGraphNodes?: Parameters<typeof buildGraph>[0];
+  extraGraphNodes?: Parameters<typeof buildGraph>[1];
   ogImage?: string;
   ogType?: 'website' | 'article';
   /**
@@ -55,7 +55,7 @@ const alternates = getHreflangs(currentPath);
 const noindex = isNoindex(currentPath);
 
 const ogImageAbsolute = new URL(ogImage, Astro.site).toString();
-const graph: SchemaGraph = buildGraph(extraGraphNodes ?? []);
+const graph: SchemaGraph = buildGraph(locale, extraGraphNodes ?? []);
 
 const gaId = analyticsEnabled() ? GA_MEASUREMENT_ID : '';
 ---
