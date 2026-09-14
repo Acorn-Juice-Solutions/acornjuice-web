@@ -40,7 +40,7 @@ skills:
     - "Renderizado 3D"
 linkedin: "https://www.linkedin.com/in/iosunegoni"
 github: "https://github.com/Neonexus29"
-artstation: "https://www.artstation.com/iosune3d/profile"
+artstation: "https://www.artstation.com/iosune3d"
 vimeo: "https://vimeo.com/120832860"
 consentedToPublish: true
 order: 20
