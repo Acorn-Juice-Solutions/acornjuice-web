@@ -17,8 +17,6 @@ const slugForLocale = locale === 'es' ? data.slugEs : data.slug;
 const productPath =
   locale === 'es' ? `/es/productos/${slugForLocale}/` : `/products/${slugForLocale}/`;
 
-// Drafts are shown in the grid but have no detail page yet (getStaticPaths
-// skips them). Render an inert card with a "Coming soon" badge instead.
 const isDraft = data.status === 'draft';
 const statusLabel = t(`products.status_${data.status}` as const);
 
@@ -36,7 +34,7 @@ const platformLabels: Record<string, string> = {
 <article class:list={['product-card', isDraft && 'product-card--draft']}>
   <div class="product-card-header">
     <h3 class="product-card-name">
-      {isDraft ? name : <a href={productPath}>{name}</a>}
+      <a href={productPath}>{name}</a>
     </h3>
     <span
       class:list={[
@@ -56,13 +54,9 @@ const platformLabels: Record<string, string> = {
     }
   </ul>
 
-  {
-    isDraft ? null : (
-      <a href={productPath} class="product-card-cta">
-        {t('products.learn_more')} →
-      </a>
-    )
-  }
+  <a href={productPath} class="product-card-cta">
+    {t('products.learn_more')} →
+  </a>
 </article>
 
 <style>
@@ -121,11 +115,6 @@ const platformLabels: Record<string, string> = {
 
   .product-card--draft {
     background: var(--color-bg-alt);
-  }
-
-  .product-card--draft:hover {
-    transform: none;
-    box-shadow: none;
   }
 
   .product-card-tagline {

@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '~/layouts/BaseLayout.astro';
 import MakerCard from '~/components/MakerCard.astro';
+import SectorChips from '~/components/SectorChips.astro';
 import { useTranslator } from '~/utils/i18n';
 import { webpageNode } from '~/utils/seo';
 
@@ -11,20 +12,6 @@ const t = useTranslator(locale);
 const makers = (await getCollection('makers'))
   .filter((m) => m.data.consentedToPublish)
   .sort((a, b) => a.data.order - b.data.order);
-
-const SECTORS = [
-  'Retail banking',
-  'Fintech & payments',
-  'Savings banks',
-  'Public safety',
-  'Justice',
-  'Insurance',
-  'Construction',
-  'Industry',
-  'Engineering',
-  'Occupational health & safety',
-  'Transport',
-];
 
 const title = t('meta.about_title');
 const description = t('meta.about_description');
@@ -42,6 +29,7 @@ const canonical = 'https://acornjuice.com/about/';
       locale,
     }),
   ]}
+  pageType="team"
 >
   <section class="section">
     <div class="container container-narrow">
@@ -63,9 +51,7 @@ const canonical = 'https://acornjuice.com/about/';
     <div class="container container-narrow">
       <h2>{t('about.experience_heading')}</h2>
       <p>{t('about.experience_body')}</p>
-      <ul class="sector-chips" aria-label="Sectors">
-        {SECTORS.map((s) => <li>{s}</li>)}
-      </ul>
+      <SectorChips locale={locale} />
       <p class="experience-approach">{t('about.experience_approach')}</p>
       <p class="experience-note">{t('about.experience_note')}</p>
     </div>
@@ -92,24 +78,6 @@ const canonical = 'https://acornjuice.com/about/';
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: var(--space-4);
-  }
-
-  .sector-chips {
-    list-style: none;
-    padding: 0;
-    margin: var(--space-4) 0 var(--space-3);
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-2);
-  }
-
-  .sector-chips li {
-    padding: var(--space-1) var(--space-3);
-    background: var(--color-bg-alt);
-    border: 1px solid var(--color-line);
-    border-radius: 999px;
-    font-size: var(--text-sm);
-    color: var(--color-ink);
   }
 
   .experience-approach {

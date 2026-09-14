@@ -38,14 +38,18 @@
     "makers_heading": "The team. Complementary skills.",
     "makers_lede": "Every product gets personal attention and reflects the work of the team behind it.",
     "approach_heading": "How we work",
-    "approach_lede": "Every product and every engagement — commercial or not — follows the same three principles.",
+    "approach_lede": "Every product and every engagement — commercial or not — follows the same five principles.",
     "approach": {
       "craft_title": "Best practices, by default",
-      "craft_body": "Code review, testing gates, documented conventions and CI that fails loud. Nothing ships that we would not be comfortable handing off to a senior partner.",
+      "craft_body": "Code review, tests (unit, integration and E2E), documented conventions and CI that fails loud. Nothing ships that we would not be comfortable handing off to a senior partner.",
       "patterns_title": "Proven patterns over shortcuts",
       "patterns_body": "Design patterns and architectural choices with a track record. We reach for the well-understood solution first, and only consider the clever one when it truly fits.",
       "security_title": "Security is not an afterthought",
-      "security_body": "Input validation at trust boundaries, secrets kept out of the repo, principle of least privilege, auditable dependencies. Built in from the first commit, not bolted on before release."
+      "security_body": "Input validation at trust boundaries, secrets kept out of the repo, principle of least privilege, auditable dependencies. Built in from the first commit, not bolted on before release.",
+      "iterative_title": "Iterative, reviewed delivery",
+      "iterative_body": "We work in short cycles: sprint planning, incremental delivery and client review every iteration. Adjusting early is cheaper than fixing later.",
+      "efficiency_title": "Time well spent",
+      "efficiency_body": "We take time seriously: short, agenda-driven meetings, automation for anything that repeats, and focus on the work that adds value. Less noise, more outcome."
     },
     "services_heading": "What else we do",
     "services_lede": "Beyond our own products, we also work with teams as an extension of theirs. A short, honest list of what we can take on:",
@@ -64,7 +68,7 @@
   },
   "about": {
     "title": "About Acorn Juice Solutions",
-    "lede": "Independent software studio from Navarra, Spain. Our team brings complementary skills and prefers tools that do one thing well.",
+    "lede": "Independent software studio from Navarra, Spain. Our team brings complementary skills and puts quality over quantity: we prefer to build less, well-crafted, rather than ship in bulk.",
     "story_heading": "Where we come from",
     "makers_heading": "Meet the makers",
     "experience_heading": "Experience",
@@ -89,7 +93,9 @@
     "platforms_heading": "Available on",
     "links_heading": "Get it",
     "made_by_heading": "Made by",
-    "screenshots_heading": "Screenshots"
+    "screenshots_heading": "Screenshots",
+    "coming_soon_heading": "Availability",
+    "coming_soon_body": "Coming soon. Download links will appear here once the product launches."
   },
   "contact": {
     "field_email": "Email",

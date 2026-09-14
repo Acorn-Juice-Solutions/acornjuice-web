@@ -38,14 +38,18 @@
     "makers_heading": "El equipo. Habilidades complementarias.",
     "makers_lede": "Cada producto recibe atención personal y refleja el trabajo del equipo que lo hace.",
     "approach_heading": "Cómo trabajamos",
-    "approach_lede": "Cada producto y cada proyecto — comercial o no — sigue los mismos tres principios.",
+    "approach_lede": "Cada producto y cada proyecto — comercial o no — sigue los mismos cinco principios.",
     "approach": {
       "craft_title": "Buenas prácticas por defecto",
-      "craft_body": "Revisión de código, tests como gate, convenciones documentadas y CI que falla en voz alta. No lanzamos nada que no nos sintiéramos cómodos entregando a un socio senior.",
+      "craft_body": "Revisión de código, tests (unitarios, de integración y E2E), convenciones documentadas y CI que falla en voz alta. No lanzamos nada que no nos sintiéramos cómodos entregando a un socio senior.",
       "patterns_title": "Patrones probados antes que atajos",
       "patterns_body": "Patrones de diseño y decisiones de arquitectura con historial. Vamos primero a la solución bien entendida y solo cuando encaja de verdad consideramos la ingeniosa.",
       "security_title": "La seguridad no es un extra",
-      "security_body": "Validación de entradas en los límites del sistema, secretos fuera del repo, principio de mínimo privilegio y dependencias auditables. Metida desde el primer commit, no colada antes del release."
+      "security_body": "Validación de entradas en los límites del sistema, secretos fuera del repo, principio de mínimo privilegio y dependencias auditables. Metida desde el primer commit, no como cambios de última hora antes del release.",
+      "iterative_title": "Entregas iterativas y revisadas",
+      "iterative_body": "Trabajamos en ciclos cortos: planificación por sprint, entregas incrementales y revisión con el cliente en cada iteración. Ajustar antes es más barato que corregir después.",
+      "efficiency_title": "Tiempo bien invertido",
+      "efficiency_body": "Nos tomamos el aprovechamiento del tiempo muy en serio: reuniones cortas y con agenda, automatización de lo que se repite, y foco en el trabajo que aporta valor. Menos ruido, más resultado."
     },
     "services_heading": "Qué más hacemos",
     "services_lede": "Además de nuestros productos, también trabajamos con equipos como extensión del suyo. Una lista corta y honesta de lo que podemos asumir:",
@@ -53,7 +57,7 @@
       "cloud_title": "Migraciones y modernización en la nube",
       "cloud_body": "De entornos on-prem o legacy a plataformas cloud bien arquitectadas en Microsoft Azure, Amazon AWS o Google Cloud. Plan de migración, modelado de costes y ejecución hands-on.",
       "pipelines_title": "Pipelines CI/CD",
-      "pipelines_body": "Análisis y definición de pipelines de build, test y release aplicando best practices modernas — builds reproducibles, releases gated, higiene de secretos y despliegue seguro por defecto.",
+      "pipelines_body": "Análisis y definición de pipelines de build, test y release aplicando best practices modernas — builds reproducibles, releases con controles bloqueantes (no se publica nada que no pase los checks), higiene de secretos y despliegue seguro por defecto.",
       "fullstack_title": "Desarrollo full-stack",
       "fullstack_body": "Java, .NET, Python, Node.js, Angular. Servicios backend, APIs, front-ends y el trabajo de base de datos que los une. Cómodos con stacks distintos y código legacy.",
       "infra_title": "Infraestructura y redes",
@@ -64,7 +68,7 @@
   },
   "about": {
     "title": "Sobre Acorn Juice Solutions",
-    "lede": "Estudio de software independiente desde Navarra. Nuestro equipo combina habilidades complementarias y prefiere herramientas que hacen una cosa bien.",
+    "lede": "Estudio de software independiente desde Navarra. Nuestro equipo combina habilidades complementarias y prima la calidad sobre la cantidad: preferimos desarrollar poco y bien resuelto antes que producir de forma masiva.",
     "story_heading": "De dónde venimos",
     "makers_heading": "Los makers",
     "experience_heading": "Experiencia",
@@ -89,7 +93,9 @@
     "platforms_heading": "Disponible en",
     "links_heading": "Consíguelo",
     "made_by_heading": "Hecho por",
-    "screenshots_heading": "Capturas"
+    "screenshots_heading": "Capturas",
+    "coming_soon_heading": "Disponibilidad",
+    "coming_soon_body": "Próximamente. Los enlaces de descarga aparecerán aquí en cuanto el producto se lance."
   },
   "contact": {
     "field_email": "Email",

@@ -11,7 +11,11 @@ import {
 } from '~/utils/hreflang';
 import { getLocaleFromUrl, htmlLangAttr, ogLocale, type Locale } from '~/utils/i18n';
 import { buildGraph, type SchemaGraph } from '~/utils/seo';
-import { GA_MEASUREMENT_ID, analyticsEnabled } from '~/utils/analytics';
+import {
+  GA_MEASUREMENT_ID,
+  analyticsEnabled,
+  type PageType,
+} from '~/utils/analytics';
 
 interface Props {
   title: string;
@@ -25,6 +29,13 @@ interface Props {
    * The footer "Manage preferences" button still opens it.
    */
   hideConsentBanner?: boolean;
+  /**
+   * GA4 content-group value for this page. Surfaced as `data-page-type` on
+   * `<html>` and consumed by ConsentBanner to enrich every `page_view` with
+   * `content_group`, so we can segment by page kind independently of URL or
+   * language.
+   */
+  pageType: PageType;
 }
 
 const {
@@ -34,6 +45,7 @@ const {
   ogImage = '/og/default.png',
   ogType = 'website',
   hideConsentBanner = false,
+  pageType,
 } = Astro.props;
 
 const locale: Locale = getLocaleFromUrl(Astro.url);
@@ -52,6 +64,7 @@ const gaId = analyticsEnabled() ? GA_MEASUREMENT_ID : '';
 <html
   lang={htmlLangAttr(locale)}
   data-ga-measurement-id={gaId || undefined}
+  data-page-type={pageType}
 >
   <head>
     <meta charset="utf-8" />

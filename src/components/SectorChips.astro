@@ -1,0 +1,74 @@
+---
+import type { Locale } from '~/utils/i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+
+const SECTORS: Record<Locale, readonly string[]> = {
+  en: [
+    'Retail banking',
+    'Corporate banking',
+    'Fintech & payments',
+    'Savings banks',
+    'Public safety',
+    'Justice',
+    'Insurance',
+    'Construction',
+    'Industry',
+    'Engineering',
+    'Occupational health & safety',
+    'Transport',
+    'Innovation projects',
+  ],
+  es: [
+    'Banca minorista',
+    'Banca corporativa',
+    'Fintech y pagos',
+    'Cajas de ahorros',
+    'Seguridad pública',
+    'Justicia',
+    'Seguros',
+    'Construcción',
+    'Industria',
+    'Ingeniería',
+    'Prevención de riesgos laborales',
+    'Transporte',
+    'Proyectos de innovación',
+  ],
+} as const;
+
+const ARIA_LABEL: Record<Locale, string> = {
+  en: 'Sectors',
+  es: 'Sectores',
+};
+
+const sectors = SECTORS[locale];
+const label = ARIA_LABEL[locale];
+---
+
+<ul class="sector-chips" aria-label={label}>
+  {sectors.map((s) => <li>{s}</li>)}
+</ul>
+
+<style>
+  .sector-chips {
+    list-style: none;
+    padding: 0;
+    margin: var(--space-4) 0 var(--space-3);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .sector-chips li {
+    padding: var(--space-1) var(--space-3);
+    background: var(--color-bg-alt);
+    border: 1px solid var(--color-line);
+    border-radius: 999px;
+    font-size: var(--text-sm);
+    color: var(--color-ink);
+  }
+</style>

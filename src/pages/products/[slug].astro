@@ -7,7 +7,7 @@ import { ORG_ID } from '~/utils/seo';
 export async function getStaticPaths() {
   const products = await getCollection('products');
   return products
-    .filter((p) => p.data.status !== 'draft')
+    .filter((p) => p.data.status !== 'archived')
     .map((product) => ({
       params: { slug: product.data.slug },
       props: { product },
@@ -81,6 +81,7 @@ const metaDescription = tagline;
   description={metaDescription}
   extraGraphNodes={[productSchemaNode]}
   ogType="article"
+  pageType="product_detail"
 >
   <article class="product-page">
     <div class="container">
@@ -107,7 +108,7 @@ const metaDescription = tagline;
         </ul>
 
         {
-          urlEntries.length > 0 && (
+          urlEntries.length > 0 ? (
             <>
               <h2>{t('product_page.links_heading')}</h2>
               <div class="link-buttons">
@@ -122,6 +123,11 @@ const metaDescription = tagline;
                   </a>
                 ))}
               </div>
+            </>
+          ) : (
+            <>
+              <h2>{t('product_page.coming_soon_heading')}</h2>
+              <p class="coming-soon">{t('product_page.coming_soon_body')}</p>
             </>
           )
         }
@@ -200,6 +206,15 @@ const metaDescription = tagline;
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-3);
+    margin-bottom: var(--space-6);
+  }
+
+  .coming-soon {
+    padding: var(--space-3) var(--space-4);
+    background: var(--color-bg-alt);
+    border-left: 3px solid var(--color-body);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    color: var(--color-ink-soft);
     margin-bottom: var(--space-6);
   }
 

@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '~/layouts/BaseLayout.astro';
 import ContactForm from '~/components/ContactForm.astro';
+import SectorChips from '~/components/SectorChips.astro';
 import { useTranslator } from '~/utils/i18n';
 import { websiteNode } from '~/utils/seo';
 
@@ -15,6 +16,7 @@ const description = t('meta.home_description');
   title={title}
   description={description}
   extraGraphNodes={[websiteNode(locale)]}
+  pageType="home"
 >
   <section class="hero">
     <div class="container hero-grid">
@@ -80,6 +82,14 @@ const description = t('meta.home_description');
           <dt>{t('home.approach.security_title')}</dt>
           <dd>{t('home.approach.security_body')}</dd>
         </div>
+        <div class="service-item">
+          <dt>{t('home.approach.iterative_title')}</dt>
+          <dd>{t('home.approach.iterative_body')}</dd>
+        </div>
+        <div class="service-item">
+          <dt>{t('home.approach.efficiency_title')}</dt>
+          <dd>{t('home.approach.efficiency_body')}</dd>
+        </div>
       </dl>
     </div>
   </section>
@@ -88,6 +98,7 @@ const description = t('meta.home_description');
     <div class="container container-narrow">
       <h2>{t('about.experience_heading')}</h2>
       <p class="section-lede">{t('about.experience_body')}</p>
+      <SectorChips locale={locale} />
     </div>
   </section>
 

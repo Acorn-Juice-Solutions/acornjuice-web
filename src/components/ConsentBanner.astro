@@ -137,10 +137,20 @@ const cookiesPath = locale === 'es' ? '/es/cookies/' : '/cookies/';
     s.src = `https://www.googletagmanager.com/gtag/js?id=${measurementId}`;
     document.head.appendChild(s);
 
+    // `content_group` is a reserved GA4 event parameter; setting it on
+    // `config` makes every auto-fired `page_view` inherit it so we can slice
+    // by page kind (home, team, products, product_detail, …) independently
+    // of the URL/language. Set as a string; if the attribute is missing we
+    // still send a stable fallback so events are never left ungrouped.
+    const pageType = document.documentElement.dataset.pageType || 'unknown';
+
     // @ts-expect-error gtag helper
     window.gtag('js', new Date());
     // @ts-expect-error gtag config
-    window.gtag('config', measurementId, { anonymize_ip: true });
+    window.gtag('config', measurementId, {
+      anonymize_ip: true,
+      content_group: pageType,
+    });
   }
 
   // Attach action handlers to the banner buttons.
