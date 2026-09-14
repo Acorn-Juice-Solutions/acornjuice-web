@@ -87,7 +87,7 @@ const makers = defineCollection({
       .regex(/^[a-z0-9-]+$/, 'slug must be lowercase kebab-case'),
     role: bilingualString,
     bio: bilingualString,
-    skills: z.array(z.string().min(1)).min(1),
+    skills: bilingualArray,
     linkedin: z.url(),
     github: z.url().optional(),
     avatar: z.string().optional(),

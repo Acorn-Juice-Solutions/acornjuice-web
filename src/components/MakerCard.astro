@@ -11,6 +11,7 @@ const { maker, locale } = Astro.props;
 const data = maker.data;
 const role = data.role[locale];
 const bio = data.bio[locale];
+const skills = data.skills[locale];
 ---
 
 <article class="maker-card">
@@ -22,7 +23,7 @@ const bio = data.bio[locale];
   <p class="maker-bio">{bio}</p>
 
   <ul class="maker-skills" aria-label="Skills">
-    {data.skills.map((s) => <li>{s}</li>)}
+    {skills.map((s) => <li>{s}</li>)}
   </ul>
 
   <div class="maker-links">

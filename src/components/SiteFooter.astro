@@ -14,6 +14,7 @@ const copyright = interpolate(t('footer.copyright'), { year });
 const privacyHref = locale === 'es' ? '/es/privacidad/' : '/privacy/';
 const cookiesHref = locale === 'es' ? '/es/cookies/' : '/cookies/';
 const legalHref = locale === 'es' ? '/es/aviso-legal/' : '/legal/';
+const contactHref = locale === 'es' ? '/es/#contact' : '/#contact';
 ---
 
 <footer class="site-footer">
@@ -41,7 +42,7 @@ const legalHref = locale === 'es' ? '/es/aviso-legal/' : '/legal/';
     <div class="footer-contact">
       <h2 class="footer-heading">{t('nav.contact')}</h2>
       <p>
-        <a href="mailto:info@acornjuice.com">info@acornjuice.com</a>
+        <a href={contactHref}>{t('footer.contact_cta')}</a>
       </p>
     </div>
   </div>

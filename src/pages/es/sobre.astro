@@ -31,8 +31,8 @@ const canonical = 'https://acornjuice.com/es/sobre/';
   ]}
   pageType="team"
 >
-  <section class="section">
-    <div class="container container-narrow">
+  <section class="section about-hero">
+    <div class="container">
       <h1>{t('about.title')}</h1>
       <p class="lede">{t('about.lede')}</p>
     </div>
@@ -64,14 +64,16 @@ const canonical = 'https://acornjuice.com/es/sobre/';
     margin-inline: auto;
   }
 
-  h1 {
+  .about-hero h1 {
     font-size: var(--text-5xl);
+    max-width: 20ch;
     margin-bottom: var(--space-3);
   }
 
-  .lede {
+  .about-hero .lede {
     font-size: var(--text-lg);
     color: var(--color-ink-soft);
+    max-width: 60ch;
   }
 
   .maker-grid {
@@ -98,7 +100,7 @@ const canonical = 'https://acornjuice.com/es/sobre/';
   }
 
   @media (max-width: 640px) {
-    h1 {
+    .about-hero h1 {
       font-size: var(--text-4xl);
     }
   }
