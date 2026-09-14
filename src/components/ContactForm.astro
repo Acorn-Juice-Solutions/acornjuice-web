@@ -9,9 +9,12 @@ const { locale } = Astro.props;
 const t = useTranslator(locale);
 
 // Same allowlisted URL for both languages; staticforms.dev decides destination
-// via the API key. TODO(manual-actions §6): decide whether to reuse AccuVideo's
-// key or provision a separate one for this site.
-const STATIC_FORMS_API_KEY = 'REPLACE_WITH_SEPARATE_KEY';
+// via the API key. Shared with the AccuVideo landing (same value in that
+// repo's index.html and main.js): rotating this affects both sites.
+// staticforms.dev keys are designed to be public — allowlisting is enforced
+// server-side by origin, so acornjuice.com must be on the allowlist for this
+// key in the staticforms.dev dashboard for submissions to be accepted.
+const STATIC_FORMS_API_KEY = 'sf_4d32929fdc91426750c7d382';
 const STATIC_FORMS_ENDPOINT = 'https://api.staticforms.dev/submit';
 
 const successPath = locale === 'es' ? '/es/gracias/' : '/thanks/';
@@ -79,7 +82,7 @@ const privacyPath = locale === 'es' ? '/es/privacidad/' : '/privacy/';
       <select id="contact-subject" name="topic" required>
         <option value="general">{t('contact.subject_general')}</option>
         <option value="products">{t('contact.subject_products')}</option>
-        <option value="careers">{t('contact.subject_careers')}</option>
+        <option value="quote">{t('contact.subject_quote')}</option>
         <option value="other">{t('contact.subject_other')}</option>
       </select>
     </label>
