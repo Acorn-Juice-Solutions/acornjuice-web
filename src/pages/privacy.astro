@@ -1,0 +1,171 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import { useTranslator } from '~/utils/i18n';
+import { webpageNode } from '~/utils/seo';
+
+const locale = 'en' as const;
+const t = useTranslator(locale);
+
+const title = t('meta.privacy_title');
+const description = t('meta.privacy_description');
+const canonical = 'https://acornjuice.com/privacy/';
+
+// TODO(review-before-launch): confirm the following draft with the owner and,
+// if possible, with legal counsel. Text mirrors the AccuVideo privacy policy
+// (which is more extensive because it handles licenses and payments) trimmed
+// down to what this corporate site actually processes: contact email + GA.
+const lastUpdated = '2026-09-14';
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  hideConsentBanner={true}
+  extraGraphNodes={[
+    webpageNode({ url: canonical, name: title, description, locale }),
+  ]}
+>
+  <article class="legal-page">
+    <div class="container container-narrow">
+      <header>
+        <h1>Privacy Policy</h1>
+        <p class="last-updated">Last updated: {lastUpdated}</p>
+      </header>
+
+      <section aria-labelledby="privacy-controller">
+        <h2 id="privacy-controller">Data controller</h2>
+        <p>
+          <strong>ACORN JUICE SOLUTIONS SL</strong> (hereafter "Acorn Juice"),
+          VAT ID <strong>ESB71336218</strong>.
+        </p>
+        <p>Registered address: Calle Bosquecillo, 6, 31191, Beriáin (Navarra), Spain.</p>
+        <p>Contact: <a href="mailto:info@acornjuice.com">info@acornjuice.com</a>.</p>
+      </section>
+
+      <section aria-labelledby="privacy-data">
+        <h2 id="privacy-data">What data we process</h2>
+        <ul>
+          <li>
+            <strong>Email:</strong> you provide it when you use the contact form.
+            We use it to reply to your message. Optional.
+          </li>
+          <li>
+            <strong>Message content:</strong> what you write in the contact form.
+          </li>
+          <li>
+            <strong>Analytics data:</strong> anonymised IP, device type, pages
+            visited — only if you accept analytics cookies. See our
+            <a href="/cookies/">cookies policy</a>.
+          </li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="privacy-basis">
+        <h2 id="privacy-basis">Legal basis</h2>
+        <ul>
+          <li>
+            <strong>Consent</strong> (GDPR art. 6.1.a): sending communications
+            through the contact form and non-essential analytics cookies.
+          </li>
+          <li>
+            <strong>Legitimate interest</strong> (GDPR art. 6.1.f): site security
+            and technical maintenance.
+          </li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="privacy-purpose">
+        <h2 id="privacy-purpose">Purpose</h2>
+        <ul>
+          <li>Reply to your contact-form messages.</li>
+          <li>Measure aggregated site usage (only if you accept analytics cookies).</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="privacy-processors">
+        <h2 id="privacy-processors">Processors and third parties</h2>
+        <ul>
+          <li>
+            <strong>Static Forms</strong> (staticforms.dev) — relays contact
+            form submissions to our email.
+          </li>
+          <li>
+            <strong>Google Ireland Limited</strong> (with transfers to Google LLC,
+            US, under Standard Contractual Clauses and the EU-US Data Privacy
+            Framework) — Google Analytics 4 with IP anonymisation, only if you
+            accept analytics cookies.
+          </li>
+          <li>
+            <strong>GitHub, Inc.</strong> (US) — hosting for the static pages of
+            this site (GitHub Pages). Does not receive form data.
+          </li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="privacy-retention">
+        <h2 id="privacy-retention">Retention</h2>
+        <ul>
+          <li>
+            <strong>Contact-form messages:</strong> up to 2 years after the last
+            interaction, unless earlier deletion is requested.
+          </li>
+          <li>
+            <strong>Analytics data:</strong> Google Analytics 4 default retention
+            of 2 months. Not cross-referenced with any other source.
+          </li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="privacy-rights">
+        <h2 id="privacy-rights">Your rights</h2>
+        <p>
+          You can exercise the following rights at any time: access, rectification,
+          erasure ("right to be forgotten"), objection, restriction of processing,
+          data portability, withdrawing consent, and not being subject to automated
+          decisions.
+        </p>
+        <p>
+          To exercise them, write to
+          <a href="mailto:info@acornjuice.com">info@acornjuice.com</a>.
+        </p>
+        <p>
+          You may also file a complaint with the <strong>Spanish Data Protection
+          Agency (AEPD)</strong>, C/ Jorge Juan 6, 28001 Madrid —
+          <a href="https://www.aepd.es" target="_blank" rel="noopener noreferrer">www.aepd.es</a>.
+        </p>
+      </section>
+
+      <section aria-labelledby="privacy-minors">
+        <h2 id="privacy-minors">Minors</h2>
+        <p>
+          This site is aimed at people over <strong>14 years old</strong>, the
+          digital consent age in Spain (LOPDGDD). If you are under that age, do
+          not submit personal data without the authorisation of your legal
+          representative.
+        </p>
+      </section>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .legal-page {
+    padding-block: var(--space-8) var(--space-12);
+  }
+  .container-narrow {
+    max-width: var(--reading-max);
+    margin-inline: auto;
+  }
+  h1 {
+    font-size: var(--text-4xl);
+  }
+  h2 {
+    font-size: var(--text-xl);
+    margin-top: var(--space-6);
+  }
+  .last-updated {
+    color: var(--color-ink-soft);
+    font-size: var(--text-sm);
+    margin-bottom: var(--space-6);
+  }
+</style>

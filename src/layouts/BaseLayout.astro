@@ -1,0 +1,137 @@
+---
+import '~/styles/globals.css';
+import SiteHeader from '~/components/SiteHeader.astro';
+import SiteFooter from '~/components/SiteFooter.astro';
+import StructuredData from '~/components/StructuredData.astro';
+import ConsentBanner from '~/components/ConsentBanner.astro';
+import {
+  canonicalUrl,
+  getHreflangs,
+  isNoindex,
+} from '~/utils/hreflang';
+import { getLocaleFromUrl, htmlLangAttr, ogLocale, type Locale } from '~/utils/i18n';
+import { buildGraph, type SchemaGraph } from '~/utils/seo';
+import { GA_MEASUREMENT_ID, analyticsEnabled } from '~/utils/analytics';
+
+interface Props {
+  title: string;
+  description: string;
+  extraGraphNodes?: Parameters<typeof buildGraph>[0];
+  ogImage?: string;
+  ogType?: 'website' | 'article';
+  /**
+   * When true, the cookie banner is server-rendered hidden (used on legal
+   * pages so users reading the policy don't get a banner covering it).
+   * The footer "Manage preferences" button still opens it.
+   */
+  hideConsentBanner?: boolean;
+}
+
+const {
+  title,
+  description,
+  extraGraphNodes,
+  ogImage = '/og/default.png',
+  ogType = 'website',
+  hideConsentBanner = false,
+} = Astro.props;
+
+const locale: Locale = getLocaleFromUrl(Astro.url);
+const currentPath = Astro.url.pathname;
+const canonical = canonicalUrl(currentPath);
+const alternates = getHreflangs(currentPath);
+const noindex = isNoindex(currentPath);
+
+const ogImageAbsolute = new URL(ogImage, Astro.site).toString();
+const graph: SchemaGraph = buildGraph(extraGraphNodes ?? []);
+
+const gaId = analyticsEnabled() ? GA_MEASUREMENT_ID : '';
+---
+
+<!doctype html>
+<html
+  lang={htmlLangAttr(locale)}
+  data-ga-measurement-id={gaId || undefined}
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    {
+      noindex ? (
+        <meta name="robots" content="noindex,nofollow" />
+      ) : (
+        <meta
+          name="robots"
+          content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1"
+        />
+      )
+    }
+
+    <link rel="canonical" href={canonical} />
+    {
+      alternates.map((a) => (
+        <link rel="alternate" hreflang={a.hreflang} href={a.href} />
+      ))
+    }
+
+    {/* Open Graph */}
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImageAbsolute} />
+    <meta property="og:site_name" content="Acorn Juice Solutions" />
+    <meta property="og:locale" content={ogLocale(locale)} />
+
+    {/* Twitter */}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageAbsolute} />
+
+    <meta name="theme-color" content="#a0522d" />
+    <meta name="author" content="Acorn Juice Solutions" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <StructuredData graph={graph} />
+
+    {/*
+      Anti-flash consent detection: runs synchronously before body renders.
+      If the user already has a decision in localStorage, mark the html so CSS
+      can hide the banner immediately (no flash). Otherwise the banner shows
+      on first paint for first-time visitors.
+    */}
+    <script is:inline>
+      (function () {
+        try {
+          var v = localStorage.getItem('aj-consent-v1');
+          if (v) {
+            document.documentElement.setAttribute(
+              'data-consent-decided',
+              'true'
+            );
+          }
+        } catch (e) {
+          /* localStorage disabled */
+        }
+      })();
+    </script>
+    <style is:global>
+      html[data-consent-decided] [data-consent-banner]:not(.consent-force-open) {
+        display: none !important;
+      }
+    </style>
+  </head>
+  <body>
+    <SiteHeader locale={locale} currentPath={currentPath} />
+    <main id="main">
+      <slot />
+    </main>
+    <SiteFooter locale={locale} />
+    <ConsentBanner locale={locale} hidden={hideConsentBanner} />
+  </body>
+</html>

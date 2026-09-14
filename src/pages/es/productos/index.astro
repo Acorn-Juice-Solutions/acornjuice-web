@@ -1,0 +1,56 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import ProductCard from '~/components/ProductCard.astro';
+import { useTranslator } from '~/utils/i18n';
+
+const locale = 'es' as const;
+const t = useTranslator(locale);
+
+// Drafts se muestran en la grid como cards "Próximamente" no clicables, para
+// que el sitio comunique el roadmap completo. La ruta dinámica [slug].astro sí
+// las filtra porque no tienen ficha propia hasta que se rellenen URLs.
+const products = (await getCollection('products'))
+  .filter((p) => p.data.status !== 'archived')
+  .sort((a, b) => a.data.order - b.data.order);
+
+const title = t('meta.products_title');
+const description = t('meta.products_description');
+---
+
+<BaseLayout title={title} description={description}>
+  <section class="section">
+    <div class="container">
+      <h1>{t('products.title')}</h1>
+      <p class="lede">{t('products.lede')}</p>
+
+      <div class="product-grid">
+        {
+          products.map((product) => (
+            <ProductCard product={product} locale={locale} />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  h1 {
+    font-size: var(--text-4xl);
+    margin-bottom: var(--space-3);
+  }
+
+  .lede {
+    font-size: var(--text-lg);
+    color: var(--color-ink-soft);
+    max-width: 60ch;
+    margin-bottom: var(--space-8);
+  }
+
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-4);
+  }
+</style>

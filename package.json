@@ -1,0 +1,40 @@
+{
+  "name": "acornjuice-web",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "description": "Corporate landing for Acorn Juice Solutions SL",
+  "scripts": {
+    "dev": "astro dev --host",
+    "start": "astro dev --host",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "check": "astro check",
+    "test:i18n": "node scripts/check-i18n.mjs",
+    "test:hreflang": "node scripts/check-hreflang.mjs",
+    "test:schema": "node scripts/check-schema.mjs",
+    "test:links": "linkinator ./dist --recurse --skip 'mailto:' --skip 'https?://(?!acornjuice\\.com|localhost)'",
+    "test:axe": "playwright test",
+    "test:lighthouse": "lhci autorun",
+    "test": "npm run check && npm run test:i18n && npm run test:hreflang && npm run test:schema"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "@fontsource-variable/inter": "^5.1.0",
+    "@fontsource-variable/newsreader": "^5.3.0",
+    "astro": "^7.3.2"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@axe-core/playwright": "^4.10.0",
+    "@lhci/cli": "^0.15.1",
+    "@playwright/test": "^1.49.0",
+    "axe-core": "^4.10.0",
+    "linkinator": "^6.1.2",
+    "typescript": "^5.7.0"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  }
+}

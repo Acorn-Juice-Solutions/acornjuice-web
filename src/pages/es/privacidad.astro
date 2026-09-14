@@ -1,0 +1,173 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import { useTranslator } from '~/utils/i18n';
+import { webpageNode } from '~/utils/seo';
+
+const locale = 'es' as const;
+const t = useTranslator(locale);
+
+const title = t('meta.privacy_title');
+const description = t('meta.privacy_description');
+const canonical = 'https://acornjuice.com/es/privacidad/';
+
+// TODO(review-before-launch): confirmar borrador con owner y, si es posible,
+// con asesoría legal. Texto adaptado de la política de AccuVideo (mucho más
+// extensa por licencias y pagos), reducido a lo que este sitio corporativo
+// realmente trata: email del formulario + GA.
+const lastUpdated = '14/09/2026';
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  hideConsentBanner={true}
+  extraGraphNodes={[
+    webpageNode({ url: canonical, name: title, description, locale }),
+  ]}
+>
+  <article class="legal-page">
+    <div class="container container-narrow">
+      <header>
+        <h1>Política de Privacidad</h1>
+        <p class="last-updated">Última actualización: {lastUpdated}</p>
+      </header>
+
+      <section aria-labelledby="privacy-controller">
+        <h2 id="privacy-controller">Responsable del tratamiento</h2>
+        <p>
+          <strong>ACORN JUICE SOLUTIONS SL</strong> (en adelante, "Acorn Juice"),
+          CIF <strong>B71336218</strong>.
+        </p>
+        <p>Domicilio social: Calle Bosquecillo, 6, 31191, Beriáin (Navarra), España.</p>
+        <p>Contacto: <a href="mailto:info@acornjuice.com">info@acornjuice.com</a>.</p>
+      </section>
+
+      <section aria-labelledby="privacy-data">
+        <h2 id="privacy-data">Qué datos tratamos</h2>
+        <ul>
+          <li>
+            <strong>Email:</strong> lo facilitas al usar el formulario de contacto.
+            Lo usamos para responder a tu mensaje. Opcional.
+          </li>
+          <li>
+            <strong>Contenido del mensaje:</strong> lo que escribas en el formulario
+            de contacto.
+          </li>
+          <li>
+            <strong>Datos analíticos:</strong> IP anonimizada, tipo de dispositivo,
+            páginas visitadas — solo si aceptas cookies analíticas. Ver la
+            <a href="/es/cookies/">política de cookies</a>.
+          </li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="privacy-basis">
+        <h2 id="privacy-basis">Base legal</h2>
+        <ul>
+          <li>
+            <strong>Consentimiento</strong> (art. 6.1.a RGPD): envío de mensajes
+            por el formulario y cookies analíticas no esenciales.
+          </li>
+          <li>
+            <strong>Interés legítimo</strong> (art. 6.1.f RGPD): seguridad del
+            sitio y mantenimiento técnico.
+          </li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="privacy-purpose">
+        <h2 id="privacy-purpose">Finalidad</h2>
+        <ul>
+          <li>Responder a los mensajes del formulario de contacto.</li>
+          <li>Medir de forma agregada el uso del sitio (solo si aceptas cookies analíticas).</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="privacy-processors">
+        <h2 id="privacy-processors">Encargados y proveedores</h2>
+        <ul>
+          <li>
+            <strong>Static Forms</strong> (staticforms.dev) — retransmite los
+            envíos del formulario a nuestro correo.
+          </li>
+          <li>
+            <strong>Google Ireland Limited</strong> (con transferencia a Google
+            LLC, EE. UU., bajo cláusulas contractuales tipo y el marco EU-US
+            Data Privacy Framework) — Google Analytics 4 con IP anonimizada,
+            solo si aceptas cookies analíticas.
+          </li>
+          <li>
+            <strong>GitHub, Inc.</strong> (EE. UU.) — alojamiento de las páginas
+            estáticas del sitio (GitHub Pages). No recibe datos del formulario.
+          </li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="privacy-retention">
+        <h2 id="privacy-retention">Conservación</h2>
+        <ul>
+          <li>
+            <strong>Mensajes del formulario:</strong> hasta 2 años tras la última
+            interacción, salvo que solicites el borrado antes.
+          </li>
+          <li>
+            <strong>Analítica:</strong> retención estándar de Google Analytics 4
+            de 2 meses. No se cruzan datos con otras fuentes.
+          </li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="privacy-rights">
+        <h2 id="privacy-rights">Tus derechos</h2>
+        <p>
+          Puedes ejercer en cualquier momento los siguientes derechos: acceso,
+          rectificación, supresión ("derecho al olvido"), oposición, limitación
+          del tratamiento, portabilidad, revocación del consentimiento y no ser
+          objeto de decisiones automatizadas.
+        </p>
+        <p>
+          Para ejercerlos, escribe a
+          <a href="mailto:info@acornjuice.com">info@acornjuice.com</a>.
+        </p>
+        <p>
+          También puedes presentar una reclamación ante la <strong>Agencia
+          Española de Protección de Datos (AEPD)</strong>, C/ Jorge Juan 6, 28001
+          Madrid —
+          <a href="https://www.aepd.es" target="_blank" rel="noopener noreferrer">www.aepd.es</a>.
+        </p>
+      </section>
+
+      <section aria-labelledby="privacy-minors">
+        <h2 id="privacy-minors">Menores de edad</h2>
+        <p>
+          Este sitio se dirige a personas mayores de <strong>14 años</strong>,
+          edad de consentimiento digital establecida en España por la LOPDGDD.
+          Si eres menor de esa edad, no facilites datos personales sin la
+          autorización de tu representante legal.
+        </p>
+      </section>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .legal-page {
+    padding-block: var(--space-8) var(--space-12);
+  }
+  .container-narrow {
+    max-width: var(--reading-max);
+    margin-inline: auto;
+  }
+  h1 {
+    font-size: var(--text-4xl);
+  }
+  h2 {
+    font-size: var(--text-xl);
+    margin-top: var(--space-6);
+  }
+  .last-updated {
+    color: var(--color-ink-soft);
+    font-size: var(--text-sm);
+    margin-bottom: var(--space-6);
+  }
+</style>

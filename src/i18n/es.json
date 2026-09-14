@@ -1,0 +1,138 @@
+{
+  "site": {
+    "name": "Acorn Juice Solutions",
+    "tagline": "Herramientas enfocadas que resuelven un problema concreto.",
+    "description": "Estudio de software independiente que construye herramientas enfocadas para personas. Casa de AccuVideo, SOSNav y otras pequeñas utilidades."
+  },
+  "nav": {
+    "home": "Inicio",
+    "products": "Productos",
+    "about": "Sobre nosotros",
+    "contact": "Contacto",
+    "skip": "Saltar al contenido principal",
+    "primary_label": "Navegación principal"
+  },
+  "language": {
+    "switcher_label": "Cambiar idioma",
+    "current": "Español",
+    "other": "English",
+    "other_short": "EN"
+  },
+  "footer": {
+    "copyright": "© {year} Acorn Juice Solutions SL. Todos los derechos reservados.",
+    "legal_heading": "Legal",
+    "privacy": "Política de privacidad",
+    "cookies": "Política de cookies",
+    "legal_notice": "Aviso legal",
+    "manage_cookies": "Gestionar cookies",
+    "made_with": "Hecho en Navarra, España."
+  },
+  "home": {
+    "hero_eyebrow": "Estudio de software independiente",
+    "hero_title": "Herramientas enfocadas. Un problema cada vez.",
+    "hero_lede": "Acorn Juice Solutions es un estudio de dos personas con sede en Navarra. Construimos software pequeño y afilado — apps de escritorio, widgets móviles y utilidades de un solo golpe — que resuelve problemas reales de personas reales.",
+    "hero_cta_products": "Ver nuestros productos",
+    "hero_cta_about": "Conócenos",
+    "products_heading": "Lo que hacemos",
+    "products_lede": "Mezcla de productos comerciales y utilidades gratuitas. Mantenidos y monitorizados con mimo.",
+    "makers_heading": "El equipo. Habilidades complementarias.",
+    "makers_lede": "Cada producto recibe atención personal y refleja el trabajo del equipo que lo hace.",
+    "approach_heading": "Cómo trabajamos",
+    "approach_lede": "Cada producto y cada proyecto — comercial o no — sigue los mismos tres principios.",
+    "approach": {
+      "craft_title": "Buenas prácticas por defecto",
+      "craft_body": "Revisión de código, tests como gate, convenciones documentadas y CI que falla en voz alta. No lanzamos nada que no nos sintiéramos cómodos entregando a un socio senior.",
+      "patterns_title": "Patrones probados antes que atajos",
+      "patterns_body": "Patrones de diseño y decisiones de arquitectura con historial. Vamos primero a la solución bien entendida y solo cuando encaja de verdad consideramos la ingeniosa.",
+      "security_title": "La seguridad no es un extra",
+      "security_body": "Validación de entradas en los límites del sistema, secretos fuera del repo, principio de mínimo privilegio y dependencias auditables. Metida desde el primer commit, no colada antes del release."
+    },
+    "services_heading": "Qué más hacemos",
+    "services_lede": "Además de nuestros productos, también trabajamos con equipos como extensión del suyo. Una lista corta y honesta de lo que podemos asumir:",
+    "services": {
+      "cloud_title": "Migraciones y modernización en la nube",
+      "cloud_body": "De entornos on-prem o legacy a plataformas cloud bien arquitectadas en Microsoft Azure, Amazon AWS o Google Cloud. Plan de migración, modelado de costes y ejecución hands-on.",
+      "pipelines_title": "Pipelines CI/CD",
+      "pipelines_body": "Análisis y definición de pipelines de build, test y release aplicando best practices modernas — builds reproducibles, releases gated, higiene de secretos y despliegue seguro por defecto.",
+      "fullstack_title": "Desarrollo full-stack",
+      "fullstack_body": "Java, .NET, Python, Node.js, Angular. Servicios backend, APIs, front-ends y el trabajo de base de datos que los une. Cómodos con stacks distintos y código legacy.",
+      "infra_title": "Infraestructura y redes",
+      "infra_body": "Automatización DevOps, provisión de entornos, monitorización y networking — incluyendo configuración de routers Mikrotik para setups on-prem o híbridos."
+    },
+    "contact_heading": "Escríbenos",
+    "contact_lede": "¿Tienes una pregunta, una idea o un proyecto que quieras que miremos? Cuéntanos."
+  },
+  "about": {
+    "title": "Sobre Acorn Juice Solutions",
+    "lede": "Estudio de software independiente desde Navarra. Nuestro equipo combina habilidades complementarias y prefiere herramientas que hacen una cosa bien.",
+    "story_heading": "De dónde venimos",
+    "makers_heading": "Los makers",
+    "experience_heading": "Experiencia",
+    "experience_body": "Más de 25 años entregando software a medida para clientes en sectores exigentes: banca internacional, sector público, industria, construcción y más. Trabajamos con soltura en inglés y hemos colaborado con equipos internacionales por toda Europa — los proyectos pueden llevarse en inglés o en español. Estos son los ámbitos en los que hemos trabajado:",
+    "experience_note": "Los nombres de clientes no se publican por acuerdos de confidencialidad. Detalles verificables en los perfiles de LinkedIn de los makers."
+  },
+  "products": {
+    "title": "Productos",
+    "lede": "Herramientas enfocadas de Acorn Juice Solutions. Desde búsqueda semántica de vídeo en escritorio hasta utilidades de servicio público en móvil.",
+    "status_available": "Disponible",
+    "status_beta": "En beta",
+    "status_archived": "Archivado",
+    "status_draft": "Próximamente",
+    "learn_more": "Más info",
+    "visit": "Ir a",
+    "grid_heading": "Todos los productos"
+  },
+  "product_page": {
+    "back_to_products": "← Volver a productos",
+    "features_heading": "Qué hace",
+    "platforms_heading": "Disponible en",
+    "links_heading": "Consíguelo",
+    "made_by_heading": "Hecho por",
+    "screenshots_heading": "Capturas"
+  },
+  "contact": {
+    "field_email": "Email",
+    "field_subject": "Asunto",
+    "field_message": "Mensaje",
+    "subject_general": "Consulta general",
+    "subject_products": "Sobre un producto",
+    "subject_careers": "Trabajar con vosotros",
+    "subject_other": "Otro",
+    "consent_label": "Doy mi consentimiento al tratamiento de mi email para responder este mensaje. Ver política de privacidad.",
+    "submit": "Enviar mensaje",
+    "sending": "Enviando…",
+    "success_heading": "Gracias",
+    "success_body": "Tu mensaje está en camino. Te contestaremos al email que has proporcionado.",
+    "error_heading": "Algo ha fallado",
+    "error_body": "El servicio de formulario no está disponible temporalmente. Vuelve a intentarlo en unos minutos o escríbenos directamente a info@acornjuice.com."
+  },
+  "consent": {
+    "heading": "Nos importa tu privacidad",
+    "body": "Usamos cookies analíticas para entender cómo se usa el sitio. No guardamos nada hasta que elijas.",
+    "accept": "Aceptar todo",
+    "reject": "Rechazar todo",
+    "preferences": "Preferencias",
+    "save": "Guardar preferencias",
+    "close": "Cerrar",
+    "learn_more": "Leer política de cookies",
+    "category_necessary": "Estrictamente necesarias",
+    "category_necessary_body": "Requeridas para que el sitio funcione (navegación, seguridad). Siempre activas.",
+    "category_analytics": "Analíticas",
+    "category_analytics_body": "Datos anónimos de uso para ayudarnos a mejorar el sitio (Google Analytics)."
+  },
+  "meta": {
+    "home_title": "Acorn Juice Solutions — Herramientas enfocadas que resuelven un problema concreto",
+    "home_description": "Estudio de software independiente desde Navarra. Casa de AccuVideo, SOSNav y otras pequeñas utilidades.",
+    "about_title": "Sobre nosotros — Acorn Juice Solutions",
+    "about_description": "Especialistas que se complementan bien. Conoce a las personas detrás de AccuVideo, SOSNav y otras herramientas útiles.",
+    "products_title": "Productos — Acorn Juice Solutions",
+    "products_description": "Herramientas enfocadas de Acorn Juice Solutions. Software de escritorio, móvil y utilidades hechos por un estudio de dos personas en Navarra.",
+    "privacy_title": "Política de privacidad — Acorn Juice Solutions",
+    "privacy_description": "Cómo Acorn Juice Solutions trata los datos personales recogidos a través de este sitio.",
+    "cookies_title": "Política de cookies — Acorn Juice Solutions",
+    "cookies_description": "Cookies usadas por acornjuice.com — necesarias y analíticas.",
+    "legal_title": "Aviso legal — Acorn Juice Solutions",
+    "legal_description": "Información legal sobre Acorn Juice Solutions SL bajo LSSI-CE.",
+    "thanks_title": "Gracias — Acorn Juice Solutions"
+  }
+}

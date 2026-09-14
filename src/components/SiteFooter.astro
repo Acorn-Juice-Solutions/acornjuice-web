@@ -1,0 +1,131 @@
+---
+import { type Locale, useTranslator, interpolate } from '~/utils/i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslator(locale);
+
+const year = new Date().getFullYear();
+const copyright = interpolate(t('footer.copyright'), { year });
+
+const privacyHref = locale === 'es' ? '/es/privacidad/' : '/privacy/';
+const cookiesHref = locale === 'es' ? '/es/cookies/' : '/cookies/';
+const legalHref = locale === 'es' ? '/es/aviso-legal/' : '/legal/';
+---
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <p class="footer-tagline">{t('site.tagline')}</p>
+      <p class="footer-made">{t('footer.made_with')}</p>
+    </div>
+
+    <nav aria-label={t('footer.legal_heading')} class="footer-legal">
+      <h2 class="footer-heading">{t('footer.legal_heading')}</h2>
+      <ul>
+        <li><a href={privacyHref}>{t('footer.privacy')}</a></li>
+        <li><a href={cookiesHref}>{t('footer.cookies')}</a></li>
+        <li><a href={legalHref}>{t('footer.legal_notice')}</a></li>
+        <li>
+          <button
+            type="button"
+            class="footer-cookie-button"
+            data-open-cookie-preferences>{t('footer.manage_cookies')}</button>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="footer-contact">
+      <h2 class="footer-heading">{t('nav.contact')}</h2>
+      <p>
+        <a href="mailto:info@acornjuice.com">info@acornjuice.com</a>
+      </p>
+    </div>
+  </div>
+
+  <div class="container footer-bottom">
+    <small>{copyright}</small>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--color-bg-alt);
+    border-top: 1px solid var(--color-line);
+    padding-block: var(--space-8) var(--space-4);
+    margin-top: var(--space-12);
+    color: var(--color-ink-soft);
+    font-size: var(--text-sm);
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: var(--space-6);
+  }
+
+  .footer-heading {
+    font-family: var(--font-display);
+    font-size: var(--text-base);
+    font-weight: 500;
+    color: var(--color-ink);
+    margin: 0 0 var(--space-3);
+  }
+
+  .footer-tagline {
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+    color: var(--color-ink);
+    margin: 0 0 var(--space-2);
+  }
+
+  .footer-made {
+    margin: 0;
+  }
+
+  .footer-legal ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .footer-legal a,
+  .footer-cookie-button {
+    color: var(--color-ink-soft);
+    text-decoration: none;
+    font-size: var(--text-sm);
+  }
+
+  .footer-legal a:hover,
+  .footer-cookie-button:hover {
+    color: var(--color-ink);
+    text-decoration: underline;
+  }
+
+  .footer-cookie-button {
+    background: none;
+    border: none;
+    padding: 0;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .footer-bottom {
+    margin-top: var(--space-6);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--color-line);
+    font-size: var(--text-xs);
+  }
+
+  @media (max-width: 640px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

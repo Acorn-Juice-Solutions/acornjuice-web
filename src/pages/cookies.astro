@@ -1,0 +1,165 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import { useTranslator } from '~/utils/i18n';
+import { webpageNode } from '~/utils/seo';
+
+const locale = 'en' as const;
+const t = useTranslator(locale);
+
+const title = t('meta.cookies_title');
+const description = t('meta.cookies_description');
+const canonical = 'https://acornjuice.com/cookies/';
+
+// TODO(review-before-launch): confirm the exact cookie names emitted by our GA4
+// stream once the property is set up (see manual actions §7).
+const lastUpdated = '2026-09-14';
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  hideConsentBanner={true}
+  extraGraphNodes={[
+    webpageNode({ url: canonical, name: title, description, locale }),
+  ]}
+>
+  <article class="legal-page">
+    <div class="container container-narrow">
+      <header>
+        <h1>Cookies policy</h1>
+        <p class="last-updated">Last updated: {lastUpdated}</p>
+      </header>
+
+      <section aria-labelledby="cookies-what">
+        <h2 id="cookies-what">What are cookies?</h2>
+        <p>
+          Cookies are small text files stored on your device by a website. They
+          let a site remember your preferences and gather usage data. This site
+          uses cookies for two purposes only: essential functionality and
+          anonymous analytics.
+        </p>
+      </section>
+
+      <section aria-labelledby="cookies-consent">
+        <h2 id="cookies-consent">Your consent</h2>
+        <p>
+          By default we do <strong>not</strong> load analytics cookies. When you
+          first visit, a banner offers three options: accept all, reject all,
+          or open preferences. Your choice is saved in your browser and can be
+          changed any time from "Manage cookie preferences" in the footer.
+        </p>
+        <p>
+          We implement this via Google's Consent Mode v2 — nothing analytics-related
+          fires until you say yes.
+        </p>
+      </section>
+
+      <section aria-labelledby="cookies-list">
+        <h2 id="cookies-list">Cookies we set</h2>
+
+        <h3>Strictly necessary (always on)</h3>
+        <table class="cookies-table">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Purpose</th>
+              <th scope="col">Duration</th>
+              <th scope="col">Provider</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>aj-consent-v1</code></td>
+              <td>Stores your cookie preferences.</td>
+              <td>1 year</td>
+              <td>acornjuice.com</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Analytics (only if you accept)</h3>
+        <table class="cookies-table">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Purpose</th>
+              <th scope="col">Duration</th>
+              <th scope="col">Provider</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>_ga</code></td>
+              <td>Identifies unique visitors (aggregated).</td>
+              <td>2 years</td>
+              <td>Google Analytics</td>
+            </tr>
+            <tr>
+              <td><code>_ga_XXXXXXXX</code></td>
+              <td>Session state for GA4.</td>
+              <td>2 years</td>
+              <td>Google Analytics</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section aria-labelledby="cookies-manage">
+        <h2 id="cookies-manage">Managing cookies</h2>
+        <p>
+          You can change your choice at any time using the "Manage cookie
+          preferences" link in the footer, or by clearing site data in your
+          browser settings.
+        </p>
+      </section>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .legal-page {
+    padding-block: var(--space-8) var(--space-12);
+  }
+  .container-narrow {
+    max-width: var(--reading-max);
+    margin-inline: auto;
+  }
+  h1 {
+    font-size: var(--text-4xl);
+  }
+  h2 {
+    font-size: var(--text-xl);
+    margin-top: var(--space-6);
+  }
+  h3 {
+    font-size: var(--text-lg);
+    margin-top: var(--space-4);
+  }
+  .last-updated {
+    color: var(--color-ink-soft);
+    font-size: var(--text-sm);
+    margin-bottom: var(--space-6);
+  }
+  .cookies-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--text-sm);
+    margin-bottom: var(--space-4);
+  }
+  .cookies-table th,
+  .cookies-table td {
+    text-align: left;
+    padding: var(--space-2);
+    border-bottom: 1px solid var(--color-line);
+  }
+  .cookies-table th {
+    background: var(--color-bg-alt);
+    font-weight: 600;
+  }
+  code {
+    background: var(--color-bg-alt);
+    padding: 1px 4px;
+    border-radius: var(--radius-sm);
+    font-size: 0.85em;
+  }
+</style>

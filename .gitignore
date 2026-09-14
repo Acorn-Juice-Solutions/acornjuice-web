@@ -1,0 +1,36 @@
+# Astro
+.astro/
+dist/
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test artifacts
+playwright-report/
+test-results/
+.lighthouseci/
+lhci-report/
+coverage/
+
+# Local notes (per user CLAUDE.md convention)
+.my-notes/

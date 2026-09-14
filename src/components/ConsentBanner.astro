@@ -1,0 +1,235 @@
+---
+import { type Locale, useTranslator } from '~/utils/i18n';
+
+interface Props {
+  locale: Locale;
+  hidden: boolean;
+}
+
+const { locale, hidden } = Astro.props;
+const t = useTranslator(locale);
+
+const cookiesPath = locale === 'es' ? '/es/cookies/' : '/cookies/';
+---
+
+<div
+  class="consent-banner"
+  data-consent-banner
+  role="dialog"
+  aria-labelledby="consent-title"
+  aria-describedby="consent-body"
+  aria-modal="false"
+  hidden={hidden}
+>
+  <div class="consent-inner">
+    <div>
+      <h2 id="consent-title" class="consent-title">{t('consent.heading')}</h2>
+      <p id="consent-body" class="consent-body">
+        {t('consent.body')}
+        <a href={cookiesPath}>{t('consent.learn_more')}</a>.
+      </p>
+    </div>
+
+    <div class="consent-actions" role="group" aria-label="Cookie choice">
+      <button
+        type="button"
+        class="btn btn-ghost"
+        data-consent-action="reject"
+      >{t('consent.reject')}</button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        data-consent-action="accept"
+      >{t('consent.accept')}</button>
+    </div>
+  </div>
+</div>
+
+<script is:inline data-consent-boot>
+  (function () {
+    // Consent Mode v2 requires gtag defined before any config call. This runs
+    // synchronously in the head-lift phase; the actual GA library is loaded
+    // only after the user consents (see BaseLayout).
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      window.dataLayer.push(arguments);
+    }
+    window.gtag = gtag;
+
+    var STORAGE_KEY = 'aj-consent-v1';
+
+    // Deny by default until we read the stored preference.
+    gtag('consent', 'default', {
+      analytics_storage: 'denied',
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+    });
+
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) {
+        var parsed = JSON.parse(raw);
+        if (parsed && parsed.analytics === 'granted') {
+          gtag('consent', 'update', { analytics_storage: 'granted' });
+        }
+      }
+    } catch (e) {
+      // localStorage disabled — treat as no stored preference.
+    }
+  })();
+</script>
+
+<script>
+  const STORAGE_KEY = 'aj-consent-v1';
+  const banner = document.querySelector<HTMLElement>('[data-consent-banner]');
+
+  type StoredConsent = {
+    analytics: 'granted' | 'denied';
+    ts: number;
+    v: 1;
+  };
+
+  function loadStored(): StoredConsent | null {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return null;
+      const parsed = JSON.parse(raw) as StoredConsent;
+      return parsed && parsed.v === 1 ? parsed : null;
+    } catch {
+      return null;
+    }
+  }
+
+  function persist(analytics: 'granted' | 'denied') {
+    try {
+      const payload: StoredConsent = {
+        analytics,
+        ts: Date.now(),
+        v: 1,
+      };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+    } catch {
+      /* localStorage disabled */
+    }
+  }
+
+  function applyConsent(analytics: 'granted' | 'denied') {
+    persist(analytics);
+    // @ts-expect-error gtag is defined via inline consent boot
+    window.gtag?.('consent', 'update', { analytics_storage: analytics });
+
+    if (analytics === 'granted') {
+      loadAnalyticsScript();
+    }
+
+    if (banner) banner.hidden = true;
+  }
+
+  function loadAnalyticsScript() {
+    const measurementId = document.documentElement.dataset.gaMeasurementId;
+    if (!measurementId) return;
+    if (document.querySelector(`script[data-ga-loaded]`)) return;
+
+    const s = document.createElement('script');
+    s.async = true;
+    s.dataset.gaLoaded = 'true';
+    s.src = `https://www.googletagmanager.com/gtag/js?id=${measurementId}`;
+    document.head.appendChild(s);
+
+    // @ts-expect-error gtag helper
+    window.gtag('js', new Date());
+    // @ts-expect-error gtag config
+    window.gtag('config', measurementId, { anonymize_ip: true });
+  }
+
+  // Attach action handlers to the banner buttons.
+  if (banner) {
+    banner.querySelectorAll<HTMLButtonElement>('[data-consent-action]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const action = btn.dataset.consentAction;
+        applyConsent(action === 'accept' ? 'granted' : 'denied');
+      });
+    });
+  }
+
+  // Global "Manage cookie preferences" opener wired to the footer button.
+  // Both actions are required: remove the HTML `hidden` attribute (which
+  // servers wins on legal pages) and add the `consent-force-open` class
+  // (which overrides the anti-flash CSS rule for returning visitors).
+  document
+    .querySelectorAll<HTMLElement>('[data-open-cookie-preferences]')
+    .forEach((el) => {
+      el.addEventListener('click', () => {
+        if (banner) {
+          banner.hidden = false;
+          banner.classList.add('consent-force-open');
+        }
+      });
+    });
+
+  // Re-hiding the banner (accept/reject) should also drop the force-open state
+  // so the anti-flash CSS rule applies on subsequent visits.
+  banner?.querySelectorAll<HTMLButtonElement>('[data-consent-action]').forEach(
+    (btn) => {
+      btn.addEventListener('click', () => {
+        banner?.classList.remove('consent-force-open');
+      });
+    },
+  );
+
+  // If the user already granted before, re-boot the script on this page load.
+  const stored = loadStored();
+  if (stored?.analytics === 'granted') {
+    loadAnalyticsScript();
+  }
+</script>
+
+<style>
+  .consent-banner {
+    position: fixed;
+    inset: auto var(--space-3) var(--space-3);
+    background: var(--color-bg);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-lg);
+    padding: var(--space-4);
+    box-shadow: 0 12px 32px rgba(42, 26, 16, 0.12);
+    z-index: 60;
+  }
+
+  .consent-inner {
+    display: grid;
+    gap: var(--space-3);
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    max-width: var(--container-max);
+    margin-inline: auto;
+  }
+
+  .consent-title {
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+    margin: 0 0 var(--space-1);
+  }
+
+  .consent-body {
+    margin: 0;
+    font-size: var(--text-sm);
+    color: var(--color-ink-soft);
+  }
+
+  .consent-actions {
+    display: flex;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 640px) {
+    .consent-inner {
+      grid-template-columns: 1fr;
+    }
+    .consent-actions {
+      justify-content: flex-end;
+    }
+  }
+</style>

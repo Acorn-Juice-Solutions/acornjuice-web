@@ -1,0 +1,143 @@
+---
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import { type Locale, useTranslator } from '~/utils/i18n';
+
+interface Props {
+  locale: Locale;
+  currentPath: string;
+}
+
+const { locale, currentPath } = Astro.props;
+const t = useTranslator(locale);
+
+const home = locale === 'es' ? '/es/' : '/';
+const products = locale === 'es' ? '/es/productos/' : '/products/';
+const about = locale === 'es' ? '/es/sobre/' : '/about/';
+---
+
+<a class="skip-link" href="#main">{t('nav.skip')}</a>
+
+<header class="site-header">
+  <div class="container header-row">
+    <a class="brand" href={home} aria-label={t('site.name')}>
+      <img
+        class="brand-logo"
+        src="/assets/logo.png"
+        width="512"
+        height="512"
+        alt=""
+        decoding="async"
+        fetchpriority="high"
+      />
+      <span class="brand-name">{t('site.name')}</span>
+    </a>
+
+    <nav class="site-nav" aria-label={t('nav.primary_label')}>
+      <a
+        href={home}
+        aria-current={currentPath === home ? 'page' : undefined}>{t('nav.home')}</a>
+      <a
+        href={products}
+        aria-current={currentPath.startsWith(products) ? 'page' : undefined}>{
+        t('nav.products')
+      }</a>
+      <a
+        href={about}
+        aria-current={currentPath === about ? 'page' : undefined}>{t('nav.about')}</a>
+    </nav>
+
+    <div class="header-actions">
+      <LanguageSwitcher locale={locale} currentPath={currentPath} />
+    </div>
+  </div>
+</header>
+
+<style>
+  .skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    background: var(--color-cap);
+    color: var(--color-bg);
+    padding: var(--space-2) var(--space-3);
+    text-decoration: none;
+    border-radius: 0 0 var(--radius-md) 0;
+    z-index: 100;
+  }
+  .skip-link:focus {
+    left: 0;
+  }
+
+  .site-header {
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-line);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    backdrop-filter: saturate(180%) blur(6px);
+  }
+
+  .header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding-block: var(--space-3);
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--color-ink);
+    text-decoration: none;
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+    font-weight: 500;
+  }
+
+  .brand:hover {
+    color: var(--color-cap-dark);
+  }
+
+  .brand-logo {
+    display: block;
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+  }
+
+  .site-nav {
+    display: flex;
+    gap: var(--space-4);
+    font-size: var(--text-sm);
+  }
+
+  .site-nav a {
+    color: var(--color-ink-soft);
+    text-decoration: none;
+    padding: var(--space-2);
+    border-radius: var(--radius-sm);
+  }
+
+  .site-nav a:hover {
+    color: var(--color-ink);
+  }
+
+  .site-nav a[aria-current='page'] {
+    color: var(--color-cap);
+    font-weight: 600;
+  }
+
+  .header-actions {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  @media (max-width: 640px) {
+    .site-nav {
+      display: none;
+    }
+  }
+</style>

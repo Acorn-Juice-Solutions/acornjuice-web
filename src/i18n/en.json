@@ -1,0 +1,138 @@
+{
+  "site": {
+    "name": "Acorn Juice Solutions",
+    "tagline": "Focused tools that solve one problem well.",
+    "description": "Independent software studio building focused tools for humans. Home of AccuVideo, SOSNav, and other small useful things."
+  },
+  "nav": {
+    "home": "Home",
+    "products": "Products",
+    "about": "About",
+    "contact": "Contact",
+    "skip": "Skip to main content",
+    "primary_label": "Primary navigation"
+  },
+  "language": {
+    "switcher_label": "Change language",
+    "current": "English",
+    "other": "Español",
+    "other_short": "ES"
+  },
+  "footer": {
+    "copyright": "© {year} Acorn Juice Solutions SL. All rights reserved.",
+    "legal_heading": "Legal",
+    "privacy": "Privacy policy",
+    "cookies": "Cookies policy",
+    "legal_notice": "Legal notice",
+    "manage_cookies": "Manage cookie preferences",
+    "made_with": "Built in Navarra, Spain."
+  },
+  "home": {
+    "hero_eyebrow": "Independent software studio",
+    "hero_title": "Focused tools. One problem at a time.",
+    "hero_lede": "Acorn Juice Solutions is a two-person studio based in Navarra, Spain. We build small, sharp software — desktop apps, mobile widgets, and one-shot utilities — that solve a real problem for real people.",
+    "hero_cta_products": "See our products",
+    "hero_cta_about": "Meet the makers",
+    "products_heading": "What we make",
+    "products_lede": "A mix of commercial products and free utilities. Carefully maintained and monitored.",
+    "makers_heading": "The team. Complementary skills.",
+    "makers_lede": "Every product gets personal attention and reflects the work of the team behind it.",
+    "approach_heading": "How we work",
+    "approach_lede": "Every product and every engagement — commercial or not — follows the same three principles.",
+    "approach": {
+      "craft_title": "Best practices, by default",
+      "craft_body": "Code review, testing gates, documented conventions and CI that fails loud. Nothing ships that we would not be comfortable handing off to a senior partner.",
+      "patterns_title": "Proven patterns over shortcuts",
+      "patterns_body": "Design patterns and architectural choices with a track record. We reach for the well-understood solution first, and only consider the clever one when it truly fits.",
+      "security_title": "Security is not an afterthought",
+      "security_body": "Input validation at trust boundaries, secrets kept out of the repo, principle of least privilege, auditable dependencies. Built in from the first commit, not bolted on before release."
+    },
+    "services_heading": "What else we do",
+    "services_lede": "Beyond our own products, we also work with teams as an extension of theirs. A short, honest list of what we can take on:",
+    "services": {
+      "cloud_title": "Cloud migrations and modernisation",
+      "cloud_body": "From on-prem or legacy environments to well-architected cloud platforms on Microsoft Azure, Amazon AWS or Google Cloud. Migration planning, cost modelling, and hands-on execution.",
+      "pipelines_title": "CI/CD pipelines",
+      "pipelines_body": "Analysis and definition of build, test and release pipelines applying modern best practices — reproducible builds, gated releases, secret hygiene and rollout safety by default.",
+      "fullstack_title": "Full-stack software delivery",
+      "fullstack_body": "Java, .NET, Python, Node.js, Angular. Backend services, APIs, front-ends and the database work that ties them together. Comfortable across stacks and legacy code.",
+      "infra_title": "Infrastructure and networking",
+      "infra_body": "DevOps automation, environment provisioning, monitoring and networking — including Mikrotik router configuration for on-prem or hybrid setups."
+    },
+    "contact_heading": "Get in touch",
+    "contact_lede": "Have a question, an idea, or a project you want us to look at? Drop us a line."
+  },
+  "about": {
+    "title": "About Acorn Juice Solutions",
+    "lede": "Independent software studio from Navarra, Spain. Our team brings complementary skills and prefers tools that do one thing well.",
+    "story_heading": "Where we come from",
+    "makers_heading": "Meet the makers",
+    "experience_heading": "Experience",
+    "experience_body": "Over 25 years delivering custom software for clients in demanding sectors: international banking, public sector, industry, construction and more. We work fluently in English and have collaborated with international teams across Europe — engagements can run in English or Spanish. Domains we've worked in:",
+    "experience_note": "Client names are withheld under confidentiality agreements. Verifiable details on the makers' LinkedIn profiles."
+  },
+  "products": {
+    "title": "Products",
+    "lede": "Focused tools built by Acorn Juice Solutions. From semantic video search on desktop to public-service utilities on mobile.",
+    "status_available": "Available",
+    "status_beta": "In beta",
+    "status_archived": "Archived",
+    "status_draft": "Coming soon",
+    "learn_more": "Learn more",
+    "visit": "Visit",
+    "grid_heading": "All products"
+  },
+  "product_page": {
+    "back_to_products": "← Back to products",
+    "features_heading": "What it does",
+    "platforms_heading": "Available on",
+    "links_heading": "Get it",
+    "made_by_heading": "Made by",
+    "screenshots_heading": "Screenshots"
+  },
+  "contact": {
+    "field_email": "Email",
+    "field_subject": "Subject",
+    "field_message": "Message",
+    "subject_general": "General question",
+    "subject_products": "A product",
+    "subject_careers": "Careers",
+    "subject_other": "Other",
+    "consent_label": "I agree to the processing of my email to answer this message. See our privacy policy.",
+    "submit": "Send message",
+    "sending": "Sending…",
+    "success_heading": "Thank you",
+    "success_body": "Your message is on its way. We'll get back to you at the email you provided.",
+    "error_heading": "Something went wrong",
+    "error_body": "The form service is temporarily unavailable. Please try again in a few minutes, or email us directly at info@acornjuice.com."
+  },
+  "consent": {
+    "heading": "We value your privacy",
+    "body": "We use analytics cookies to understand how visitors use the site. Nothing is stored until you choose.",
+    "accept": "Accept all",
+    "reject": "Reject all",
+    "preferences": "Preferences",
+    "save": "Save preferences",
+    "close": "Close",
+    "learn_more": "Read our cookies policy",
+    "category_necessary": "Strictly necessary",
+    "category_necessary_body": "Required for the site to work (page navigation, security). Always on.",
+    "category_analytics": "Analytics",
+    "category_analytics_body": "Anonymous usage data to help us improve the site (Google Analytics)."
+  },
+  "meta": {
+    "home_title": "Acorn Juice Solutions — Focused tools that solve one problem well",
+    "home_description": "Independent software studio from Navarra, Spain. Home of AccuVideo, SOSNav, and other small useful tools.",
+    "about_title": "About — Acorn Juice Solutions",
+    "about_description": "Specialists that complement each other well. Meet the people behind AccuVideo, SOSNav, and other small useful tools.",
+    "products_title": "Products — Acorn Juice Solutions",
+    "products_description": "Focused tools by Acorn Juice Solutions. Desktop, mobile, and utility software built by a two-person studio in Navarra, Spain.",
+    "privacy_title": "Privacy policy — Acorn Juice Solutions",
+    "privacy_description": "How Acorn Juice Solutions handles personal data collected through this website.",
+    "cookies_title": "Cookies policy — Acorn Juice Solutions",
+    "cookies_description": "Cookies used by acornjuice.com — necessary and analytics.",
+    "legal_title": "Legal notice — Acorn Juice Solutions",
+    "legal_description": "Legal information about Acorn Juice Solutions SL under Spanish LSSI-CE.",
+    "thanks_title": "Thank you — Acorn Juice Solutions"
+  }
+}

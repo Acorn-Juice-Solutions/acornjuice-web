@@ -1,0 +1,196 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import ContactForm from '~/components/ContactForm.astro';
+import { useTranslator } from '~/utils/i18n';
+import { websiteNode } from '~/utils/seo';
+
+const locale = 'en' as const;
+const t = useTranslator(locale);
+
+const title = t('meta.home_title');
+const description = t('meta.home_description');
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  extraGraphNodes={[websiteNode(locale)]}
+>
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">{t('home.hero_eyebrow')}</p>
+        <h1 class="hero-title">{t('home.hero_title')}</h1>
+        <p class="lede">{t('home.hero_lede')}</p>
+        <div class="hero-ctas">
+          <a href="/products/" class="btn btn-primary">{t('home.hero_cta_products')}</a>
+          <a href="/about/" class="btn btn-ghost">{t('home.hero_cta_about')}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2>{t('home.products_heading')}</h2>
+      <p class="section-lede">{t('home.products_lede')}</p>
+      <p><a href="/products/" class="btn btn-ghost">{t('products.grid_heading')}</a></p>
+    </div>
+  </section>
+
+  <section id="services" class="section">
+    <div class="container container-narrow">
+      <h2>{t('home.services_heading')}</h2>
+      <p class="section-lede">{t('home.services_lede')}</p>
+      <dl class="service-list">
+        <div class="service-item">
+          <dt>{t('home.services.cloud_title')}</dt>
+          <dd>{t('home.services.cloud_body')}</dd>
+        </div>
+        <div class="service-item">
+          <dt>{t('home.services.pipelines_title')}</dt>
+          <dd>{t('home.services.pipelines_body')}</dd>
+        </div>
+        <div class="service-item">
+          <dt>{t('home.services.fullstack_title')}</dt>
+          <dd>{t('home.services.fullstack_body')}</dd>
+        </div>
+        <div class="service-item">
+          <dt>{t('home.services.infra_title')}</dt>
+          <dd>{t('home.services.infra_body')}</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <section id="approach" class="section section-alt">
+    <div class="container container-narrow">
+      <h2>{t('home.approach_heading')}</h2>
+      <p class="section-lede">{t('home.approach_lede')}</p>
+      <dl class="service-list">
+        <div class="service-item">
+          <dt>{t('home.approach.craft_title')}</dt>
+          <dd>{t('home.approach.craft_body')}</dd>
+        </div>
+        <div class="service-item">
+          <dt>{t('home.approach.patterns_title')}</dt>
+          <dd>{t('home.approach.patterns_body')}</dd>
+        </div>
+        <div class="service-item">
+          <dt>{t('home.approach.security_title')}</dt>
+          <dd>{t('home.approach.security_body')}</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <section id="experience" class="section">
+    <div class="container container-narrow">
+      <h2>{t('about.experience_heading')}</h2>
+      <p class="section-lede">{t('about.experience_body')}</p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2>{t('home.makers_heading')}</h2>
+      <p class="section-lede">{t('home.makers_lede')}</p>
+      <p><a href="/about/" class="btn btn-ghost">{t('home.hero_cta_about')}</a></p>
+    </div>
+  </section>
+
+  <section id="contact" class="section">
+    <div class="container container-narrow">
+      <h2>{t('home.contact_heading')}</h2>
+      <p class="section-lede">{t('home.contact_lede')}</p>
+      <ContactForm locale={locale} />
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    padding-block: var(--space-12) var(--space-8);
+    background:
+      radial-gradient(
+        ellipse at top right,
+        rgba(232, 147, 74, 0.15),
+        transparent 60%
+      ),
+      var(--color-bg);
+  }
+
+  .hero-grid {
+    display: grid;
+    gap: var(--space-6);
+  }
+
+  .eyebrow {
+    font-size: var(--text-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-ink-soft);
+    margin-bottom: var(--space-3);
+  }
+
+  .hero-title {
+    font-size: var(--text-5xl);
+    max-width: 20ch;
+  }
+
+  .lede {
+    font-size: var(--text-lg);
+    color: var(--color-ink-soft);
+    max-width: 60ch;
+  }
+
+  .hero-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-5);
+  }
+
+  .section-lede {
+    font-size: var(--text-lg);
+    color: var(--color-ink-soft);
+    max-width: 60ch;
+  }
+
+  .container-narrow {
+    max-width: var(--reading-max);
+    margin-inline: auto;
+  }
+
+  .service-list {
+    margin: var(--space-6) 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+
+  .service-item {
+    padding-left: var(--space-4);
+    border-left: 3px solid var(--color-body);
+  }
+
+  .service-item dt {
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+    font-weight: 500;
+    color: var(--color-ink);
+    margin-bottom: var(--space-2);
+  }
+
+  .service-item dd {
+    margin: 0;
+    color: var(--color-ink-soft);
+  }
+
+  @media (max-width: 640px) {
+    .hero-title {
+      font-size: var(--text-4xl);
+    }
+  }
+</style>

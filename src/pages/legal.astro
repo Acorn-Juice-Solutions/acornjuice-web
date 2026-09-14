@@ -1,0 +1,129 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import { useTranslator } from '~/utils/i18n';
+import { webpageNode } from '~/utils/seo';
+
+const locale = 'en' as const;
+const t = useTranslator(locale);
+
+const title = t('meta.legal_title');
+const description = t('meta.legal_description');
+const canonical = 'https://acornjuice.com/legal/';
+
+// TODO(review-before-launch): confirm the Registro Mercantil de Navarra
+// registration details (tomo, folio, hoja) before publishing. Mandatory per
+// LSSI-CE art. 10.
+const lastUpdated = '2026-09-14';
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  hideConsentBanner={true}
+  extraGraphNodes={[
+    webpageNode({ url: canonical, name: title, description, locale }),
+  ]}
+>
+  <article class="legal-page">
+    <div class="container container-narrow">
+      <header>
+        <h1>Legal notice</h1>
+        <p class="last-updated">Last updated: {lastUpdated}</p>
+      </header>
+
+      <section aria-labelledby="legal-identity">
+        <h2 id="legal-identity">Identity of the site owner</h2>
+        <p>
+          In compliance with the Spanish Ley 34/2002 (LSSI-CE), article 10, the
+          identifying details of the owner of this site are:
+        </p>
+        <ul>
+          <li><strong>Company:</strong> ACORN JUICE SOLUTIONS SL</li>
+          <li><strong>VAT ID:</strong> ESB71336218</li>
+          <li><strong>Spanish tax ID:</strong> B71336218</li>
+          <li>
+            <strong>Registered address:</strong> Calle Bosquecillo, 6, 31191,
+            Beriáin (Navarra), Spain
+          </li>
+          <li>
+            <strong>Registro Mercantil:</strong> to be confirmed (Registro Mercantil de Navarra)
+          </li>
+          <li>
+            <strong>Contact email:</strong>
+            <a href="mailto:info@acornjuice.com">info@acornjuice.com</a>
+          </li>
+          <li>
+            <strong>Website:</strong>
+            <a href="https://acornjuice.com/">acornjuice.com</a>
+          </li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="legal-purpose">
+        <h2 id="legal-purpose">Purpose of this site</h2>
+        <p>
+          This site presents Acorn Juice Solutions SL and its software products.
+          Commercial transactions related to specific products (for example
+          AccuVideo licences) happen on the respective product's own site.
+        </p>
+      </section>
+
+      <section aria-labelledby="legal-ip">
+        <h2 id="legal-ip">Intellectual property</h2>
+        <p>
+          The text, images, logo and structure of this site are property of
+          Acorn Juice Solutions SL unless otherwise stated. You may quote and
+          share content with attribution and a link back to the original page.
+          Commercial reuse requires prior written permission.
+        </p>
+        <p>
+          Third-party logos and trademarks that appear on this site (if any)
+          are property of their respective owners and are used with permission
+          or under fair-use quotation.
+        </p>
+      </section>
+
+      <section aria-labelledby="legal-liability">
+        <h2 id="legal-liability">Liability</h2>
+        <p>
+          Acorn Juice Solutions SL does its best to keep this site accurate and
+          up to date, but does not guarantee the absence of errors, interruptions
+          or unavailability. External links are provided for convenience; Acorn
+          Juice is not responsible for the content of third-party sites.
+        </p>
+      </section>
+
+      <section aria-labelledby="legal-jurisdiction">
+        <h2 id="legal-jurisdiction">Applicable law and jurisdiction</h2>
+        <p>
+          Use of this site is governed by <strong>Spanish law</strong>. Any
+          dispute arising from access to or use of this site will be resolved
+          by the <strong>courts of Pamplona (Navarra), Spain</strong>, unless
+          a specific mandatory jurisdiction applies.
+        </p>
+      </section>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .legal-page {
+    padding-block: var(--space-8) var(--space-12);
+  }
+  .container-narrow {
+    max-width: var(--reading-max);
+    margin-inline: auto;
+  }
+  h1 {
+    font-size: var(--text-4xl);
+  }
+  h2 {
+    font-size: var(--text-xl);
+    margin-top: var(--space-6);
+  }
+  .last-updated {
+    color: var(--color-ink-soft);
+    font-size: var(--text-sm);
+    margin-bottom: var(--space-6);
+  }
+</style>

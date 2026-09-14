@@ -1,0 +1,37 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import { useTranslator } from '~/utils/i18n';
+
+const locale = 'es' as const;
+const t = useTranslator(locale);
+
+const title = t('meta.thanks_title');
+const description = t('contact.success_body');
+---
+
+<BaseLayout title={title} description={description}>
+  <section class="section">
+    <div class="container container-narrow">
+      <h1>{t('contact.success_heading')}</h1>
+      <p class="lede">{t('contact.success_body')}</p>
+      <p class="ctas">
+        <a href="/es/" class="btn btn-primary">← {t('nav.home')}</a>
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .container-narrow {
+    max-width: var(--reading-max);
+    margin-inline: auto;
+  }
+  h1 {
+    font-size: var(--text-4xl);
+  }
+  .lede {
+    font-size: var(--text-lg);
+    color: var(--color-ink-soft);
+    margin-bottom: var(--space-5);
+  }
+</style>

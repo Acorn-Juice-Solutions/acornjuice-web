@@ -1,0 +1,211 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import { useTranslator } from '~/utils/i18n';
+import { ORG_ID } from '~/utils/seo';
+
+export async function getStaticPaths() {
+  const products = await getCollection('products');
+  return products
+    .filter((p) => p.data.status !== 'draft')
+    .map((product) => ({
+      params: { slug: product.data.slugEs },
+      props: { product },
+    }));
+}
+
+interface Props {
+  product: CollectionEntry<'products'>;
+}
+
+const { product }: Props = Astro.props;
+const data = product.data;
+const locale = 'es' as const;
+const t = useTranslator(locale);
+
+const name = data.name;
+const tagline = data.tagline[locale];
+const description = data.description[locale];
+const features = data.features[locale];
+
+const platformLabels: Record<string, string> = {
+  ios: 'iOS',
+  android: 'Android',
+  windows: 'Windows',
+  macos: 'macOS',
+  linux: 'Linux',
+  web: 'Web',
+  github: 'GitHub',
+};
+
+const urlEntries = Object.entries(data.urls).filter(([, v]) => Boolean(v)) as [
+  string,
+  string,
+][];
+
+const urlLabels: Record<string, string> = {
+  appStore: 'App Store',
+  playStore: 'Google Play',
+  website: 'Web',
+  github: 'GitHub',
+};
+
+const operatingSystem =
+  data.schemaType === 'MobileApplication'
+    ? data.platforms.map((p) => {
+        if (p === 'ios') return 'iOS';
+        if (p === 'android') return 'Android';
+        return p;
+      })
+    : data.platforms.map((p) => platformLabels[p] ?? p);
+
+const productSchemaNode = {
+  '@type': data.schemaType,
+  name,
+  description,
+  operatingSystem,
+  applicationCategory:
+    data.schemaType === 'MobileApplication'
+      ? 'MobileApplication'
+      : 'SoftwareApplication',
+  url: data.urls.website ?? data.urls.appStore ?? data.urls.github,
+  publisher: { '@id': ORG_ID },
+};
+
+const title = `${name} — Acorn Juice Solutions`;
+const metaDescription = tagline;
+---
+
+<BaseLayout
+  title={title}
+  description={metaDescription}
+  extraGraphNodes={[productSchemaNode]}
+  ogType="article"
+>
+  <article class="product-page">
+    <div class="container">
+      <p class="back-link"><a href="/es/productos/">{t('product_page.back_to_products')}</a></p>
+
+      <header class="product-hero">
+        <h1>{name}</h1>
+        <p class="tagline">{tagline}</p>
+        <ul class="platforms" aria-label={t('product_page.platforms_heading')}>
+          {
+            data.platforms.map((p) => (
+              <li>{platformLabels[p] ?? p}</li>
+            ))
+          }
+        </ul>
+      </header>
+
+      <section class="product-body">
+        <p class="lede">{description}</p>
+
+        <h2>{t('product_page.features_heading')}</h2>
+        <ul class="features">
+          {features.map((f) => <li>{f}</li>)}
+        </ul>
+
+        {
+          urlEntries.length > 0 && (
+            <>
+              <h2>{t('product_page.links_heading')}</h2>
+              <div class="link-buttons">
+                {urlEntries.map(([kind, href]) => (
+                  <a
+                    class="btn btn-primary"
+                    href={href}
+                    rel="noopener"
+                    target="_blank"
+                  >
+                    {urlLabels[kind] ?? kind}
+                  </a>
+                ))}
+              </div>
+            </>
+          )
+        }
+
+        <h2>{t('product_page.made_by_heading')}</h2>
+        <p>
+          <a href="/es/sobre/">Acorn Juice Solutions</a>
+        </p>
+      </section>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .product-page {
+    padding-block: var(--space-8) var(--space-12);
+  }
+
+  .back-link {
+    margin-bottom: var(--space-4);
+    font-size: var(--text-sm);
+  }
+
+  .product-hero {
+    margin-bottom: var(--space-8);
+    padding-bottom: var(--space-6);
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .product-hero h1 {
+    font-size: var(--text-5xl);
+    margin-bottom: var(--space-3);
+  }
+
+  .tagline {
+    font-size: var(--text-xl);
+    color: var(--color-ink-soft);
+    margin-bottom: var(--space-4);
+  }
+
+  .platforms {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .platforms li {
+    padding: 4px var(--space-3);
+    background: var(--color-bg-alt);
+    border-radius: var(--radius-sm);
+    font-size: var(--text-sm);
+    color: var(--color-ink-soft);
+  }
+
+  .product-body {
+    max-width: var(--reading-max);
+  }
+
+  .lede {
+    font-size: var(--text-lg);
+    color: var(--color-ink);
+  }
+
+  .features {
+    padding-left: var(--space-4);
+  }
+
+  .features li {
+    margin-bottom: var(--space-2);
+  }
+
+  .link-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-bottom: var(--space-6);
+  }
+
+  @media (max-width: 640px) {
+    .product-hero h1 {
+      font-size: var(--text-4xl);
+    }
+  }
+</style>

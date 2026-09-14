@@ -1,0 +1,126 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import MakerCard from '~/components/MakerCard.astro';
+import { useTranslator } from '~/utils/i18n';
+import { webpageNode } from '~/utils/seo';
+
+const locale = 'en' as const;
+const t = useTranslator(locale);
+
+const makers = (await getCollection('makers'))
+  .filter((m) => m.data.consentedToPublish)
+  .sort((a, b) => a.data.order - b.data.order);
+
+const SECTORS = [
+  'Retail banking',
+  'Fintech & payments',
+  'Savings banks',
+  'Public safety',
+  'Justice',
+  'Insurance',
+  'Construction',
+  'Industry',
+  'Engineering',
+  'Occupational health & safety',
+  'Transport',
+];
+
+const title = t('meta.about_title');
+const description = t('meta.about_description');
+const canonical = 'https://acornjuice.com/about/';
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  extraGraphNodes={[
+    webpageNode({
+      url: canonical,
+      name: title,
+      description,
+      locale,
+    }),
+  ]}
+>
+  <section class="section">
+    <div class="container container-narrow">
+      <h1>{t('about.title')}</h1>
+      <p class="lede">{t('about.lede')}</p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2>{t('about.makers_heading')}</h2>
+      <div class="maker-grid">
+        {makers.map((maker) => <MakerCard maker={maker} locale={locale} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container container-narrow">
+      <h2>{t('about.experience_heading')}</h2>
+      <p>{t('about.experience_body')}</p>
+      <ul class="sector-chips" aria-label="Sectors">
+        {SECTORS.map((s) => <li>{s}</li>)}
+      </ul>
+      <p class="experience-note">{t('about.experience_note')}</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .container-narrow {
+    max-width: var(--reading-max);
+    margin-inline: auto;
+  }
+
+  h1 {
+    font-size: var(--text-5xl);
+    margin-bottom: var(--space-3);
+  }
+
+  .lede {
+    font-size: var(--text-lg);
+    color: var(--color-ink-soft);
+  }
+
+  .maker-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--space-4);
+  }
+
+  .sector-chips {
+    list-style: none;
+    padding: 0;
+    margin: var(--space-4) 0 var(--space-3);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .sector-chips li {
+    padding: var(--space-1) var(--space-3);
+    background: var(--color-bg-alt);
+    border: 1px solid var(--color-line);
+    border-radius: 999px;
+    font-size: var(--text-sm);
+    color: var(--color-ink);
+  }
+
+  .experience-note {
+    margin-top: var(--space-3);
+    font-size: var(--text-sm);
+    color: var(--color-ink-soft);
+    font-style: italic;
+  }
+
+  @media (max-width: 640px) {
+    h1 {
+      font-size: var(--text-4xl);
+    }
+  }
+</style>

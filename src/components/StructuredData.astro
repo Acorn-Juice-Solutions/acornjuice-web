@@ -1,0 +1,15 @@
+---
+import type { SchemaGraph } from '~/utils/seo';
+
+interface Props {
+  graph: SchemaGraph;
+}
+
+const { graph } = Astro.props;
+// Astro's `set:html` bypasses HTML entity encoding for embedded JSON, which is
+// what JSON-LD requires — but we still need to escape the `</script>` sequence
+// so a rogue value can never break out of the tag.
+const serialized = JSON.stringify(graph).replace(/<\/(script)/gi, '<\\/$1');
+---
+
+<script type="application/ld+json" is:inline set:html={serialized}></script>

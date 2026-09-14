@@ -1,0 +1,131 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import { useTranslator } from '~/utils/i18n';
+import { webpageNode } from '~/utils/seo';
+
+const locale = 'es' as const;
+const t = useTranslator(locale);
+
+const title = t('meta.legal_title');
+const description = t('meta.legal_description');
+const canonical = 'https://acornjuice.com/es/aviso-legal/';
+
+// TODO(review-before-launch): confirmar los datos registrales del Registro
+// Mercantil de Navarra (tomo, folio, hoja) antes de publicar. Obligatorio por
+// LSSI-CE art. 10.
+const lastUpdated = '14/09/2026';
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  hideConsentBanner={true}
+  extraGraphNodes={[
+    webpageNode({ url: canonical, name: title, description, locale }),
+  ]}
+>
+  <article class="legal-page">
+    <div class="container container-narrow">
+      <header>
+        <h1>Aviso legal</h1>
+        <p class="last-updated">Última actualización: {lastUpdated}</p>
+      </header>
+
+      <section aria-labelledby="legal-identity">
+        <h2 id="legal-identity">Datos identificativos del titular del sitio</h2>
+        <p>
+          En cumplimiento del artículo 10 de la Ley 34/2002 (LSSI-CE), se
+          publican los siguientes datos del titular de este sitio web:
+        </p>
+        <ul>
+          <li><strong>Denominación social:</strong> ACORN JUICE SOLUTIONS SL</li>
+          <li><strong>NIF/CIF:</strong> B71336218</li>
+          <li>
+            <strong>Domicilio social:</strong> Calle Bosquecillo, 6, 31191,
+            Beriáin (Navarra), España
+          </li>
+          <li>
+            <strong>Registro Mercantil:</strong> pendiente de confirmar
+            (Registro Mercantil de Navarra)
+          </li>
+          <li>
+            <strong>Email de contacto:</strong>
+            <a href="mailto:info@acornjuice.com">info@acornjuice.com</a>
+          </li>
+          <li>
+            <strong>Web:</strong>
+            <a href="https://acornjuice.com/">acornjuice.com</a>
+          </li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="legal-purpose">
+        <h2 id="legal-purpose">Objeto del sitio</h2>
+        <p>
+          Este sitio presenta a Acorn Juice Solutions SL y a sus productos de
+          software. Las transacciones comerciales relativas a productos concretos
+          (por ejemplo, licencias de AccuVideo) se realizan en el sitio propio
+          de cada producto.
+        </p>
+      </section>
+
+      <section aria-labelledby="legal-ip">
+        <h2 id="legal-ip">Propiedad intelectual</h2>
+        <p>
+          Los textos, imágenes, logotipo y estructura de este sitio son
+          propiedad de Acorn Juice Solutions SL salvo indicación contraria.
+          Puedes citar y compartir el contenido con atribución y enlace a la
+          página original. La reutilización comercial requiere autorización
+          previa por escrito.
+        </p>
+        <p>
+          Los logos y marcas de terceros que puedan aparecer en este sitio son
+          propiedad de sus respectivos titulares y se muestran con permiso o
+          amparados por el derecho de cita.
+        </p>
+      </section>
+
+      <section aria-labelledby="legal-liability">
+        <h2 id="legal-liability">Responsabilidad</h2>
+        <p>
+          Acorn Juice Solutions SL procura mantener este sitio actualizado y
+          exacto, pero no garantiza la ausencia de errores, interrupciones o
+          indisponibilidades. Los enlaces externos se ofrecen por comodidad;
+          Acorn Juice no es responsable del contenido de sitios de terceros.
+        </p>
+      </section>
+
+      <section aria-labelledby="legal-jurisdiction">
+        <h2 id="legal-jurisdiction">Ley aplicable y jurisdicción</h2>
+        <p>
+          El uso de este sitio se rige por la <strong>legislación española</strong>.
+          Cualquier controversia derivada del acceso o uso del sitio se
+          resolverá ante los <strong>juzgados y tribunales de Pamplona (Navarra)</strong>,
+          salvo que una jurisdicción imperativa concreta resulte aplicable.
+        </p>
+      </section>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .legal-page {
+    padding-block: var(--space-8) var(--space-12);
+  }
+  .container-narrow {
+    max-width: var(--reading-max);
+    margin-inline: auto;
+  }
+  h1 {
+    font-size: var(--text-4xl);
+  }
+  h2 {
+    font-size: var(--text-xl);
+    margin-top: var(--space-6);
+  }
+  .last-updated {
+    color: var(--color-ink-soft);
+    font-size: var(--text-sm);
+    margin-bottom: var(--space-6);
+  }
+</style>
