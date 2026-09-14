@@ -2,7 +2,7 @@
   "site": {
     "name": "Acorn Juice Solutions",
     "tagline": "Herramientas enfocadas que resuelven un problema concreto.",
-    "description": "Estudio de software independiente que construye herramientas enfocadas para personas. Casa de AccuVideo, SOSNav y otras pequeñas utilidades."
+    "description": "Estudio de software independiente que construye software escalable y bien resuelto — desde utilidades enfocadas hasta aplicaciones móviles, webs, APIs, pipelines e infraestructura en la nube."
   },
   "nav": {
     "home": "Inicio",
@@ -30,7 +30,7 @@
   "home": {
     "hero_eyebrow": "Estudio de software independiente",
     "hero_title": "Herramientas enfocadas. Un problema cada vez.",
-    "hero_lede": "Acorn Juice Solutions es un estudio de dos personas con sede en Navarra. Construimos software pequeño y afilado — apps de escritorio, widgets móviles y utilidades de un solo golpe — que resuelve problemas reales de personas reales.",
+    "hero_lede": "Acorn Juice Solutions es un estudio fundado por dos socios con amplia experiencia en desarrollo software e implementación de infraestructura, con sede en Navarra. Construimos software escalable y bien resuelto — desde utilidades y widgets hasta aplicaciones móviles, webs, APIs, pipelines e infraestructura en la nube — que resuelve problemas reales de personas y equipos reales.",
     "hero_cta_products": "Ver nuestros productos",
     "hero_cta_about": "Conócenos",
     "products_heading": "Lo que hacemos",
@@ -69,11 +69,12 @@
     "makers_heading": "Los makers",
     "experience_heading": "Experiencia",
     "experience_body": "Más de 25 años entregando software a medida para clientes en sectores exigentes: banca internacional, sector público, industria, construcción y más. Trabajamos con soltura en inglés y hemos colaborado con equipos internacionales por toda Europa — los proyectos pueden llevarse en inglés o en español. Estos son los ámbitos en los que hemos trabajado:",
+    "experience_approach": "Aplicamos a cada proyecto — sea una utilidad enfocada o una plataforma escalable — las prácticas de calidad y seguridad que aprendimos entregando software para banca y grandes cuentas. Trabajamos con metodologías ágiles, sprint a sprint. La escala cambia; el rigor no.",
     "experience_note": "Los nombres de clientes no se publican por acuerdos de confidencialidad. Detalles verificables en los perfiles de LinkedIn de los makers."
   },
   "products": {
     "title": "Productos",
-    "lede": "Herramientas enfocadas de Acorn Juice Solutions. Desde búsqueda semántica de vídeo en escritorio hasta utilidades de servicio público en móvil.",
+    "lede": "Herramientas enfocadas de Acorn Juice Solutions. Software de escritorio, móvil, web y servicios que resuelven un problema concreto.",
     "status_available": "Disponible",
     "status_beta": "En beta",
     "status_archived": "Archivado",
@@ -122,11 +123,11 @@
   },
   "meta": {
     "home_title": "Acorn Juice Solutions — Herramientas enfocadas que resuelven un problema concreto",
-    "home_description": "Estudio de software independiente desde Navarra. Casa de AccuVideo, SOSNav y otras pequeñas utilidades.",
+    "home_description": "Estudio de software independiente desde Navarra. Construimos software escalable y bien resuelto para personas y equipos.",
     "about_title": "Sobre nosotros — Acorn Juice Solutions",
-    "about_description": "Especialistas que se complementan bien. Conoce a las personas detrás de AccuVideo, SOSNav y otras herramientas útiles.",
+    "about_description": "Especialistas que se complementan bien. Conoce al equipo detrás del software escalable y las herramientas de Acorn Juice Solutions.",
     "products_title": "Productos — Acorn Juice Solutions",
-    "products_description": "Herramientas enfocadas de Acorn Juice Solutions. Software de escritorio, móvil y utilidades hechos por un estudio de dos personas en Navarra.",
+    "products_description": "Software de escritorio, móvil, web y servicios de Acorn Juice Solutions. Estudio con amplia experiencia en desarrollo e infraestructura escalable, desde Navarra.",
     "privacy_title": "Política de privacidad — Acorn Juice Solutions",
     "privacy_description": "Cómo Acorn Juice Solutions trata los datos personales recogidos a través de este sitio.",
     "cookies_title": "Política de cookies — Acorn Juice Solutions",

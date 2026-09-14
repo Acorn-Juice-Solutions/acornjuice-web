@@ -2,7 +2,7 @@
   "site": {
     "name": "Acorn Juice Solutions",
     "tagline": "Focused tools that solve one problem well.",
-    "description": "Independent software studio building focused tools for humans. Home of AccuVideo, SOSNav, and other small useful things."
+    "description": "Independent software studio building scalable, well-crafted software — from focused utilities to mobile apps, websites, APIs, pipelines and cloud infrastructure."
   },
   "nav": {
     "home": "Home",
@@ -30,7 +30,7 @@
   "home": {
     "hero_eyebrow": "Independent software studio",
     "hero_title": "Focused tools. One problem at a time.",
-    "hero_lede": "Acorn Juice Solutions is a two-person studio based in Navarra, Spain. We build small, sharp software — desktop apps, mobile widgets, and one-shot utilities — that solve a real problem for real people.",
+    "hero_lede": "Acorn Juice Solutions is a studio founded by two partners with extensive experience in software development and infrastructure implementation, based in Navarra, Spain. We build scalable, well-crafted software — from utilities and widgets to mobile apps, websites, APIs, pipelines and cloud infrastructure — that solves real problems for real people and teams.",
     "hero_cta_products": "See our products",
     "hero_cta_about": "Meet the makers",
     "products_heading": "What we make",
@@ -69,11 +69,12 @@
     "makers_heading": "Meet the makers",
     "experience_heading": "Experience",
     "experience_body": "Over 25 years delivering custom software for clients in demanding sectors: international banking, public sector, industry, construction and more. We work fluently in English and have collaborated with international teams across Europe — engagements can run in English or Spanish. Domains we've worked in:",
+    "experience_approach": "We apply the quality and security practices we learned delivering software for banks and large accounts to every project — from a focused utility to a scalable platform. We work with agile methodologies, sprint by sprint. The scale changes; the rigor doesn't.",
     "experience_note": "Client names are withheld under confidentiality agreements. Verifiable details on the makers' LinkedIn profiles."
   },
   "products": {
     "title": "Products",
-    "lede": "Focused tools built by Acorn Juice Solutions. From semantic video search on desktop to public-service utilities on mobile.",
+    "lede": "Focused tools built by Acorn Juice Solutions. Desktop, mobile, web and service software that solves one concrete problem.",
     "status_available": "Available",
     "status_beta": "In beta",
     "status_archived": "Archived",
@@ -122,11 +123,11 @@
   },
   "meta": {
     "home_title": "Acorn Juice Solutions — Focused tools that solve one problem well",
-    "home_description": "Independent software studio from Navarra, Spain. Home of AccuVideo, SOSNav, and other small useful tools.",
+    "home_description": "Independent software studio from Navarra, Spain. We build scalable, well-crafted software for people and teams.",
     "about_title": "About — Acorn Juice Solutions",
-    "about_description": "Specialists that complement each other well. Meet the people behind AccuVideo, SOSNav, and other small useful tools.",
+    "about_description": "Specialists that complement each other well. Meet the team behind the scalable software and tools built at Acorn Juice Solutions.",
     "products_title": "Products — Acorn Juice Solutions",
-    "products_description": "Focused tools by Acorn Juice Solutions. Desktop, mobile, and utility software built by a two-person studio in Navarra, Spain.",
+    "products_description": "Desktop, mobile, web and service software by Acorn Juice Solutions. Studio with extensive experience in scalable development and infrastructure, from Navarra, Spain.",
     "privacy_title": "Privacy policy — Acorn Juice Solutions",
     "privacy_description": "How Acorn Juice Solutions handles personal data collected through this website.",
     "cookies_title": "Cookies policy — Acorn Juice Solutions",

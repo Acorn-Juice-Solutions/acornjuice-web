@@ -66,6 +66,7 @@ const canonical = 'https://acornjuice.com/about/';
       <ul class="sector-chips" aria-label="Sectors">
         {SECTORS.map((s) => <li>{s}</li>)}
       </ul>
+      <p class="experience-approach">{t('about.experience_approach')}</p>
       <p class="experience-note">{t('about.experience_note')}</p>
     </div>
   </section>
@@ -109,6 +110,16 @@ const canonical = 'https://acornjuice.com/about/';
     border-radius: 999px;
     font-size: var(--text-sm);
     color: var(--color-ink);
+  }
+
+  .experience-approach {
+    margin: var(--space-4) 0 var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    border-left: 3px solid var(--color-cap);
+    background: var(--color-bg-alt);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    color: var(--color-ink);
+    font-size: var(--text-base);
   }
 
   .experience-note {

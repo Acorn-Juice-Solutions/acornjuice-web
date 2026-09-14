@@ -23,7 +23,7 @@ export const PAGE_PAIRS: readonly PagePair[] = [
   { en: '/products/', es: '/es/productos/' },
   { en: '/products/accuvideo/', es: '/es/productos/accuvideo/' },
   { en: '/products/sosnav/', es: '/es/productos/sosnav/' },
-  { en: '/products/glucose-widget/', es: '/es/productos/widget-glucosa/' },
+  { en: '/products/sweet-enough/', es: '/es/productos/sweet-enough/' },
   { en: '/products/github-counter/', es: '/es/productos/contador-github/' },
   { en: '/privacy/', es: '/es/privacidad/' },
   { en: '/cookies/', es: '/es/cookies/' },
