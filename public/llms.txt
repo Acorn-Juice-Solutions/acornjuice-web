@@ -1,0 +1,39 @@
+# Acorn Juice Solutions
+
+> Independent software studio from Navarra, Spain. We build focused, well-crafted software for people and teams — from utilities and widgets to mobile apps, websites, APIs, pipelines and cloud infrastructure. The site is bilingual (English and Spanish); every English URL below has a Spanish counterpart under `/es/`, listed in the Spanish section.
+
+## Products
+
+- [AccuVideo](https://acornjuice.com/products/accuvideo/): Semantic search over your video library. Ask in plain language, jump to the exact second. 100% local, Windows and macOS.
+- [SOSNav](https://acornjuice.com/products/sosnav/): Free mobile utility that shows on-call pharmacies and emergency service locations in Navarra, Spain. iOS and Android.
+- [Sweet Enough](https://acornjuice.com/products/sweet-enough/): Minimal home-screen widget for iOS and Android that shows your current blood glucose reading at a glance.
+- [GitHub Download Counter](https://acornjuice.com/products/github-counter/): Android home-screen widget that shows the total download count of any public GitHub repository's releases.
+- [All products (index)](https://acornjuice.com/products/): Full product catalogue.
+
+## Company
+
+- [Home](https://acornjuice.com/): Studio overview, services, and approach.
+- [About Acorn Juice](https://acornjuice.com/about/): The people behind the studio (Iosune and Javier) and how we work.
+
+## Legal
+
+- [Privacy policy](https://acornjuice.com/privacy/)
+- [Cookie policy](https://acornjuice.com/cookies/)
+- [Legal notice](https://acornjuice.com/legal/)
+
+## Español (Spanish version)
+
+- [Inicio](https://acornjuice.com/es/): Estudio de software independiente desde Navarra.
+- [Sobre Acorn Juice](https://acornjuice.com/es/sobre/): Las personas detrás del estudio y cómo trabajamos.
+- [Productos](https://acornjuice.com/es/productos/): Catálogo completo de productos.
+- [AccuVideo](https://acornjuice.com/es/productos/accuvideo/): Búsqueda semántica sobre tu biblioteca de vídeo, 100% local (Windows y macOS).
+- [SOSNav](https://acornjuice.com/es/productos/sosnav/): Farmacias de guardia y servicios de emergencia en Navarra (iOS y Android).
+- [Sweet Enough](https://acornjuice.com/es/productos/sweet-enough/): Widget para pantalla de inicio con tu glucosa actual (iOS y Android).
+- [Contador de descargas de GitHub](https://acornjuice.com/es/productos/contador-github/): Widget Android con el total de descargas de un repositorio público.
+- [Privacidad](https://acornjuice.com/es/privacidad/)
+- [Cookies](https://acornjuice.com/es/cookies/)
+- [Aviso legal](https://acornjuice.com/es/aviso-legal/)
+
+## Optional
+
+- [Sitemap](https://acornjuice.com/sitemap-index.xml): Full machine-readable index of every page in both languages.
