@@ -1,6 +1,6 @@
 # Acorn Juice Solutions
 
-> Independent software studio from Navarra, Spain. We build focused, well-crafted software for people and teams — from utilities and widgets to mobile apps, websites, APIs, pipelines and cloud infrastructure. The site is bilingual (English and Spanish); every English URL below has a Spanish counterpart under `/es/`, listed in the Spanish section.
+> Independent software studio from Navarra, Spain. We build focused, well-crafted software for people and teams — from utilities and widgets to mobile apps, websites, APIs, pipelines and cloud infrastructure. We also deliver technical training and digital-competencies sessions for teams, in Spanish or English, remote or on-site. The site is bilingual (English and Spanish); every English URL below has a Spanish counterpart under `/es/`, listed in the Spanish section.
 
 ## Products
 
@@ -12,7 +12,7 @@
 
 ## Company
 
-- [Home](https://www.acornjuice.com/): Studio overview, services, and approach.
+- [Home](https://www.acornjuice.com/): Studio overview, services (including technical and digital-skills training), and approach.
 - [About Acorn Juice](https://www.acornjuice.com/about/): The people behind the studio (Iosune and Javier) and how we work.
 
 ## Legal
@@ -23,7 +23,7 @@
 
 ## Español (Spanish version)
 
-- [Inicio](https://www.acornjuice.com/es/): Estudio de software independiente desde Navarra.
+- [Inicio](https://www.acornjuice.com/es/): Estudio de software independiente desde Navarra. Servicios (incluida formación técnica y en competencias digitales) y enfoque.
 - [Sobre Acorn Juice](https://www.acornjuice.com/es/sobre/): Las personas detrás del estudio y cómo trabajamos.
 - [Productos](https://www.acornjuice.com/es/productos/): Catálogo completo de productos.
 - [AccuVideo](https://www.acornjuice.com/es/productos/accuvideo/): Búsqueda semántica sobre tu biblioteca de vídeo, 100% local (Windows y macOS).
