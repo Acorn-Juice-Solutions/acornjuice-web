@@ -90,6 +90,7 @@
     "lede": "Herramientas enfocadas de Acorn Juice Solutions. Software de escritorio, móvil, web y servicios que resuelven un problema concreto.",
     "status_available": "Disponible",
     "status_beta": "En beta",
+    "status_pilot": "En piloto",
     "status_archived": "Archivado",
     "status_draft": "Próximamente",
     "learn_more": "Más info",
@@ -104,7 +105,15 @@
     "made_by_heading": "Hecho por",
     "screenshots_heading": "Capturas",
     "coming_soon_heading": "Disponibilidad",
-    "coming_soon_body": "Próximamente. Los enlaces de descarga aparecerán aquí en cuanto el producto se lance."
+    "coming_soon_body": "Próximamente. Los enlaces de descarga aparecerán aquí en cuanto el producto se lance.",
+    "pilot_heading": "Únete al piloto",
+    "pilot_body": "Este producto está actualmente en piloto cerrado con usuarios reales, no en lanzamiento general. Si quieres probarlo, solicita acceso abajo y te responderemos.",
+    "pilot_field_email": "Email",
+    "pilot_field_reason": "¿Por qué te interesa? (opcional)",
+    "pilot_field_reason_hint": "Un par de líneas sobre cómo lo usarías nos ayuda a priorizar invitaciones.",
+    "pilot_consent_label": "Doy mi consentimiento al tratamiento de mi email para responder sobre el piloto. Ver política de privacidad.",
+    "pilot_submit": "Solicitar acceso",
+    "pilot_sending": "Enviando…"
   },
   "contact": {
     "field_email": "Email",

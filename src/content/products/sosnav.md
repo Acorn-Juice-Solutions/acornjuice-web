@@ -27,12 +27,14 @@ platforms:
 urls: {}
 icon: "/assets/products/sosnav.png"
 screenshots: []
-status: "draft"
+status: "pilot"
 schemaType: "MobileApplication"
 order: 20
 ---
 
 <!--
+  Currently in `pilot`: closed testing with real users, not general availability.
+  Product detail page renders a "join the pilot" request form instead of store links.
   Pending manual actions before flipping to `status: "available"`:
     - Confirm App Store URL
     - Confirm Play Store URL

@@ -22,7 +22,13 @@ const platform = z.enum([
   'github',
 ]);
 
-const productStatus = z.enum(['available', 'beta', 'archived', 'draft']);
+const productStatus = z.enum([
+  'available',
+  'beta',
+  'pilot',
+  'archived',
+  'draft',
+]);
 
 const productSchemaType = z.enum([
   'SoftwareApplication',
@@ -62,7 +68,7 @@ const products = defineCollection({
     })
     .refine(
       (data) => {
-        if (data.status === 'draft') return true;
+        if (data.status === 'draft' || data.status === 'pilot') return true;
         return Boolean(
           data.urls.appStore ||
             data.urls.playStore ||
@@ -72,7 +78,7 @@ const products = defineCollection({
       },
       {
         message:
-          'non-draft products require at least one destination URL (appStore, playStore, website or github)',
+          'products require at least one destination URL (appStore, playStore, website or github) unless status is draft or pilot',
         path: ['urls'],
       },
     ),

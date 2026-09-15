@@ -1,0 +1,258 @@
+---
+import { type Locale, useTranslator } from '~/utils/i18n';
+
+interface Props {
+  locale: Locale;
+  productName: string;
+  productSlug: string;
+}
+
+const { locale, productName, productSlug } = Astro.props;
+const t = useTranslator(locale);
+
+// Same staticforms.dev endpoint as the general contact form. The API key
+// selects the destination inbox; the `subject` and hidden `product` field
+// tag pilot requests so they can be filtered downstream.
+// TODO(manual-actions §6): provision a real staticforms key for this site.
+const STATIC_FORMS_API_KEY = 'REPLACE_WITH_SEPARATE_KEY';
+const STATIC_FORMS_ENDPOINT = 'https://api.staticforms.dev/submit';
+
+const successPath = locale === 'es' ? '/es/gracias/' : '/thanks/';
+const privacyPath = locale === 'es' ? '/es/privacidad/' : '/privacy/';
+
+const emailId = `pilot-email-${productSlug}`;
+const reasonId = `pilot-reason-${productSlug}`;
+const honeypotId = `pilot-website-${productSlug}`;
+---
+
+<form
+  class="pilot-form"
+  data-pilot-form
+  action={STATIC_FORMS_ENDPOINT}
+  method="POST"
+  novalidate
+>
+  <input type="hidden" name="apiKey" value={STATIC_FORMS_API_KEY} />
+  <input
+    type="hidden"
+    name="subject"
+    value={`Pilot request: ${productName}`}
+  />
+  <input type="hidden" name="product" value={productSlug} />
+  <input type="hidden" name="_locale" value={locale} />
+  <input
+    type="hidden"
+    name="_success_redirect"
+    value={successPath}
+  />
+
+  {/* Honeypot — invisible to humans, catches most bots */}
+  <div class="hp-field" aria-hidden="true">
+    <label for={honeypotId}>Website</label>
+    <input
+      type="text"
+      id={honeypotId}
+      name="website"
+      tabindex="-1"
+      autocomplete="off"
+      value=""
+    />
+  </div>
+
+  <p
+    class="form-service-banner"
+    role="alert"
+    data-form-service-banner
+    hidden
+  >
+    {t('contact.error_body')}
+  </p>
+
+  <div class="form-row">
+    <label for={emailId}>
+      <span>{t('product_page.pilot_field_email')}</span>
+      <input
+        type="email"
+        id={emailId}
+        name="email"
+        required
+        autocomplete="email"
+      />
+    </label>
+  </div>
+
+  <div class="form-row">
+    <label for={reasonId}>
+      <span>{t('product_page.pilot_field_reason')}</span>
+      <textarea
+        id={reasonId}
+        name="message"
+        rows="4"
+        autocomplete="off"
+        placeholder={t('product_page.pilot_field_reason_hint')}
+      ></textarea>
+    </label>
+  </div>
+
+  <label class="form-consent">
+    <input
+      type="checkbox"
+      name="data_consent"
+      value="yes"
+      required
+      checked
+    />
+    <span>
+      {t('product_page.pilot_consent_label')}
+      <a href={privacyPath}>{t('footer.privacy')}</a>.
+    </span>
+  </label>
+
+  <button
+    type="submit"
+    class="btn btn-primary pilot-submit"
+    data-submit-label={t('product_page.pilot_submit')}
+    data-submitting-label={t('product_page.pilot_sending')}
+  >{t('product_page.pilot_submit')}</button>
+</form>
+
+<script>
+  const forms = document.querySelectorAll<HTMLFormElement>('[data-pilot-form]');
+
+  forms.forEach((form) => {
+    const submit = form.querySelector<HTMLButtonElement>('.pilot-submit');
+    const banner = form.querySelector<HTMLElement>('[data-form-service-banner]');
+    const successPath = form.querySelector<HTMLInputElement>(
+      'input[name="_success_redirect"]',
+    )?.value;
+
+    form.addEventListener('submit', async (event) => {
+      const hp = form.querySelector<HTMLInputElement>('input[name="website"]');
+      if (hp && hp.value.trim() !== '') {
+        event.preventDefault();
+        return;
+      }
+
+      if (!form.checkValidity()) {
+        return;
+      }
+
+      event.preventDefault();
+
+      if (submit) {
+        const submitting = submit.dataset.submittingLabel;
+        if (submitting) {
+          submit.textContent = submitting;
+        }
+        submit.disabled = true;
+      }
+      if (banner) {
+        banner.hidden = true;
+      }
+
+      try {
+        const formData = new FormData(form);
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: formData,
+        });
+
+        if (!res.ok) {
+          throw new Error(`Status ${res.status}`);
+        }
+
+        if (successPath) {
+          window.location.assign(successPath);
+        }
+      } catch {
+        if (banner) {
+          banner.hidden = false;
+        }
+        if (submit) {
+          const label = submit.dataset.submitLabel;
+          if (label) {
+            submit.textContent = label;
+          }
+          submit.disabled = false;
+        }
+      }
+    });
+  });
+</script>
+
+<style>
+  .pilot-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    max-width: var(--reading-max);
+    padding: var(--space-5);
+    background: var(--color-bg-alt);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-lg);
+  }
+
+  .hp-field {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    visibility: hidden;
+    height: 0;
+    width: 0;
+  }
+
+  .form-row label,
+  .form-consent {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+    color: var(--color-ink);
+  }
+
+  .form-row input,
+  .form-row textarea {
+    padding: var(--space-2) var(--space-3);
+    background: var(--color-bg);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+    font-size: var(--text-base);
+    color: var(--color-ink);
+  }
+
+  .form-row textarea {
+    resize: vertical;
+    min-height: 6rem;
+    font-family: var(--font-body);
+  }
+
+  .form-row input:focus,
+  .form-row textarea:focus {
+    border-color: var(--color-focus);
+    box-shadow: 0 0 0 3px var(--color-focus-ring);
+    outline: none;
+  }
+
+  .form-consent {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: var(--space-2);
+  }
+
+  .form-consent input[type='checkbox'] {
+    margin-top: 3px;
+  }
+
+  .pilot-submit {
+    align-self: flex-start;
+  }
+
+  .form-service-banner {
+    background: rgba(160, 82, 45, 0.08);
+    border: 1px solid var(--color-cap);
+    color: var(--color-cap-dark);
+    padding: var(--space-3);
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+  }
+</style>

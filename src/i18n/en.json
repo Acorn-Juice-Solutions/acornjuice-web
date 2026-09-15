@@ -90,6 +90,7 @@
     "lede": "Focused tools built by Acorn Juice Solutions. Desktop, mobile, web and service software that solves one concrete problem.",
     "status_available": "Available",
     "status_beta": "In beta",
+    "status_pilot": "In pilot",
     "status_archived": "Archived",
     "status_draft": "Coming soon",
     "learn_more": "Learn more",
@@ -104,7 +105,15 @@
     "made_by_heading": "Made by",
     "screenshots_heading": "Screenshots",
     "coming_soon_heading": "Availability",
-    "coming_soon_body": "Coming soon. Download links will appear here once the product launches."
+    "coming_soon_body": "Coming soon. Download links will appear here once the product launches.",
+    "pilot_heading": "Join the pilot",
+    "pilot_body": "This product is currently in a closed pilot with real users, not general availability. If you'd like to try it, request access below and we'll get back to you.",
+    "pilot_field_email": "Email",
+    "pilot_field_reason": "Why are you interested? (optional)",
+    "pilot_field_reason_hint": "A line or two about how you'd use it helps us prioritise invites.",
+    "pilot_consent_label": "I agree to the processing of my email to reply about the pilot. See our privacy policy.",
+    "pilot_submit": "Request access",
+    "pilot_sending": "Sending…"
   },
   "contact": {
     "field_email": "Email",

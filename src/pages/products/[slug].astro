@@ -1,6 +1,7 @@
 ---
 import { getCollection, type CollectionEntry } from 'astro:content';
 import BaseLayout from '~/layouts/BaseLayout.astro';
+import PilotRequestForm from '~/components/PilotRequestForm.astro';
 import { useTranslator } from '~/utils/i18n';
 import { ORG_ID } from '~/utils/seo';
 
@@ -108,7 +109,7 @@ const metaDescription = tagline;
         </ul>
 
         {
-          urlEntries.length > 0 ? (
+          urlEntries.length > 0 && (
             <>
               <h2>{t('product_page.links_heading')}</h2>
               <div class="link-buttons">
@@ -124,7 +125,25 @@ const metaDescription = tagline;
                 ))}
               </div>
             </>
-          ) : (
+          )
+        }
+
+        {
+          data.status === 'pilot' && (
+            <>
+              <h2>{t('product_page.pilot_heading')}</h2>
+              <p class="pilot-lede">{t('product_page.pilot_body')}</p>
+              <PilotRequestForm
+                locale={locale}
+                productName={name}
+                productSlug={data.slug}
+              />
+            </>
+          )
+        }
+
+        {
+          urlEntries.length === 0 && data.status !== 'pilot' && (
             <>
               <h2>{t('product_page.coming_soon_heading')}</h2>
               <p class="coming-soon">{t('product_page.coming_soon_body')}</p>
@@ -216,6 +235,12 @@ const metaDescription = tagline;
     border-radius: 0 var(--radius-md) var(--radius-md) 0;
     color: var(--color-ink-soft);
     margin-bottom: var(--space-6);
+  }
+
+  .pilot-lede {
+    color: var(--color-ink-soft);
+    max-width: 60ch;
+    margin-bottom: var(--space-4);
   }
 
   @media (max-width: 640px) {
