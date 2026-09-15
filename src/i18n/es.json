@@ -62,7 +62,9 @@
       "fullstack_title": "Desarrollo full-stack",
       "fullstack_body": "Java, .NET, Python, Node.js, Angular. Servicios backend, APIs, front-ends y el trabajo de base de datos que los une. Cómodos con stacks distintos y código legacy.",
       "infra_title": "Infraestructura y redes",
-      "infra_body": "Automatización DevOps, provisión de entornos, monitorización y networking — incluyendo configuración de routers Mikrotik para setups on-prem o híbridos."
+      "infra_body": "Automatización DevOps, provisión de entornos, monitorización y networking — incluyendo configuración de routers Mikrotik para setups on-prem o híbridos.",
+      "training_title": "Formación técnica y en competencias digitales",
+      "training_body": "Formación técnica para equipos de desarrollo (buenas prácticas, seguridad, CI/CD, cloud) y sesiones de competencias digitales para personal no técnico. Sesiones en español o inglés, remotas o presenciales, adaptadas al nivel de partida del equipo."
     },
     "contact_heading": "Escríbenos",
     "contact_lede": "¿Tienes una pregunta, una idea o un proyecto que quieras que miremos? Cuéntanos.",

@@ -74,8 +74,8 @@ function baseNodes(locale: Locale): GraphNode[] {
     '@id': LOGO_ID,
     url: `${SITE_URL}/assets/logo.png`,
     contentUrl: `${SITE_URL}/assets/logo.png`,
-    width: 223,
-    height: 223,
+    width: 512,
+    height: 512,
     caption: 'Acorn Juice Solutions logo',
   });
 
