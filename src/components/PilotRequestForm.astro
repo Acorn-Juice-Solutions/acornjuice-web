@@ -22,7 +22,6 @@ const privacyPath = locale === 'es' ? '/es/privacidad/' : '/privacy/';
 
 const emailId = `pilot-email-${productSlug}`;
 const reasonId = `pilot-reason-${productSlug}`;
-const honeypotId = `pilot-website-${productSlug}`;
 ---
 
 <form
@@ -46,12 +45,16 @@ const honeypotId = `pilot-website-${productSlug}`;
     value={successPath}
   />
 
-  {/* Honeypot — invisible to humans, catches most bots */}
+  {/*
+    Honeypot — invisible to humans, catches most bots. No <label>: the
+    container is aria-hidden and the input is not focusable via Tab, so
+    a visible label would only introduce a dangling audit warning
+    ("label without accessible control"). Bots key off name="website"
+    to fill it in — the label is not what makes the trap work.
+  */}
   <div class="hp-field" aria-hidden="true">
-    <label for={honeypotId}>Website</label>
     <input
       type="text"
-      id={honeypotId}
       name="website"
       tabindex="-1"
       autocomplete="off"
