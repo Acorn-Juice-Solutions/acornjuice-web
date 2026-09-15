@@ -208,6 +208,17 @@ const metaDescription = tagline;
     max-width: var(--reading-max);
   }
 
+  /* Consistent breathing room between sections on the product page.
+     Every h2 introduces a section; the first one already sits below the
+     hero divider so it doesn't need the extra top margin. */
+  .product-body h2 {
+    margin-top: var(--space-8);
+  }
+
+  .product-body h2:first-of-type {
+    margin-top: 0;
+  }
+
   .lede {
     font-size: var(--text-lg);
     color: var(--color-ink);
@@ -225,7 +236,6 @@ const metaDescription = tagline;
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-3);
-    margin-bottom: var(--space-6);
   }
 
   .coming-soon {
@@ -234,7 +244,6 @@ const metaDescription = tagline;
     border-left: 3px solid var(--color-body);
     border-radius: 0 var(--radius-md) var(--radius-md) 0;
     color: var(--color-ink-soft);
-    margin-bottom: var(--space-6);
   }
 
   .pilot-lede {
