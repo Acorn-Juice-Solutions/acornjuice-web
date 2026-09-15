@@ -10,11 +10,11 @@ interface Props {
 const { locale, productName, productSlug } = Astro.props;
 const t = useTranslator(locale);
 
-// Same staticforms.dev endpoint as the general contact form. The API key
-// selects the destination inbox; the `subject` and hidden `product` field
-// tag pilot requests so they can be filtered downstream.
-// TODO(manual-actions §6): provision a real staticforms key for this site.
-const STATIC_FORMS_API_KEY = 'REPLACE_WITH_SEPARATE_KEY';
+// Same staticforms.dev key and endpoint as ContactForm — pilot requests land
+// in the same inbox but are tagged via the `subject` and hidden `product`
+// fields so they can be filtered downstream. Rotating the key requires
+// updating ContactForm too (and the AccuVideo landing, which shares it).
+const STATIC_FORMS_API_KEY = 'sf_4d32929fdc91426750c7d382';
 const STATIC_FORMS_ENDPOINT = 'https://api.staticforms.dev/submit';
 
 const successPath = locale === 'es' ? '/es/gracias/' : '/thanks/';
