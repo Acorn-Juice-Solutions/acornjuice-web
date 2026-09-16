@@ -4,7 +4,7 @@
 
 ## Products
 
-- [AccuVideo](https://www.acornjuice.com/products/accuvideo/): Semantic search over your video library. Ask in plain language, jump to the exact second. 100% local, Windows and macOS.
+- [AccuVideo](https://www.acornjuice.com/products/accuvideo/): Semantic search over your video library. Ask in plain language, jump to the exact second. Windows and macOS.
 - [SOSNav](https://www.acornjuice.com/products/sosnav/): Free mobile utility that shows on-call pharmacies and emergency service locations in Navarra, Spain. iOS and Android.
 - [Sweet Enough](https://www.acornjuice.com/products/sweet-enough/): Minimal home-screen widget for iOS and Android that shows your current blood glucose reading at a glance.
 - [GitHub Download Counter](https://www.acornjuice.com/products/github-counter/): Android home-screen widget that shows the total download count of any public GitHub repository's releases.
@@ -26,7 +26,7 @@
 - [Inicio](https://www.acornjuice.com/es/): Estudio de software independiente desde Navarra. Servicios (incluida formación técnica y en competencias digitales) y enfoque.
 - [Sobre Acorn Juice](https://www.acornjuice.com/es/sobre/): Las personas detrás del estudio y cómo trabajamos.
 - [Productos](https://www.acornjuice.com/es/productos/): Catálogo completo de productos.
-- [AccuVideo](https://www.acornjuice.com/es/productos/accuvideo/): Búsqueda semántica sobre tu biblioteca de vídeo, 100% local (Windows y macOS).
+- [AccuVideo](https://www.acornjuice.com/es/productos/accuvideo/): Búsqueda semántica sobre tu biblioteca de vídeo (Windows y macOS).
 - [SOSNav](https://www.acornjuice.com/es/productos/sosnav/): Farmacias de guardia y servicios de emergencia en Navarra (iOS y Android).
 - [Sweet Enough](https://www.acornjuice.com/es/productos/sweet-enough/): Widget para pantalla de inicio con tu glucosa actual (iOS y Android).
 - [Contador de descargas de GitHub](https://www.acornjuice.com/es/productos/contador-github/): Widget Android con el total de descargas de un repositorio público.

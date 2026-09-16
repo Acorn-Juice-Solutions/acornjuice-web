@@ -12,6 +12,8 @@ export interface Testimonial {
   readonly date: `${number}-${number}`;
   readonly rating: StarRating;
   readonly text: Readonly<Record<Locale, string>>;
+  /** Optional client industry/sector shown as a subtitle under the name. */
+  readonly sector?: Readonly<Record<Locale, string>>;
 }
 
 /**
@@ -188,6 +190,19 @@ export const TESTIMONIALS: readonly Testimonial[] = [
     text: {
       es: 'En un mercado lleno de proveedores intercambiables, ellos son claramente distintos. Serios, con criterio, recomiendan lo que hace falta y no lo que abulta la factura.',
       en: 'In a market full of interchangeable vendors, they clearly stand apart. Serious, thoughtful, they recommend what you actually need — not what pads the invoice.',
+    },
+  },
+  {
+    name: 'Jaime Carrasco Tobares',
+    date: '2026-09',
+    rating: 5,
+    sector: {
+      es: 'Banca',
+      en: 'Banking',
+    },
+    text: {
+      es: 'Trabajar con Iosune y Javier ha sido una experiencia excelente. Destacan por su altísimo nivel de profesionalidad y por la capacidad de entender y captar los requerimientos del proyecto a la primera. Además, valoran enormemente tanto su tiempo como el de sus clientes, por lo que reducen las reuniones al mínimo indispensable sin perder ni un ápice de claridad ni alineación. Un equipo altamente eficiente y recomendable para cualquier actividad relacionada con el desarrollo de software.',
+      en: 'Working with Iosune and Javier has been an excellent experience. They stand out for their outstanding level of professionalism and their ability to grasp project requirements right from the start. On top of that, they deeply value both their time and their clients’, keeping meetings to the strict minimum without losing an ounce of clarity or alignment. A highly efficient team, and one I would recommend for any software development work.',
     },
   },
 ] as const;

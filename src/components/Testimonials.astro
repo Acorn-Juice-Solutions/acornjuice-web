@@ -67,7 +67,12 @@ const visibleDup = [...visible, ...visible];
               </div>
               <p class="quote">{item.text[locale]}</p>
               <p class="meta">
-                <span class="name">{item.name}</span>
+                <span class="who">
+                  <span class="name">{item.name}</span>
+                  {item.sector && (
+                    <span class="sector">{item.sector[locale]}</span>
+                  )}
+                </span>
                 <span class="date">{formatDate(item.date)}</span>
               </p>
             </li>
@@ -172,9 +177,16 @@ const visibleDup = [...visible, ...visible];
     margin-top: auto;
     display: flex;
     justify-content: space-between;
+    align-items: flex-end;
     gap: var(--space-2);
     font-size: var(--text-sm);
     color: var(--color-ink-soft);
+  }
+
+  .who {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
   }
 
   .name {
@@ -182,8 +194,14 @@ const visibleDup = [...visible, ...visible];
     color: var(--color-ink);
   }
 
+  .sector {
+    font-size: var(--text-xs);
+    color: var(--color-ink-soft);
+  }
+
   .date {
     text-transform: capitalize;
+    white-space: nowrap;
   }
 
   @media (prefers-reduced-motion: reduce) {
