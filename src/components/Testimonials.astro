@@ -295,12 +295,11 @@ const visibleDup = [...visible, ...visible];
     const track = section.querySelector<HTMLElement>('.marquee-track');
     if (!track) return;
 
-    // Read the perceived pace from the CSS custom property so tuning stays in
-    // one place (the stylesheet above).
-    const durationStr = getComputedStyle(section)
-      .getPropertyValue('--marquee-duration')
-      .trim();
-    const durationSec = parseFloat(durationStr) || 260;
+    // Signal to CSS that JS is in control (disables the fallback animation and
+    // enables the grab cursor / touch-action rules). Done up front so this
+    // write is grouped with the other synchronous writes below, and the reads
+    // that follow live in rAF where layout has already settled.
+    section.classList.add('is-armed');
 
     const state: MarqueeState = {
       section,
@@ -319,6 +318,10 @@ const visibleDup = [...visible, ...visible];
       lastTs: 0,
       rafId: 0,
     };
+    // Sensible fallback until the first rAF-scheduled measurement runs. The
+    // rAF loop is safe to start with pxPerSecond = 0 (position doesn't
+    // advance) so a slight ordering with IntersectionObserver won't glitch.
+    let durationSec = 260;
 
     const measure = () => {
       // The track holds two identical halves; wrapping at the offsetLeft of the
@@ -331,12 +334,22 @@ const visibleDup = [...visible, ...visible];
       state.halfWidth = seamCard ? seamCard.offsetLeft : 0;
       state.pxPerSecond = state.halfWidth > 0 ? state.halfWidth / durationSec : 0;
     };
-    measure();
-    new ResizeObserver(measure).observe(track);
 
-    // Signal to CSS that JS is in control (disables the fallback animation and
-    // enables the grab cursor / touch-action rules).
-    section.classList.add('is-armed');
+    // Defer every layout read (offsetLeft, getComputedStyle) to the first
+    // animation frame. Reading geometry synchronously during the initial parse
+    // task forces a layout while the browser is still doing its first pass —
+    // Lighthouse's forced-reflow insight scores that at 0. rAF fires after
+    // layout has settled and before the next paint, which is exactly the
+    // place the platform reserves for measurements.
+    requestAnimationFrame(() => {
+      const durationStr = getComputedStyle(section)
+        .getPropertyValue('--marquee-duration')
+        .trim();
+      const parsed = parseFloat(durationStr);
+      if (parsed > 0) durationSec = parsed;
+      measure();
+      new ResizeObserver(measure).observe(track);
+    });
 
     const io = new IntersectionObserver(
       (entries) => {
