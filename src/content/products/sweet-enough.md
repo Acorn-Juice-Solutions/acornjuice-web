@@ -13,14 +13,14 @@ features:
     - "Home-screen widget for iOS and Android"
     - "Reads from your existing CGM data source"
     - "Configurable refresh interval and trend arrows"
-    - "No account, no cloud, no tracking"
-    - "Free"
+    - "Requires an account to query the external CGM data API"
+    - "Free during the pilot — one-time purchase after launch, no subscription"
   es:
     - "Widget para la pantalla de inicio de iOS y Android"
     - "Lee de tu fuente de datos CGM existente"
     - "Intervalo de refresco y flechas de tendencia configurables"
-    - "Sin cuenta, sin nube, sin tracking"
-    - "Gratuito"
+    - "Requiere una cuenta para consultar la API externa de datos CGM"
+    - "Gratis durante el piloto — pago único tras el lanzamiento, sin suscripción"
 platforms:
   - "ios"
   - "android"

@@ -5,7 +5,7 @@
 ## Products
 
 - [AccuVideo](https://www.acornjuice.com/products/accuvideo/): Semantic search over your video library. Ask in plain language, jump to the exact second. Windows and macOS.
-- [SOSNav](https://www.acornjuice.com/products/sosnav/): Free mobile utility that shows on-call pharmacies and emergency service locations in Navarra, Spain. iOS and Android.
+- [SOSNav](https://www.acornjuice.com/products/sosnav/): Mobile utility that shows on-call pharmacies and emergency service locations in Navarra, Spain. iOS and Android.
 - [Sweet Enough](https://www.acornjuice.com/products/sweet-enough/): Minimal home-screen widget for iOS and Android that shows your current blood glucose reading at a glance.
 - [GitHub Download Counter](https://www.acornjuice.com/products/github-counter/): Android home-screen widget that shows the total download count of any public GitHub repository's releases.
 - [All products (index)](https://www.acornjuice.com/products/): Full product catalogue.

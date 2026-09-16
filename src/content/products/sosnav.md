@@ -6,20 +6,22 @@ tagline:
   en: "On-call pharmacies and emergency centres in Navarra, in your pocket."
   es: "Farmacias de guardia y centros de emergencia en Navarra, en tu bolsillo."
 description:
-  en: "SOSNav is a free mobile utility for Navarra (Spain) that surfaces on-call pharmacies and emergency service locations right when you need them. Open the app, see what's open near you, tap for directions. No account, no ads, no data collection."
-  es: "SOSNav es una utilidad móvil gratuita para Navarra (España) que muestra las farmacias de guardia y los servicios de emergencia justo cuando los necesitas. Abre la app, mira qué está abierto cerca de ti, toca para llegar. Sin cuenta, sin publicidad, sin recogida de datos."
+  en: "SOSNav is a mobile utility for Navarra (Spain) that surfaces on-call pharmacies and emergency service locations right when you need them. Open the app, see what's open near you, tap for directions. No account, no ads, no data collection."
+  es: "SOSNav es una utilidad móvil para Navarra (España) que muestra las farmacias de guardia y los servicios de emergencia justo cuando los necesitas. Abre la app, mira qué está abierto cerca de ti, toca para llegar. Sin cuenta, sin publicidad, sin recogida de datos."
 features:
   en:
     - "Live list of on-call pharmacies across Navarra"
     - "Emergency service locations (hospitals, urgent care)"
     - "One-tap directions to any location"
-    - "Free, no account required"
+    - "No account required"
+    - "Free during the pilot — one-time purchase after launch, no subscription"
     - "Works offline for the last-known data"
   es:
     - "Listado en vivo de farmacias de guardia en Navarra"
     - "Ubicaciones de servicios de emergencia (hospitales, urgencias)"
     - "Cómo llegar en un solo toque"
-    - "Gratuita, sin cuenta"
+    - "Sin cuenta"
+    - "Gratis durante el piloto — pago único tras el lanzamiento, sin suscripción"
     - "Funciona offline con los últimos datos conocidos"
 platforms:
   - "ios"
