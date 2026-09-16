@@ -29,12 +29,11 @@ function formatDate(iso: `${number}-${number}`): string {
 const ratingLabel = (rating: StarRating): string =>
   interpolate(ratingTemplate, { count: rating });
 
-// Show a curated subset in a single row, most recent first. The data file is
-// stored in chronological order, so we take the tail and reverse it. Duplicated
-// inline so the CSS marquee loops seamlessly at translateX(-50%); the duplicated
-// half is aria-hidden so assistive tech only announces each testimonial once.
-const VISIBLE_COUNT = 10;
-const visible = TESTIMONIALS.slice(-VISIBLE_COUNT).reverse();
+// Show every testimonial in the loop, most recent first. The data file is
+// stored in chronological order, so we reverse a copy. Duplicated inline so
+// the CSS marquee loops seamlessly at translateX(-50%); the duplicated half is
+// aria-hidden so assistive tech only announces each testimonial once.
+const visible = [...TESTIMONIALS].reverse();
 const visibleDup = [...visible, ...visible];
 ---
 
@@ -43,7 +42,7 @@ const visibleDup = [...visible, ...visible];
     <h2>{heading}</h2>
     <p class="section-lede">{lede}</p>
 
-    <div class="marquee" role="region" aria-label={regionLabel}>
+    <div class="marquee" role="region" aria-label={regionLabel} data-marquee>
       <ul class="marquee-track">
         {
           visibleDup.map((item, i) => (
@@ -85,9 +84,10 @@ const visibleDup = [...visible, ...visible];
 
 <style>
   .marquee {
-    /* Perceived pace ~50px/s at desktop card width — comfortable to read
-       without feeling static. Tuned when scaling card count / width. */
-    --marquee-duration: 140s;
+    /* Perceived pace tuned to feel readable without dragging. Duration scales
+       with the number of cards in the track — retune when the count changes
+       substantially so the perceived px/s stays similar. */
+    --marquee-duration: 260s;
     margin-top: var(--space-6);
     position: relative;
     overflow: hidden;
@@ -113,17 +113,31 @@ const visibleDup = [...visible, ...visible];
     padding: 0;
     margin: 0;
     display: flex;
-    gap: var(--space-4);
     width: max-content;
     animation: marquee-scroll var(--marquee-duration) linear infinite;
     will-change: transform;
   }
 
-  /* Pause when a pointer is over the marquee or when a focusable element
-     inside it gains focus (keyboard accessibility). */
-  .marquee:hover .marquee-track,
-  .marquee:focus-within .marquee-track {
+  /* No-JS fallback: the CSS animation runs from load; pause on hover / focus
+     for readability + keyboard accessibility. When JS enhances the marquee
+     (is-armed), the client script owns animation, hover-pause, drag and
+     viewport gating — see the block after this and the script at the bottom. */
+  .marquee:not(.is-armed):hover .marquee-track,
+  .marquee:not(.is-armed):focus-within .marquee-track {
     animation-play-state: paused;
+  }
+
+  .marquee.is-armed .marquee-track {
+    animation: none;
+  }
+  .marquee.is-armed {
+    cursor: grab;
+    /* Allow vertical page scroll on touch; horizontal is captured for drag. */
+    touch-action: pan-y;
+  }
+  .marquee.is-armed.is-dragging {
+    cursor: grabbing;
+    user-select: none;
   }
 
   @keyframes marquee-scroll {
@@ -138,6 +152,7 @@ const visibleDup = [...visible, ...visible];
   .testimonial-card {
     flex: 0 0 20rem;
     min-height: 12rem;
+    margin-right: var(--space-4);
     background: var(--color-bg-alt);
     border: 1px solid var(--color-line);
     border-radius: var(--radius-lg);
@@ -228,7 +243,218 @@ const visibleDup = [...visible, ...visible];
       min-height: 11rem;
     }
     .marquee {
-      --marquee-duration: 110s;
+      --marquee-duration: 210s;
     }
   }
 </style>
+
+<script>
+  // Progressive enhancement over the CSS marquee: take over the transform in
+  // JS so we can (a) hold at frame 0 until the section is in the viewport so
+  // the most-recent card is never missed, (b) pause on hover / focus, and (c)
+  // let the user drag the strip horizontally with mouse / touch / pen.
+  type MarqueeState = {
+    section: HTMLElement;
+    track: HTMLElement;
+    halfWidth: number;
+    pxPerSecond: number;
+    /** Distance scrolled, always in [0, halfWidth). Rendered as translateX(-position). */
+    position: number;
+    active: boolean;
+    hover: boolean;
+    focus: boolean;
+    /** Pointer is down but hasn't moved past the threshold yet — treat as click. */
+    pending: boolean;
+    dragging: boolean;
+    pendingPointerId: number;
+    dragStartX: number;
+    dragStartPos: number;
+    lastTs: number;
+    rafId: number;
+  };
+
+  // Pixels the pointer must travel before we treat the gesture as a drag. Below
+  // this, a press-and-release is a plain click and never touches the marquee
+  // position, capture, cursor or user-select — which avoids repaint artifacts
+  // where cards briefly vanish after a click on the strip.
+  const DRAG_THRESHOLD = 4;
+
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const marquees = document.querySelectorAll<HTMLElement>('[data-marquee]');
+  const supported =
+    marquees.length > 0 &&
+    !reducedMotion.matches &&
+    'IntersectionObserver' in window &&
+    'ResizeObserver' in window;
+
+  if (supported) {
+    for (const m of marquees) setupMarquee(m);
+  }
+
+  function setupMarquee(section: HTMLElement) {
+    const track = section.querySelector<HTMLElement>('.marquee-track');
+    if (!track) return;
+
+    // Read the perceived pace from the CSS custom property so tuning stays in
+    // one place (the stylesheet above).
+    const durationStr = getComputedStyle(section)
+      .getPropertyValue('--marquee-duration')
+      .trim();
+    const durationSec = parseFloat(durationStr) || 260;
+
+    const state: MarqueeState = {
+      section,
+      track,
+      halfWidth: 0,
+      pxPerSecond: 0,
+      position: 0,
+      active: false,
+      hover: false,
+      focus: false,
+      pending: false,
+      dragging: false,
+      pendingPointerId: -1,
+      dragStartX: 0,
+      dragStartPos: 0,
+      lastTs: 0,
+      rafId: 0,
+    };
+
+    const measure = () => {
+      // The track holds two identical halves; wrapping at the offsetLeft of the
+      // first card of the second half is exact by definition, and dodges the
+      // browser inconsistency where `scrollWidth` may exclude the trailing
+      // margin of the last flex child (which would misalign the loop seam and
+      // leave a visible gap when the wrap fires).
+      const cards = track.querySelectorAll<HTMLElement>('.testimonial-card');
+      const seamCard = cards[cards.length / 2];
+      state.halfWidth = seamCard ? seamCard.offsetLeft : 0;
+      state.pxPerSecond = state.halfWidth > 0 ? state.halfWidth / durationSec : 0;
+    };
+    measure();
+    new ResizeObserver(measure).observe(track);
+
+    // Signal to CSS that JS is in control (disables the fallback animation and
+    // enables the grab cursor / touch-action rules).
+    section.classList.add('is-armed');
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            state.active = true;
+            io.unobserve(entry.target);
+            if (!state.rafId) startLoop(state);
+          }
+        }
+      },
+      { threshold: 0.15 },
+    );
+    io.observe(section);
+
+    // Hover pause only for real hover devices — touch would otherwise leave
+    // the marquee stuck in "hovered" state after a tap.
+    section.addEventListener('pointerenter', (e) => {
+      if (e.pointerType === 'mouse') state.hover = true;
+    });
+    section.addEventListener('pointerleave', (e) => {
+      if (e.pointerType === 'mouse') state.hover = false;
+    });
+    section.addEventListener('focusin', () => {
+      state.focus = true;
+    });
+    section.addEventListener('focusout', () => {
+      state.focus = section.matches(':focus-within');
+    });
+
+    section.addEventListener('pointerdown', (e) => {
+      // Ignore secondary mouse buttons; touch / pen have button 0 too.
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      // Mark as pending — we don't touch position, capture, cursor or DOM
+      // classes until the pointer actually moves past DRAG_THRESHOLD. A plain
+      // click therefore never mutates marquee state and can't cause a repaint
+      // glitch on the transformed track.
+      state.pending = true;
+      state.pendingPointerId = e.pointerId;
+      state.dragStartX = e.clientX;
+      state.dragStartPos = state.position;
+    });
+
+    section.addEventListener('pointermove', (e) => {
+      if (!state.pending && !state.dragging) return;
+      if (e.pointerId !== state.pendingPointerId && !state.dragging) return;
+      const delta = e.clientX - state.dragStartX;
+      if (!state.dragging) {
+        if (Math.abs(delta) < DRAG_THRESHOLD) return;
+        state.dragging = true;
+        state.pending = false;
+        try {
+          section.setPointerCapture(e.pointerId);
+        } catch {
+          /* older browsers / already captured — safe to ignore */
+        }
+        section.classList.add('is-dragging');
+        // Now that we've committed to a drag, stop any nascent text selection.
+        e.preventDefault();
+      }
+      // Drag right → content moves right → position (scroll amount) decreases.
+      state.position = wrap(state.dragStartPos - delta, state.halfWidth);
+      render(state);
+    });
+
+    const endDrag = (e: PointerEvent) => {
+      state.pending = false;
+      if (!state.dragging) return;
+      state.dragging = false;
+      section.classList.remove('is-dragging');
+      try {
+        section.releasePointerCapture(e.pointerId);
+      } catch {
+        /* ignore */
+      }
+      // Reset the frame timer so the first tick after release doesn't advance
+      // by the elapsed drag duration.
+      state.lastTs = 0;
+    };
+    section.addEventListener('pointerup', endDrag);
+    section.addEventListener('pointercancel', endDrag);
+  }
+
+  function wrap(pos: number, halfWidth: number): number {
+    if (halfWidth <= 0) return 0;
+    // JS `%` keeps the sign of the dividend, so add halfWidth before the
+    // second mod to guarantee a non-negative result on negative inputs
+    // (which happen when the user drags to the right past the origin).
+    return (((pos % halfWidth) + halfWidth) % halfWidth);
+  }
+
+  function render(state: MarqueeState) {
+    // Plain translateX: translate3d was causing a Chromium compositor glitch
+    // where the masked track occasionally lost paint after fast state changes.
+    // The `will-change: transform` on the track (see CSS) already hints
+    // compositing without needing the 3d flavour.
+    state.track.style.transform = `translateX(${-state.position}px)`;
+  }
+
+  function startLoop(state: MarqueeState) {
+    const tick = (ts: number) => {
+      const paused =
+        !state.active || state.dragging || state.hover || state.focus;
+      if (paused) {
+        state.lastTs = 0;
+      } else {
+        if (state.lastTs > 0) {
+          const dt = (ts - state.lastTs) / 1000;
+          state.position = wrap(
+            state.position + state.pxPerSecond * dt,
+            state.halfWidth,
+          );
+          render(state);
+        }
+        state.lastTs = ts;
+      }
+      state.rafId = requestAnimationFrame(tick);
+    };
+    state.rafId = requestAnimationFrame(tick);
+  }
+</script>

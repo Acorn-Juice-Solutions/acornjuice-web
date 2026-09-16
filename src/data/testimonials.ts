@@ -41,30 +41,16 @@ export const TESTIMONIALS: readonly Testimonial[] = [
     },
   },
   {
-    name: 'Marc Dubois',
+    name: 'Marc',
     date: '2020-01',
     rating: 5,
+    sector: {
+      es: 'Seguros',
+      en: 'Insurance',
+    },
     text: {
       es: 'Técnicamente excelentes. Refactorizaron un servicio legacy crítico sin romper nada y con una cobertura de tests que nos sigue dando confianza meses después.',
       en: 'Technically excellent. They refactored a critical legacy service without breaking anything, with test coverage that still gives us confidence months later.',
-    },
-  },
-  {
-    name: 'Peter Neumann',
-    date: '2020-08',
-    rating: 5,
-    text: {
-      es: 'Gente seria y puntual. Entregaron una API limpia y bien documentada en la mitad del tiempo que había estimado el proveedor anterior. Cero regresiones en seis meses.',
-      en: 'Serious, on-time delivery. They shipped a clean, well-documented API in half the time our previous vendor quoted. Zero regressions in six months.',
-    },
-  },
-  {
-    name: 'Iñaki Zabala',
-    date: '2020-11',
-    rating: 4,
-    text: {
-      es: 'Buenos consejos incluso cuando eso implicaba menos trabajo para ellos. Nos recomendaron simplificar el alcance y ahorrar coste. Esa honestidad se paga sola.',
-      en: 'Good advice even when it meant less work for them. They recommended simplifying the scope and cutting cost. That kind of honesty pays for itself.',
     },
   },
   {
@@ -86,39 +72,12 @@ export const TESTIMONIALS: readonly Testimonial[] = [
     },
   },
   {
-    name: 'Elena Marín',
-    date: '2021-09',
-    rating: 5,
-    text: {
-      es: 'Son unos cracks. Reformulamos un producto entero con ellos y el código que entregaron sigue siendo un placer mantener años después — calidad de verdad, no solo en la demo.',
-      en: 'These guys are the real deal. We rebuilt an entire product with them and the code they delivered is still a pleasure to maintain years later — real quality, not just demo-quality.',
-    },
-  },
-  {
     name: 'Thomas Berg',
     date: '2022-01',
     rating: 3,
     text: {
       es: 'Entrega profesional en conjunto. La comunicación en la fase inicial podría haber sido más afinada; una vez alineado el alcance, todo fue como la seda.',
       en: 'Professional delivery overall. Communication in the early phase could have been sharper; once we aligned on scope, everything went smoothly.',
-    },
-  },
-  {
-    name: 'Miguel Torres',
-    date: '2022-04',
-    rating: 5,
-    text: {
-      es: 'De los mejores equipos con los que he trabajado en quince años. Están un paso por delante del resto: criterio propio, buenos consejos y foco en lo que aporta valor.',
-      en: 'One of the best teams I have worked with in fifteen years. They stand a step above the rest: real judgment, good advice, and focus on what actually adds value.',
-    },
-  },
-  {
-    name: 'Anna Kowalski',
-    date: '2022-08',
-    rating: 5,
-    text: {
-      es: 'Ajustaron la solución a nuestras necesidades reales, no a un catálogo genérico. Migraron el pipeline de datos sin un incidente y con documentación que seguimos usando.',
-      en: 'They tailored the solution to our real needs, not a generic template. Migrated the data pipeline without an incident and left documentation we still use.',
     },
   },
   {
@@ -131,9 +90,13 @@ export const TESTIMONIALS: readonly Testimonial[] = [
     },
   },
   {
-    name: 'Rachel Hoffman',
+    name: 'R. H.',
     date: '2023-03',
     rating: 5,
+    sector: {
+      es: 'Salud',
+      en: 'Healthcare',
+    },
     text: {
       es: 'Convirtieron un requisito de compliance complejo en un módulo simple y mantenible, ajustado justo a lo que exigía la norma. Sin sobreingeniería y sin atajos.',
       en: 'They turned a complex compliance requirement into a simple, maintainable module, tailored exactly to what the regulation required. No over-engineering, no cutting corners.',
@@ -143,45 +106,26 @@ export const TESTIMONIALS: readonly Testimonial[] = [
     name: 'Pablo Lasarte',
     date: '2023-06',
     rating: 5,
+    sector: {
+      es: 'Retail',
+      en: 'Retail',
+    },
     text: {
       es: 'No fueron la opción más barata que valoramos, pero sí la más rentable a la larga. El dashboard que nos hicieron sigue vigente dos años después, sin una sola intervención correctiva.',
       en: 'They were not the cheapest option we quoted, but they were the most cost-effective in the long run. The dashboard they built is still running two years later, without a single corrective intervention.',
     },
   },
   {
-    name: 'Chloé Martin',
-    date: '2023-10',
-    rating: 5,
-    text: {
-      es: 'Diferentes al resto: profesionales, serios y con criterio. Puntuales, precisos y sin florituras. Los recomiendo sin reservas.',
-      en: 'Different from the rest: professional, serious, and thoughtful. Prompt, precise, no fluff. I recommend them without reservation.',
-    },
-  },
-  {
     name: 'Sofía Delgado',
     date: '2024-02',
     rating: 4,
+    sector: {
+      es: 'Educación',
+      en: 'Education',
+    },
     text: {
       es: 'Nos ajustaron el proyecto a lo que de verdad necesitábamos, sin sobredimensionar la infraestructura. En arranque hubo que reajustar el alcance, pero desde ahí impecable.',
       en: 'They scoped the project to what we actually needed, without oversizing the infrastructure. Some rescoping at the start, but flawless from there.',
-    },
-  },
-  {
-    name: 'Kai Andersson',
-    date: '2024-07',
-    rating: 5,
-    text: {
-      es: 'Técnicamente los mejores que he visto en CI/CD. Los builds son reproducibles y los releases aburridos — que es exactamente lo que quieres en producción.',
-      en: 'Technically the best I have seen on CI/CD. Builds are reproducible, releases are boring — which is exactly what you want in production.',
-    },
-  },
-  {
-    name: 'Nerea Aguirre',
-    date: '2025-01',
-    rating: 5,
-    text: {
-      es: 'En un mercado lleno de proveedores intercambiables, ellos son claramente distintos. Serios, con criterio, recomiendan lo que hace falta y no lo que abulta la factura.',
-      en: 'In a market full of interchangeable vendors, they clearly stand apart. Serious, thoughtful, they recommend what you actually need — not what pads the invoice.',
     },
   },
   {
