@@ -21,15 +21,7 @@ export interface Testimonial {
  * Pending to add latest surveys 2025-2026
  */
 export const TESTIMONIALS: readonly Testimonial[] = [
-  {
-    name: 'Ana García',
-    date: '2019-02',
-    rating: 5,
-    text: {
-      es: 'Gente seria. Migraron toda nuestra infraestructura a la nube sin un minuto de caída y con un plan de vuelta atrás para cada paso. Tranquilidad total.',
-      en: 'Serious professionals. Migrated our entire infrastructure to the cloud without a minute of downtime, with a rollback plan for every step. Total peace of mind.',
-    },
-  },
+
   {
     name: "James O'Brien",
     date: '2019-05',
