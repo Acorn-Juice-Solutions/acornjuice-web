@@ -29,12 +29,12 @@ function formatDate(iso: `${number}-${number}`): string {
 const ratingLabel = (rating: StarRating): string =>
   interpolate(ratingTemplate, { count: rating });
 
-// Show a curated subset in a single row. The full data file keeps the rest as
-// a rotation reserve. Duplicated inline so the CSS marquee loops seamlessly at
-// translateX(-50%); the duplicated half is aria-hidden so assistive tech only
-// announces each testimonial once.
+// Show a curated subset in a single row, most recent first. The data file is
+// stored in chronological order, so we take the tail and reverse it. Duplicated
+// inline so the CSS marquee loops seamlessly at translateX(-50%); the duplicated
+// half is aria-hidden so assistive tech only announces each testimonial once.
 const VISIBLE_COUNT = 10;
-const visible = TESTIMONIALS.slice(0, VISIBLE_COUNT);
+const visible = TESTIMONIALS.slice(-VISIBLE_COUNT).reverse();
 const visibleDup = [...visible, ...visible];
 ---
 
