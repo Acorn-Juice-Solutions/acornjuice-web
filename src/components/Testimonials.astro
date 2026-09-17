@@ -232,23 +232,12 @@ const visibleDup = [...visible, ...visible];
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .marquee {
-      overflow: visible;
-      -webkit-mask-image: none;
-      mask-image: none;
-    }
+    /* Respect user's motion preference by disabling the auto-scroll CSS
+       fallback. JS enhancement still arms and handles drag, so the carousel
+       stays visually identical and remains interactive — nothing moves
+       unless the user drags it. */
     .marquee-track {
       animation: none;
-      flex-wrap: wrap;
-      width: 100%;
-      /* Drop the trailing padding — with wrapping enabled, that padding
-         becomes an unwanted right-edge gutter on the last row. */
-      padding: 0;
-      justify-content: center;
-    }
-    /* Hide the duplicated half — we only need the unique cards when static. */
-    .marquee-track > [aria-hidden='true'] {
-      display: none;
     }
   }
 
@@ -296,9 +285,11 @@ const visibleDup = [...visible, ...visible];
 
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const marquees = document.querySelectorAll<HTMLElement>('[data-marquee]');
+  // Note: reduced-motion is NOT a gate for JS enhancement. We still arm the
+  // marquee under reduce-motion — drag stays available and the visual layout
+  // stays consistent — we just skip auto-advance inside the tick loop.
   const supported =
     marquees.length > 0 &&
-    !reducedMotion.matches &&
     'IntersectionObserver' in window &&
     'ResizeObserver' in window;
 
@@ -478,8 +469,15 @@ const visibleDup = [...visible, ...visible];
 
   function startLoop(state: MarqueeState) {
     const tick = (ts: number) => {
+      // Under `prefers-reduced-motion: reduce` we skip auto-advance but keep
+      // the loop alive so drag interactions still get rendered. Checked live
+      // via `.matches` so a runtime toggle of the OS setting is picked up.
       const paused =
-        !state.active || state.dragging || state.hover || state.focus;
+        !state.active ||
+        state.dragging ||
+        state.hover ||
+        state.focus ||
+        reducedMotion.matches;
       if (paused) {
         state.lastTs = 0;
       } else {
