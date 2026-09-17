@@ -141,4 +141,17 @@ export const TESTIMONIALS: readonly Testimonial[] = [
       en: 'Working with Iosune and Javier has been an excellent experience. They stand out for their outstanding level of professionalism and their ability to grasp project requirements right from the start. On top of that, they deeply value both their time and their clients’, keeping meetings to the strict minimum without losing an ounce of clarity or alignment. A highly efficient team, and one I would recommend for any software development work.',
     },
   },
+  {
+    name: 'Ammarah Uddin',
+    date: '2026-09',
+    rating: 5,
+    sector: {
+      es: 'Banca',
+      en: 'Banking',
+    },
+    text: {
+      es: 'Trabajar con Acorn Juice fue una experiencia positiva, con un equipo profesional y colaborativo que se comunicó con claridad durante todo el proyecto. Aprecié su solvencia técnica, capacidad de respuesta y foco en entregar soluciones de calidad.',
+      en: 'Working with Acorn Juice was a positive experience, with a professional and collaborative team that communicated clearly throughout the project. I appreciated their technical expertise, responsiveness, and focus on delivering quality solutions.',
+    },
+  },
 ] as const;
