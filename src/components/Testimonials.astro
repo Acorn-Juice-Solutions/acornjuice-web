@@ -110,10 +110,20 @@ const visibleDup = [...visible, ...visible];
 
   .marquee-track {
     list-style: none;
-    padding: 0;
+    /* `gap` only sits between cards, not after the last one. To keep the CSS
+       keyframe `translateX(-50%)` aligned with the JS-measured `halfWidth`
+       (= offsetLeft of the seam card), the track needs one extra trailing
+       gap of padding so its border-box is exactly `2 × halfWidth`.
+       With box-sizing: border-box (global), padding is included in the
+       reference box that `translateX(-50%)` resolves against. */
+    padding: 0 var(--space-4) 0 0;
     margin: 0;
     display: flex;
     width: max-content;
+    /* Single source of truth for card spacing — covers both the horizontal
+       gutter in marquee mode and the row separation when the track wraps in
+       reduced-motion mode. */
+    gap: var(--space-4);
     animation: marquee-scroll var(--marquee-duration) linear infinite;
     will-change: transform;
   }
@@ -152,7 +162,6 @@ const visibleDup = [...visible, ...visible];
   .testimonial-card {
     flex: 0 0 20rem;
     min-height: 12rem;
-    margin-right: var(--space-4);
     background: var(--color-bg-alt);
     border: 1px solid var(--color-line);
     border-radius: var(--radius-lg);
@@ -232,11 +241,10 @@ const visibleDup = [...visible, ...visible];
       animation: none;
       flex-wrap: wrap;
       width: 100%;
+      /* Drop the trailing padding — with wrapping enabled, that padding
+         becomes an unwanted right-edge gutter on the last row. */
+      padding: 0;
       justify-content: center;
-      /* Cards carry only margin-right for the marquee layout; when we wrap into
-         a grid in reduced-motion mode, we need explicit row spacing so cards
-         don't touch vertically. */
-      row-gap: var(--space-4);
     }
     /* Hide the duplicated half — we only need the unique cards when static. */
     .marquee-track > [aria-hidden='true'] {
@@ -302,12 +310,6 @@ const visibleDup = [...visible, ...visible];
     const track = section.querySelector<HTMLElement>('.marquee-track');
     if (!track) return;
 
-    // Signal to CSS that JS is in control (disables the fallback animation and
-    // enables the grab cursor / touch-action rules). Done up front so this
-    // write is grouped with the other synchronous writes below, and the reads
-    // that follow live in rAF where layout has already settled.
-    section.classList.add('is-armed');
-
     const state: MarqueeState = {
       section,
       track,
@@ -325,10 +327,22 @@ const visibleDup = [...visible, ...visible];
       lastTs: 0,
       rafId: 0,
     };
-    // Sensible fallback until the first rAF-scheduled measurement runs. The
-    // rAF loop is safe to start with pxPerSecond = 0 (position doesn't
-    // advance) so a slight ordering with IntersectionObserver won't glitch.
+    // Sensible fallback until the first rAF-scheduled measurement runs.
     let durationSec = 260;
+
+    // Arms the section (disabling the CSS fallback animation and switching
+    // control to JS) once the first valid measurement is in. Deferring this
+    // avoids the previous race where the section was armed synchronously with
+    // `halfWidth = 0`, killing the CSS animation before JS had numbers to
+    // drive it — the visible result was a marquee stuck at 0%.
+    const armIfReady = () => {
+      if (state.halfWidth <= 0) return;
+      if (section.classList.contains('is-armed')) return;
+      section.classList.add('is-armed');
+      // If the section is already in-viewport (IO fired before measurement),
+      // kick the loop now. Otherwise the IO callback will do it on entry.
+      if (state.active && !state.rafId) startLoop(state);
+    };
 
     const measure = () => {
       // The track holds two identical halves; wrapping at the offsetLeft of the
@@ -337,9 +351,10 @@ const visibleDup = [...visible, ...visible];
       // margin of the last flex child (which would misalign the loop seam and
       // leave a visible gap when the wrap fires).
       const cards = track.querySelectorAll<HTMLElement>('.testimonial-card');
-      const seamCard = cards[cards.length / 2];
+      const seamCard = cards[Math.floor(cards.length / 2)];
       state.halfWidth = seamCard ? seamCard.offsetLeft : 0;
       state.pxPerSecond = state.halfWidth > 0 ? state.halfWidth / durationSec : 0;
+      armIfReady();
     };
 
     // Defer every layout read (offsetLeft, getComputedStyle) to the first
@@ -364,7 +379,12 @@ const visibleDup = [...visible, ...visible];
           if (entry.isIntersecting) {
             state.active = true;
             io.unobserve(entry.target);
-            if (!state.rafId) startLoop(state);
+            // Only start the loop if measurement has already armed the
+            // section. If not, `armIfReady` will start it when measurement
+            // completes.
+            if (section.classList.contains('is-armed') && !state.rafId) {
+              startLoop(state);
+            }
           }
         }
       },

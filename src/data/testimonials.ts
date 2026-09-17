@@ -149,4 +149,17 @@ export const TESTIMONIALS: readonly Testimonial[] = [
       en: 'It has been a real pleasure working with your services. The level of expertise, professionalism and support provided has been exceptional. Complex challenges are approached thoughtfully, with a clear focus on understanding the need and finding practical solutions.\n\nI have particularly valued the collaborative approach and willingness to go the extra mile whenever support is needed. The knowledge and experience brought to each engagement have made a genuine difference to the outcomes we have achieved.\n\nI would highly recommend these services to anyone looking for a knowledgeable, reliable and genuinely supportive partner.',
     },
   },
+  {
+    name: 'Miguel N.',
+    date: '2026-09',
+    rating: 5,
+    sector: {
+      es: 'Banca',
+      en: 'Banking',
+    },
+    text: {
+      es: 'He trabajado estrechamente con Iosune y Javier durante unos cuatro años, aunque los conozco desde hace más tiempo.\n\nLa experiencia siempre ha sido fantástica. Sus habilidades técnicas son excelentes, pero lo que más destacaría es su proactividad y su intención de hacerlo todo con un alto nivel de exigencia.',
+      en: "I've worked closely with both Iosune and Javier for about four years, although I've known them for longer.\n\nThe experience has always been fantastic. Their engineering skills are excellent, but the quality I would highlight most is their proactivity and their intention to do everything to a high standard.",
+    },
+  },
 ] as const;
