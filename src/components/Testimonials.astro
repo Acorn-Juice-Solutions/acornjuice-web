@@ -233,6 +233,10 @@ const visibleDup = [...visible, ...visible];
       flex-wrap: wrap;
       width: 100%;
       justify-content: center;
+      /* Cards carry only margin-right for the marquee layout; when we wrap into
+         a grid in reduced-motion mode, we need explicit row spacing so cards
+         don't touch vertically. */
+      row-gap: var(--space-4);
     }
     /* Hide the duplicated half — we only need the unique cards when static. */
     .marquee-track > [aria-hidden='true'] {
