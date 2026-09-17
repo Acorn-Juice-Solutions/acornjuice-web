@@ -185,6 +185,9 @@ const visibleDup = [...visible, ...visible];
     font-size: var(--text-base);
     line-height: var(--leading-snug);
     font-style: italic;
+    /* Respect paragraph breaks (`\n\n`) embedded in the source string while
+       collapsing all other whitespace as usual. */
+    white-space: pre-line;
   }
 
   .meta {

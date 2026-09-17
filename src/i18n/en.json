@@ -2,7 +2,8 @@
   "site": {
     "name": "Acorn Juice Solutions",
     "tagline": "Focused tools that solve one problem well.",
-    "description": "Independent software studio building scalable, well-crafted software — from focused utilities to mobile apps, websites, APIs, pipelines and cloud infrastructure."
+    "description": "Independent software studio building scalable, well-crafted software — from focused utilities to mobile apps, websites, APIs, pipelines and cloud infrastructure.",
+    "logo_alt": "Stylized acorn illustration"
   },
   "nav": {
     "home": "Home",

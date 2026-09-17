@@ -2,7 +2,8 @@
   "site": {
     "name": "Acorn Juice Solutions",
     "tagline": "Herramientas enfocadas que resuelven un problema concreto.",
-    "description": "Estudio de software independiente que construye software escalable y bien resuelto — desde utilidades enfocadas hasta aplicaciones móviles, webs, APIs, pipelines e infraestructura en la nube."
+    "description": "Estudio de software independiente que construye software escalable y bien resuelto — desde utilidades enfocadas hasta aplicaciones móviles, webs, APIs, pipelines e infraestructura en la nube.",
+    "logo_alt": "Ilustración de bellota estilizada"
   },
   "nav": {
     "home": "Inicio",

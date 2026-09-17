@@ -23,24 +23,6 @@ export interface Testimonial {
 export const TESTIMONIALS: readonly Testimonial[] = [
 
   {
-    name: "James O'Brien",
-    date: '2019-05',
-    rating: 5,
-    text: {
-      es: 'Equipo profesional, directo y sin humo. Encuentran soluciones simples a problemas complejos y entregan cuando dicen. Volvería a contratarles mañana.',
-      en: 'Professional, straightforward, no fluff. They find simple solutions to complex problems and deliver when they say they will. I would hire them again tomorrow.',
-    },
-  },
-  {
-    name: 'Laura Etxeberria',
-    date: '2019-09',
-    rating: 4,
-    text: {
-      es: 'Nos entregaron exactamente lo que necesitábamos, ni una línea de más. Nada de sobreingeniería ni features que nadie iba a usar. Se nota la experiencia.',
-      en: 'They delivered exactly what we needed, not a line more. No over-engineering, no features nobody would use. The experience shows.',
-    },
-  },
-  {
     name: 'Marc',
     date: '2020-01',
     rating: 5,
@@ -152,6 +134,19 @@ export const TESTIMONIALS: readonly Testimonial[] = [
     text: {
       es: 'Trabajar con Acorn Juice fue una experiencia positiva, con un equipo profesional y colaborativo que se comunicó con claridad durante todo el proyecto. Aprecié su solvencia técnica, capacidad de respuesta y foco en entregar soluciones de calidad.',
       en: 'Working with Acorn Juice was a positive experience, with a professional and collaborative team that communicated clearly throughout the project. I appreciated their technical expertise, responsiveness, and focus on delivering quality solutions.',
+    },
+  },
+  {
+    name: 'Athul Prasad',
+    date: '2026-09',
+    rating: 5,
+    sector: {
+      es: 'Banca',
+      en: 'Banking',
+    },
+    text: {
+      es: 'Ha sido un verdadero placer trabajar con vosotros. El nivel de experiencia, profesionalidad y soporte ha sido excepcional. Los retos complejos se abordan con reflexión, con un foco claro en entender la necesidad y encontrar soluciones prácticas.\n\nHe valorado especialmente el enfoque colaborativo y la disposición a ir más allá siempre que hace falta apoyo. El conocimiento y la experiencia que aportan a cada colaboración marcan una diferencia real en los resultados que hemos conseguido.\n\nRecomendaría sin reservas estos servicios a cualquiera que busque un partner con criterio, fiable y realmente comprometido.',
+      en: 'It has been a real pleasure working with your services. The level of expertise, professionalism and support provided has been exceptional. Complex challenges are approached thoughtfully, with a clear focus on understanding the need and finding practical solutions.\n\nI have particularly valued the collaborative approach and willingness to go the extra mile whenever support is needed. The knowledge and experience brought to each engagement have made a genuine difference to the outcomes we have achieved.\n\nI would highly recommend these services to anyone looking for a knowledgeable, reliable and genuinely supportive partner.',
     },
   },
 ] as const;
