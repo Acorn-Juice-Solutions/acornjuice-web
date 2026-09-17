@@ -36,15 +36,6 @@ export const TESTIMONIALS: readonly Testimonial[] = [
     },
   },
   {
-    name: 'Sarah Whitmore',
-    date: '2021-02',
-    rating: 5,
-    text: {
-      es: 'Buenos técnicos de verdad. Cogieron un código heredado enmarañado y entregaron algo simple donde tenía que serlo y robusto donde hacía falta. Soluciones simples a problemas complejos, tal cual.',
-      en: 'Genuinely strong engineers. They took a tangled legacy codebase and delivered something simple where it needed to be and robust where it had to be. Simple solutions to complex problems, exactly.',
-    },
-  },
-  {
     name: 'David Chen',
     date: '2021-05',
     rating: 5,
