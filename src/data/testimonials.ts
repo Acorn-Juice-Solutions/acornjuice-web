@@ -36,15 +36,6 @@ export const TESTIMONIALS: readonly Testimonial[] = [
     },
   },
   {
-    name: 'David Chen',
-    date: '2021-05',
-    rating: 5,
-    text: {
-      es: 'Solvencia técnica y honestidad con los trade-offs. Nunca nos vendieron una arquitectura brillante cuando la aburrida era la correcta. Muy recomendables.',
-      en: 'Technical rigor and honest about trade-offs. They never sold us a brilliant architecture when the boring one was the right call. Highly recommended.',
-    },
-  },
-  {
     name: 'Thomas Berg',
     date: '2022-01',
     rating: 3,
@@ -102,6 +93,19 @@ export const TESTIMONIALS: readonly Testimonial[] = [
     },
   },
   {
+    name: 'Luis Miguel Roda',
+    date: '2026-04',
+    rating: 5,
+    sector: {
+      es: 'Telecom y seguridad',
+      en: 'Telecom & security',
+    },
+    text: {
+      es: 'Nos han dado un trato profesional.',
+      en: 'They have treated us professionally throughout.',
+    },
+  },
+  {
     name: 'Jaime Carrasco Tobares',
     date: '2026-09',
     rating: 5,
@@ -151,19 +155,6 @@ export const TESTIMONIALS: readonly Testimonial[] = [
     text: {
       es: 'He trabajado estrechamente con Iosune y Javier durante unos cuatro años, aunque los conozco desde hace más tiempo.\n\nLa experiencia siempre ha sido fantástica. Sus habilidades técnicas son excelentes, pero lo que más destacaría es su proactividad y su intención de hacerlo todo con un alto nivel de exigencia.',
       en: "I've worked closely with both Iosune and Javier for about four years, although I've known them for longer.\n\nThe experience has always been fantastic. Their engineering skills are excellent, but the quality I would highlight most is their proactivity and their intention to do everything to a high standard.",
-    },
-  },
-  {
-    name: 'Luis Miguel Roda',
-    date: '2026-09',
-    rating: 5,
-    sector: {
-      es: 'Telecom y seguridad',
-      en: 'Telecom & security',
-    },
-    text: {
-      es: 'Nos han dado un trato profesional.',
-      en: 'They have treated us professionally throughout.',
     },
   },
 ] as const;
