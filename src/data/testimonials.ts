@@ -153,4 +153,17 @@ export const TESTIMONIALS: readonly Testimonial[] = [
       en: "I've worked closely with both Iosune and Javier for about four years, although I've known them for longer.\n\nThe experience has always been fantastic. Their engineering skills are excellent, but the quality I would highlight most is their proactivity and their intention to do everything to a high standard.",
     },
   },
+  {
+    name: 'Luis Miguel Roda',
+    date: '2026-09',
+    rating: 5,
+    sector: {
+      es: 'Telecom y seguridad',
+      en: 'Telecom & security',
+    },
+    text: {
+      es: 'Nos han dado un trato profesional.',
+      en: 'They have treated us professionally throughout.',
+    },
+  },
 ] as const;
