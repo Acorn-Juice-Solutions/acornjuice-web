@@ -133,6 +133,21 @@ const metaDescription = tagline;
             <>
               <h2>{t('product_page.pilot_heading')}</h2>
               <p class="pilot-lede">{t('product_page.pilot_body')}</p>
+              {(data.platforms.includes('android') ||
+                data.platforms.includes('ios')) && (
+                <div class="pilot-process">
+                  <h3>{t('product_page.pilot_process_heading')}</h3>
+                  <p>{t('product_page.pilot_process_intro')}</p>
+                  <ul>
+                    {data.platforms.includes('android') && (
+                      <li>{t('product_page.pilot_process_android')}</li>
+                    )}
+                    {data.platforms.includes('ios') && (
+                      <li>{t('product_page.pilot_process_ios')}</li>
+                    )}
+                  </ul>
+                </div>
+              )}
               <PilotRequestForm
                 locale={locale}
                 productName={name}
@@ -250,6 +265,29 @@ const metaDescription = tagline;
     color: var(--color-ink-soft);
     max-width: 60ch;
     margin-bottom: var(--space-4);
+  }
+
+  .pilot-process {
+    max-width: 60ch;
+    margin-bottom: var(--space-4);
+  }
+
+  .pilot-process h3 {
+    font-size: var(--text-lg);
+    margin-bottom: var(--space-2);
+  }
+
+  .pilot-process p {
+    color: var(--color-ink-soft);
+    margin-bottom: var(--space-2);
+  }
+
+  .pilot-process ul {
+    padding-left: var(--space-4);
+  }
+
+  .pilot-process li {
+    margin-bottom: var(--space-2);
   }
 
   @media (max-width: 640px) {
