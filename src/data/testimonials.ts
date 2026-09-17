@@ -80,16 +80,16 @@ export const TESTIMONIALS: readonly Testimonial[] = [
     },
   },
   {
-    name: 'Sofía Delgado',
-    date: '2024-02',
-    rating: 4,
+    name: 'Sergi Sánchez',
+    date: '2025-07',
+    rating: 5,
     sector: {
-      es: 'Educación',
-      en: 'Education',
+      es: 'Ingeniería industrial',
+      en: 'Industrial engineering',
     },
     text: {
-      es: 'Nos ajustaron el proyecto a lo que de verdad necesitábamos, sin sobredimensionar la infraestructura. En arranque hubo que reajustar el alcance, pero desde ahí impecable.',
-      en: 'They scoped the project to what we actually needed, without oversizing the infrastructure. Some rescoping at the start, but flawless from there.',
+      es: 'En mi ámbito laboral he necesitado subcontratar a una empresa para configurar redes de datos, VPN, comunicaciones 5G, etc., todo ello usando equipos MikroTik.\n\nJavier, de Acornjuice, no solo es un experto en la materia, sino que va mucho más allá de la simple configuración de los equipos. Asesora sobre la instalación, detecta posibles puntos de mejora y tiene muy en cuenta aspectos de ciberseguridad en los que quizá ni siquiera habías pensado.\n\nAdemás, trabaja de forma muy profesional, cercana y clara, explicando en todo momento las decisiones tomadas y proponiendo soluciones prácticas y adaptadas a las necesidades reales de cada proyecto. Se nota que tiene una amplia experiencia y un gran conocimiento técnico.\n\nRecomendable 100%.',
+      en: "In my line of work I've had to subcontract a company to configure data networks, VPNs, 5G communications, etc. — all of it running on MikroTik equipment.\n\nJavier, from Acornjuice, isn't just an expert in the field; he goes well beyond simply configuring the devices. He advises on installation, spots areas for improvement and pays close attention to cybersecurity angles you might not even have considered.\n\nOn top of that, he works in a very professional, approachable and clear way, always explaining the decisions he takes and proposing practical solutions tailored to the real needs of each project. His broad experience and strong technical knowledge really show.\n\nHighly recommended.",
     },
   },
   {
