@@ -23,47 +23,16 @@ export interface Testimonial {
 export const TESTIMONIALS: readonly Testimonial[] = [
 
   {
-    name: 'Marc',
-    date: '2020-01',
+    name: 'Haritz Urrestarazu',
+    date: '2018-02',
     rating: 5,
     sector: {
-      es: 'Seguros',
-      en: 'Insurance',
+      es: 'Servicios informáticos',
+      en: 'IT services',
     },
     text: {
-      es: 'Técnicamente excelentes. Refactorizaron un servicio legacy crítico sin romper nada y con una cobertura de tests que nos sigue dando confianza meses después.',
-      en: 'Technically excellent. They refactored a critical legacy service without breaking anything, with test coverage that still gives us confidence months later.',
-    },
-  },
-  {
-    name: 'Thomas Berg',
-    date: '2022-01',
-    rating: 3,
-    text: {
-      es: 'Entrega profesional en conjunto. La comunicación en la fase inicial podría haber sido más afinada; una vez alineado el alcance, todo fue como la seda.',
-      en: 'Professional delivery overall. Communication in the early phase could have been sharper; once we aligned on scope, everything went smoothly.',
-    },
-  },
-  {
-    name: 'Javier Ortiz',
-    date: '2022-11',
-    rating: 4,
-    text: {
-      es: 'Muy buenos técnicos, sobre todo en arquitectura. No son de los más baratos del mercado — se nota en la factura — pero también se nota en la calidad de lo que entregan.',
-      en: 'Very strong engineers, especially on architecture. Not the cheapest option out there — you see it on the invoice — but you also see it in the quality of what they deliver.',
-    },
-  },
-  {
-    name: 'R. H.',
-    date: '2023-03',
-    rating: 5,
-    sector: {
-      es: 'Salud',
-      en: 'Healthcare',
-    },
-    text: {
-      es: 'Convirtieron un requisito de compliance complejo en un módulo simple y mantenible, ajustado justo a lo que exigía la norma. Sin sobreingeniería y sin atajos.',
-      en: 'They turned a complex compliance requirement into a simple, maintainable module, tailored exactly to what the regulation required. No over-engineering, no cutting corners.',
+      es: 'Y le daría 6 si hubiera.\n\nGrandes profesionales. Saben lo que tienen entre manos y te ayudan en todo para afinar las cosas a unos límites insospechados.\n\nRecomendaría sus servicios siempre que pueda hacerlo.',
+      en: "I'd give 6 stars if that were an option.\n\nGreat professionals. They know their craft and help you fine-tune everything to levels you wouldn't have thought possible.\n\nI'd recommend their services any chance I get.",
     },
   },
   {
@@ -77,6 +46,19 @@ export const TESTIMONIALS: readonly Testimonial[] = [
     text: {
       es: 'No fueron la opción más barata que valoramos, pero sí la más rentable a la larga. El dashboard que nos hicieron sigue vigente dos años después, sin una sola intervención correctiva.',
       en: 'They were not the cheapest option we quoted, but they were the most cost-effective in the long run. The dashboard they built is still running two years later, without a single corrective intervention.',
+    },
+  },
+  {
+    name: 'Joseba H.',
+    date: '2024-11',
+    rating: 5,
+    sector: {
+      es: 'Automoción',
+      en: 'Automotive',
+    },
+    text: {
+      es: 'Un 10 en todo. Grandes profesionales y siempre dispuestos a ayudar. Ganas tranquilidad sabiendo que están en el proyecto.',
+      en: "Top marks across the board. Great professionals, always ready to help. Real peace of mind knowing they're on the project.",
     },
   },
   {

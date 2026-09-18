@@ -49,6 +49,7 @@ function baseNodes(locale: Locale): GraphNode[] {
     '@id': ORG_ID,
     name: 'Acorn Juice Solutions',
     legalName: 'ACORN JUICE SOLUTIONS SL',
+    foundingDate: '2018',
     url: `${SITE_URL}/`,
     logo: { '@id': LOGO_ID },
     email: 'info@acornjuice.com',
