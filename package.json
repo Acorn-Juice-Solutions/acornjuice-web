@@ -17,11 +17,14 @@
     "test:page-types": "node scripts/check-page-types.mjs",
     "test:makers": "node scripts/check-makers.mjs",
     "test:favicons": "node scripts/check-favicons.mjs",
+    "test:sitemap": "node scripts/check-sitemap.mjs",
+    "test:og": "node scripts/check-og.mjs",
     "test:links": "linkinator ./dist --config linkinator.config.json",
     "test:axe": "playwright test",
     "test:lighthouse": "lhci autorun",
     "favicons": "node scripts/generate-favicons.mjs",
-    "test": "npm run check && npm run test:i18n && npm run test:hreflang && npm run test:schema && npm run test:page-types && npm run test:makers && npm run test:favicons"
+    "og": "node scripts/generate-og.mjs",
+    "test": "npm run check && npm run test:i18n && npm run test:hreflang && npm run test:schema && npm run test:page-types && npm run test:makers && npm run test:favicons && npm run test:sitemap && npm run test:og"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",

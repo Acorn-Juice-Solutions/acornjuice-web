@@ -8,13 +8,14 @@ export const IOSUNE_ID = `${SITE_URL}/#person-iosune`;
 export const JAVIER_ID = `${SITE_URL}/#person-javier`;
 
 /**
- * Consent gate for exposing Javier publicly. Kept as a single boolean so it can
- * be flipped in exactly one place once he confirms.
+ * Javier is a co-founder and is published on the site by agreement — this is
+ * settled, not pending. The flag survives only as a seam for the two branches
+ * below; it gates the structured data (the `Person` node and the `founder`
+ * reference), not his visible maker card, which comes from
+ * src/content/makers/javier.md.
  *
- * TODO(consent-blocker): Enabled for local preview. REVERT to `false` before
- * pushing to `main` unless Javier has confirmed in writing that he consents to
- * being published on acornjuice.com with his name and LinkedIn URL.
- * Tracked in .my-notes/acornjuice-web-manual-actions.md §4.
+ * The `as boolean` widening is load-bearing: without it TypeScript narrows to
+ * the literal `true` and reports the `false` branches below as dead code.
  */
 export const JAVIER_CONSENTED = true as boolean;
 

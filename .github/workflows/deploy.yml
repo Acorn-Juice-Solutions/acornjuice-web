@@ -38,7 +38,13 @@ jobs:
     outputs:
       artifact-name: site-dist
     steps:
+      # Full history: the sitemap derives each page's <lastmod> from the last
+      # commit that touched its sources. A shallow clone would collapse every
+      # date onto the tip commit, and scripts/lastmod.mjs would (correctly)
+      # warn and fall back to meaningless mtimes.
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
@@ -52,7 +58,7 @@ jobs:
           retention-days: 7
 
   post-build-tests:
-    name: Post-build tests (hreflang + schema + links)
+    name: Post-build tests (hreflang + schema + sitemap + og + links)
     runs-on: ubuntu-latest
     needs: build
     steps:
@@ -68,6 +74,8 @@ jobs:
           path: ./dist
       - run: npm run test:hreflang
       - run: npm run test:schema
+      - run: npm run test:sitemap
+      - run: npm run test:og
       - name: Link check (internal links only)
         run: npm run test:links
 
