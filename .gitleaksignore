@@ -1,0 +1,27 @@
+# Accepted findings, pinned to an exact file, rule and line.
+#
+# A fingerprint stops matching as soon as the line moves, which is deliberate:
+# relocating a key forces someone to look at it again rather than inheriting a
+# blanket exemption. Do not replace these with a regex allowlist — a pattern
+# broad enough to cover this key is broad enough to hide the next one.
+#
+# ---------------------------------------------------------------------------
+# StaticForms client key (ContactForm.astro, PilotRequestForm.astro)
+#
+# Publishable by StaticForms' design: it identifies the form owner from
+# browser-side JavaScript, so it ships to every visitor and cannot be kept
+# secret. It grants no access to anything we hold, and it is the same key the
+# AccuVideo site uses.
+#
+# Not harmless, though. Anyone can lift it and submit forms against our quota,
+# or send mail that appears to come from our forms. If that starts happening:
+# rotate it in the StaticForms dashboard, and if it recurs, move form delivery
+# behind something that can authenticate the caller.
+#
+# Both the working-tree and the commit-scoped fingerprints are listed, because
+# the CI job scans full history while a local `gitleaks dir` does not.
+# ---------------------------------------------------------------------------
+src/components/ContactForm.astro:generic-api-key:17
+src/components/PilotRequestForm.astro:generic-api-key:17
+56f0602edcb41f03e5106f3ddf26a0c41b4d49db:src/components/ContactForm.astro:generic-api-key:17
+a41785cf10e34d56ec9540923700ce50b9911630:src/components/PilotRequestForm.astro:generic-api-key:17
