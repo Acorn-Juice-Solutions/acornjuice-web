@@ -48,7 +48,7 @@
       "patterns_title": "Patrones probados antes que atajos",
       "patterns_body": "Patrones de diseño y decisiones de arquitectura con historial. Vamos primero a la solución bien entendida y solo cuando encaja de verdad consideramos la ingeniosa.",
       "security_title": "La seguridad no es un extra",
-      "security_body": "Validación de entradas en los límites del sistema, secretos fuera del repo, principio de mínimo privilegio y dependencias auditables. Metida desde el primer commit, no como cambios de última hora antes del release.",
+      "security_body": "Validación de entradas en los límites del sistema, secretos fuera del repo, principio de mínimo privilegio e inventario de dependencias (SBOM) en cada entrega, para saber qué llevamos dentro cuando aparece una vulnerabilidad. Metida desde el primer commit, no como cambios de última hora antes del release.",
       "iterative_title": "Entregas iterativas y revisadas",
       "iterative_body": "Trabajamos en ciclos cortos: planificación por sprint, entregas incrementales y revisión con el cliente en cada iteración. Ajustar antes es más barato que corregir después.",
       "efficiency_title": "Tiempo bien invertido",

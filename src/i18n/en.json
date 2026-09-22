@@ -48,7 +48,7 @@
       "patterns_title": "Proven patterns over shortcuts",
       "patterns_body": "Design patterns and architectural choices with a track record. We reach for the well-understood solution first, and only consider the clever one when it truly fits.",
       "security_title": "Security is not an afterthought",
-      "security_body": "Input validation at trust boundaries, secrets kept out of the repo, principle of least privilege, auditable dependencies. Built in from the first commit, not bolted on before release.",
+      "security_body": "Input validation at trust boundaries, secrets kept out of the repo, principle of least privilege, and a dependency inventory (SBOM) with every release, so we know what we ship when a vulnerability lands. Built in from the first commit, not bolted on before release.",
       "iterative_title": "Iterative, reviewed delivery",
       "iterative_body": "We work in short cycles: sprint planning, incremental delivery and client review every iteration. Adjusting early is cheaper than fixing later.",
       "efficiency_title": "Time well spent",
