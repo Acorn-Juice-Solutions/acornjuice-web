@@ -84,10 +84,8 @@ cumplen con tres cosas que existen antes del incidente.
 dependencia, la pregunta operativa no es si es grave, sino si está en alguno de
 tus productos y en qué versiones. Sin un inventario de dependencias por entrega
 —un SBOM generado desde el lockfile, no desde lo que declaras— esa pregunta se
-responde a mano, repositorio por repositorio, con el reloj corriendo. Es la
-razón por la que nosotros lo generamos en cada entrega y lo adjuntamos a la
-release: el inventario que caduca en un artefacto de CI a los noventa días no
-sirve cuando alguien pregunta por una versión de hace un año.
+responde a mano, repositorio por repositorio, con el reloj corriendo. Más abajo
+contamos cómo lo hemos resuelto nosotros.
 
 **Tener forma de enterarte.** Un canal de contacto publicado, con una política
 que diga a dónde escribir y qué esperar, y que alguien lea de verdad. Si el
@@ -97,6 +95,39 @@ horas ya está comprometido antes de empezar.
 **Saber quién decide.** La notificación la firma alguien. Conviene que esté
 decidido quién es antes de necesitarlo, y que esa persona sepa dónde está la
 plataforma de ENISA y con qué credenciales entra.
+
+## Cómo lo hemos montado nosotros
+
+Lo honesto es enseñarlo en vez de contarlo, así que el pipeline del que hablamos
+está a la vista: el [widget Android que publicamos con licencia MIT](https://github.com/Acorn-Juice-Solutions/github_download_counter_widget_android)
+lleva el workflow entero en `.github/workflows/supply-chain.yml`. Se ejecuta en
+cada push a la rama principal, en cada pull request, una vez al día y a demanda,
+y hace cinco cosas:
+
+- **Genera el SBOM en formato CycloneDX a partir del lockfile de Gradle**, no de
+  lo que declaran los ficheros de build. La diferencia no es cosmética: lo
+  declarado es una intención, el lockfile es el árbol resuelto que acaba dentro
+  del APK.
+- **Escanea las dependencias contra OSV** y deja el informe junto al inventario.
+- **Verifica que el lockfile concuerda con lo declarado**, que es lo que caza el
+  cambio que alguien metió sin actualizar el candado.
+- **Busca secretos en todo el historial**, no solo en el último commit.
+- **Audita los propios workflows** y mantiene cada acción de GitHub anclada a un
+  hash de commit en lugar de a una etiqueta. Esto último es lo que de verdad
+  muerde: una etiqueta se reescribe, y ese es exactamente el camino por el que
+  un gusano de cadena de suministro entra en un build ajeno.
+
+Los informes se conservan como artefactos noventa días. Y desde la última
+versión el `.cdx.json` **viaja adjunto a la release**, al lado del APK firmado y
+con los SHA-256 que GitHub publica para ambos. Ese fue el cambio que más nos
+costó ver: durante un tiempo generamos el inventario religiosamente y se quedaba
+muriendo en CI, donde no le sirve de nada a quien descarga el binario seis meses
+después.
+
+Lo que todavía no tenemos, y lo decimos porque el hueco informa tanto como el
+resto: **procedencia y attestations**. El inventario dice qué hay dentro; la
+procedencia demuestra que ese binario salió de ese código y de ese pipeline, y
+no de la máquina de cualquiera. Es lo siguiente en la lista.
 
 ## Lo que no resuelve
 

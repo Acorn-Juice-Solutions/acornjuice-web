@@ -86,9 +86,7 @@ operational question is not whether it is severe, but whether it is in any of
 your products and in which versions. Without a dependency inventory per release
 — an SBOM generated from the lockfile, not from what your build files declare —
 that question gets answered by hand, repository by repository, with the clock
-running. It is why we generate one on every release and attach it to the
-release itself: an inventory that expires with a 90-day CI artifact is no use
-when someone asks about a version from last year.
+running. How we solved that on our side is further down.
 
 **Having a way to find out.** A published contact channel, with a policy that
 says where to write and what to expect, and that somebody actually reads. If the
@@ -98,6 +96,38 @@ it starts.
 **Knowing who decides.** Someone signs the notification. Better to settle who
 that is before you need them, and to make sure that person knows where the ENISA
 platform is and which credentials get them in.
+
+## How we built ours
+
+Showing beats telling, so the pipeline we are describing is in the open: the
+[Android widget we publish under MIT](https://github.com/Acorn-Juice-Solutions/github_download_counter_widget_android)
+carries the whole thing in `.github/workflows/supply-chain.yml`. It runs on
+every push to the main branch, on every pull request, once a day and on demand,
+and it does five things:
+
+- **Generates a CycloneDX SBOM from the Gradle lockfile**, not from what the
+  build files declare. The difference is not cosmetic: what you declare is an
+  intention, the lockfile is the resolved tree that ends up inside the APK.
+- **Scans dependencies against OSV** and files the report next to the inventory.
+- **Verifies the lockfile matches what is declared**, which is what catches the
+  change someone made without updating the lock.
+- **Scans the full history for secrets**, not just the latest commit.
+- **Audits the workflows themselves** and keeps every GitHub Action pinned to a
+  commit SHA rather than a moving tag. That last one is the one that bites: a
+  tag can be rewritten, and that is precisely the route a supply-chain worm
+  takes into someone else's build.
+
+Reports are kept as artifacts for ninety days. And since the latest release the
+`.cdx.json` **ships attached to the release**, next to the signed APK, with the
+SHA-256 digests GitHub publishes for both. That was the change that took us
+longest to see: for a while we generated the inventory religiously and left it
+to die in CI, where it is no use to anyone downloading the binary six months
+later.
+
+What we do not have yet, and we say so because the gap is as informative as the
+rest: **provenance and attestations**. The inventory says what is inside;
+provenance proves that this binary came out of that code and that pipeline, and
+not off someone's laptop. It is next on the list.
 
 ## What it does not solve
 
