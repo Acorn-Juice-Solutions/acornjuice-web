@@ -20,6 +20,7 @@
     "test:favicons": "node scripts/check-favicons.mjs",
     "test:sitemap": "node scripts/check-sitemap.mjs",
     "test:og": "node scripts/check-og.mjs",
+    "test:articles": "node scripts/check-articles.mjs",
     "test:links": "linkinator ./dist --config linkinator.config.json",
     "test:axe": "playwright test",
     "test:lighthouse": "lhci autorun",

@@ -8,6 +8,7 @@
   "nav": {
     "home": "Home",
     "products": "Products",
+    "articles": "Articles",
     "about": "About",
     "contact": "Contact",
     "skip": "Skip to main content",
@@ -151,6 +152,16 @@
     "category_analytics": "Analytics",
     "category_analytics_body": "Anonymous usage data to help us improve the site (Google Analytics)."
   },
+  "articles": {
+    "title": "Articles",
+    "lede": "What we learn shipping software: regulation, infrastructure and applied AI, written for the people who have to decide.",
+    "sources_heading": "Sources",
+    "published_on": "Published {date}",
+    "updated_on": "Updated {date}",
+    "back_to_index": "All articles",
+    "related_product": "Related product",
+    "empty": "No articles published yet."
+  },
   "meta": {
     "home_title": "Acorn Juice Solutions — Focused tools that solve one problem",
     "home_description": "Independent software studio from Navarra, Spain. We build scalable, well-crafted software for people and teams.",
@@ -158,6 +169,8 @@
     "about_description": "Specialists that complement each other well. Meet the team behind the scalable software and tools built at Acorn Juice Solutions.",
     "products_title": "Products — Acorn Juice Solutions",
     "products_description": "Desktop, mobile, web and service software by Acorn Juice Solutions. Studio with extensive experience in scalable development and infrastructure, from Navarra, Spain.",
+    "articles_title": "Articles — Acorn Juice Solutions",
+    "articles_description": "Articles by Acorn Juice Solutions on regulation, supply chain, infrastructure and applied AI, written from practice.",
     "privacy_title": "Privacy policy — Acorn Juice Solutions",
     "privacy_description": "How Acorn Juice Solutions handles personal data collected through this website.",
     "cookies_title": "Cookies policy — Acorn Juice Solutions",

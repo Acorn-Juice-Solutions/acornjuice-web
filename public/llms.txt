@@ -10,6 +10,11 @@
 - [GitHub Download Counter](https://www.acornjuice.com/products/github-counter/): Android home-screen widget that shows the total download count of any public GitHub repository's releases.
 - [All products (index)](https://www.acornjuice.com/products/): Full product catalogue.
 
+## Articles
+
+- [Articles (index)](https://www.acornjuice.com/articles/): Long-form pieces on regulation, software supply chain, infrastructure and applied AI, written from practice.
+- [Reporting vulnerabilities under the CRA](https://www.acornjuice.com/articles/cra-vulnerability-reporting/): What the Cyber Resilience Act requires since September 2026, who counts as a manufacturer, and the 24/72-hour and 14-day deadlines.
+
 ## Company
 
 - [Home](https://www.acornjuice.com/): Studio overview, services (including technical and digital-skills training), and approach.
@@ -30,6 +35,8 @@
 - [SOSNav](https://www.acornjuice.com/es/productos/sosnav/): Farmacias de guardia y servicios de emergencia en Navarra (iOS y Android).
 - [Sweet Enough](https://www.acornjuice.com/es/productos/sweet-enough/): Widget para pantalla de inicio con tu glucosa actual (iOS y Android).
 - [Contador de descargas de GitHub](https://www.acornjuice.com/es/productos/contador-github/): Widget Android con el total de descargas de un repositorio público.
+- [Artículos](https://www.acornjuice.com/es/articulos/): Artículos sobre regulación, cadena de suministro, infraestructura e IA aplicada.
+- [Notificar vulnerabilidades bajo el CRA](https://www.acornjuice.com/es/articulos/cra-notificacion-vulnerabilidades/): Qué obliga el Cyber Resilience Act desde septiembre de 2026, a quién alcanza y con qué plazos.
 - [Privacidad](https://www.acornjuice.com/es/privacidad/)
 - [Cookies](https://www.acornjuice.com/es/cookies/)
 - [Aviso legal](https://www.acornjuice.com/es/aviso-legal/)

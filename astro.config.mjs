@@ -1,9 +1,16 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
-import { PAGE_PAIRS } from './src/utils/hreflang.ts';
+import { STATIC_PAGE_PAIRS } from './src/utils/hreflang.ts';
+import { articlePagePairs } from './scripts/article-pairs.mjs';
 import { createLastmodResolver } from './scripts/lastmod.mjs';
 
 const SITE = 'https://www.acornjuice.com';
+
+// The fixed pages plus one pair per published article. Articles are derived
+// from the filesystem rather than from the content collection because this
+// config is evaluated before `astro:content` exists; src/utils/articles.ts is
+// the equivalent for everything that renders.
+const PAGE_PAIRS = [...STATIC_PAGE_PAIRS, ...articlePagePairs()];
 
 // Index PAGE_PAIRS by both of its paths so a sitemap entry can find its twin.
 const pairByPath = new Map();

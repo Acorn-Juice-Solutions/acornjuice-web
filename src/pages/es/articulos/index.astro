@@ -1,0 +1,66 @@
+---
+import ArticleCard from '~/components/ArticleCard.astro';
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import { getArticlePairs } from '~/utils/articles';
+import { useTranslator } from '~/utils/i18n';
+import { webpageNode } from '~/utils/seo';
+
+const locale = 'es' as const;
+const t = useTranslator(locale);
+
+const pairs = await getArticlePairs();
+
+const title = t('meta.articles_title');
+const description = t('meta.articles_description');
+
+const indexNode = webpageNode({
+  url: 'https://www.acornjuice.com/es/articulos/',
+  name: t('articles.title'),
+  description,
+  locale,
+});
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  extraGraphNodes={[indexNode]}
+  pageType="articles"
+>
+  <section class="section">
+    <div class="container">
+      <h1>{t('articles.title')}</h1>
+      <p class="lede">{t('articles.lede')}</p>
+
+      {
+        pairs.length === 0 ? (
+          <p class="empty">{t('articles.empty')}</p>
+        ) : (
+          <div class="article-list">
+            {pairs.map((pair) => (
+              <ArticleCard entry={pair.es} locale={locale} />
+            ))}
+          </div>
+        )
+      }
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  h1 {
+    font-size: var(--text-4xl);
+    margin-bottom: var(--space-3);
+  }
+
+  .lede {
+    font-size: var(--text-lg);
+    color: var(--color-ink-soft);
+    max-width: 60ch;
+    margin-bottom: var(--space-5);
+  }
+
+  .empty {
+    color: var(--color-ink-soft);
+  }
+</style>

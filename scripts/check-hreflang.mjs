@@ -2,8 +2,10 @@
 // Verifies hreflang tags on the built site:
 //  1. Every non-noindex HTML page has exactly 3 <link rel="alternate" hreflang>
 //     tags (en, es, x-default).
-//  2. The alternates match the PAGE_PAIRS registered in src/utils/hreflang.ts —
-//     no drift between the source of truth and what actually ships.
+//  2. The alternates are checked against what shipped in dist/, not against
+//     the pairs declared in src/utils/hreflang.ts. That is the stronger
+//     property: article pairs are derived from the content collection, so a
+//     declaration can be right while the build is wrong.
 //  3. Reciprocity: if /about/ points to /es/sobre/, then /es/sobre/ points
 //     back to /about/. Broken pairs are the #1 hreflang issue in the wild.
 

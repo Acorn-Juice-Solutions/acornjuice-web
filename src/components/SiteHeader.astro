@@ -14,6 +14,7 @@ const t = useTranslator(locale);
 
 const home = locale === 'es' ? '/es/' : '/';
 const products = locale === 'es' ? '/es/productos/' : '/products/';
+const articles = locale === 'es' ? '/es/articulos/' : '/articles/';
 const about = locale === 'es' ? '/es/sobre/' : '/about/';
 ---
 
@@ -44,6 +45,11 @@ const about = locale === 'es' ? '/es/sobre/' : '/about/';
         href={products}
         aria-current={currentPath.startsWith(products) ? 'page' : undefined}>{
         t('nav.products')
+      }</a>
+      <a
+        href={articles}
+        aria-current={currentPath.startsWith(articles) ? 'page' : undefined}>{
+        t('nav.articles')
       }</a>
       <a
         href={about}

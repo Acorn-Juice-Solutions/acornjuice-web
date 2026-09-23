@@ -1,0 +1,64 @@
+---
+import { articlePath, type ArticleEntry } from '~/utils/articles';
+import { interpolate, type Locale, useTranslator } from '~/utils/i18n';
+
+interface Props {
+  entry: ArticleEntry;
+  locale: Locale;
+}
+
+const { entry, locale } = Astro.props;
+const t = useTranslator(locale);
+
+const href = articlePath(entry.data.slug, locale);
+const isoDate = entry.data.date.toISOString().slice(0, 10);
+const formatted = new Intl.DateTimeFormat(locale === 'es' ? 'es-ES' : 'en-GB', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+}).format(entry.data.date);
+---
+
+<article class="article-card">
+  <p class="date">
+    <time datetime={isoDate}>
+      {interpolate(t('articles.published_on'), { date: formatted })}
+    </time>
+  </p>
+  <h2><a href={href}>{entry.data.title}</a></h2>
+  <p class="summary">{entry.data.summary}</p>
+</article>
+
+<style>
+  .article-card {
+    padding-block: var(--space-4);
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .date {
+    font-size: var(--text-sm);
+    color: var(--color-ink-soft);
+    margin-bottom: var(--space-1);
+  }
+
+  h2 {
+    font-size: var(--text-xl);
+    line-height: var(--leading-snug);
+    margin-bottom: var(--space-2);
+    max-width: var(--reading-max);
+  }
+
+  h2 a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  h2 a:hover {
+    color: var(--color-cap);
+  }
+
+  .summary {
+    color: var(--color-ink-soft);
+    max-width: var(--reading-max);
+  }
+</style>
