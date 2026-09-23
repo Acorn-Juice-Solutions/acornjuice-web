@@ -17,16 +17,20 @@
 //   LINK      - only ever appears as a link target or in JSON-LD metadata.
 //               A compromise there is someone else's problem.
 //
-// Keep this in sync with the Content-Security-Policy in BaseLayout.astro: the
-// CSP is what actually enforces this at runtime, and this check is what stops
-// the two from drifting apart.
+// Keep RESOURCE in sync with the Content-Security-Policy in BaseLayout.astro:
+// the CSP is what actually enforces those at runtime, and this check is what
+// stops the two from drifting apart. LINK entries have no CSP counterpart --
+// the policy does not govern <a href> navigation, so widening it for a link
+// target would only dilute the policy.
 
 import { readdir, readFile, stat } from 'node:fs/promises';
-import { join, relative } from 'node:path';
+import { join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
-const DIST = join(ROOT, 'dist');
+// Defaults to dist/. An explicit path is what the test suite points at a
+// fixture tree, so the checker can be exercised without running a build.
+const DIST = process.argv[2] ? resolve(process.argv[2]) : join(ROOT, 'dist');
 
 const RED = '\x1b[31m';
 const GREEN = '\x1b[32m';
@@ -50,6 +54,13 @@ const LINK = new Set([
   'https://vimeo.com',
   'https://www.producthunt.com',
   'https://www.aepd.es',               // privacy policy reference
+
+  // Cited in the "sources" block of an article; rendered only as <a href>,
+  // never fetched. Keep alongside the article that introduced them.
+  'https://digital-strategy.ec.europa.eu',  // European Commission, CRA reporting
+  'https://www.enisa.europa.eu',            // ENISA, Single Reporting Platform
+  'https://www.helpnetsecurity.com',        // security press
+  'https://www.crowell.com',                // law firm client alert
 ]);
 
 // Contexts that make the browser fetch something, or send something out.
@@ -148,10 +159,10 @@ async function main() {
       console.error(`  ${RED}${origin}${RESET}  (${kind})`);
       for (const f of where) console.error(`      ${DIM}${f}${RESET}`);
     }
-    console.error(
-      `\nIf this is intentional, add the origin to ${kindHint(violations)} in ` +
-        `scripts/check-external-origins.mjs AND to the CSP in src/layouts/BaseLayout.astro.`,
-    );
+    for (const line of remediation(violations)) {
+      console.error('');
+      console.error(line);
+    }
     process.exit(1);
   }
 
@@ -160,8 +171,27 @@ async function main() {
   console.log(`${DIM}Resource-loading origins: ${resources.join(', ') || 'none'}${RESET}`);
 }
 
-function kindHint(violations) {
-  return violations.some((v) => v.kind === 'resource') ? 'RESOURCE' : 'LINK';
+// A CSP governs what the browser fetches or submits, so widening it is the
+// remedy for a resource origin and noise for a link one. Sending someone to
+// edit the policy over a plain <a href> is how a CSP slowly stops meaning
+// anything, so each kind gets only the advice that applies to it.
+function remediation(violations) {
+  const lines = [];
+  if (violations.some((v) => v.kind === 'resource')) {
+    lines.push(
+      'If a resource origin is intentional, add it to RESOURCE in ' +
+        'scripts/check-external-origins.mjs AND to the CSP in ' +
+        'src/layouts/BaseLayout.astro.',
+    );
+  }
+  if (violations.some((v) => v.kind === 'link')) {
+    lines.push(
+      'If a link origin is intentional, add it to LINK in ' +
+        'scripts/check-external-origins.mjs. Leave the CSP alone: it does not ' +
+        'govern <a href> navigation.',
+    );
+  }
+  return lines;
 }
 
 main().catch((err) => {
