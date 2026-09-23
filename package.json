@@ -9,6 +9,7 @@
     "start": "astro dev --host",
     "build": "astro build",
     "preview": "astro preview",
+    "ci:install": "npm ci && npm rebuild esbuild",
     "astro": "astro",
     "check": "astro check",
     "test:i18n": "node scripts/check-i18n.mjs",
@@ -25,7 +26,8 @@
     "test:lighthouse": "lhci autorun",
     "favicons": "node scripts/generate-favicons.mjs",
     "og": "node scripts/generate-og.mjs",
-    "test": "npm run check && npm run test:i18n && npm run test:hreflang && npm run test:schema && npm run test:page-types && npm run test:makers && npm run test:favicons && npm run test:sitemap && npm run test:og && npm run test:articles"
+    "test:origins": "node scripts/check-external-origins.mjs",
+    "test": "npm run check && npm run test:i18n && npm run test:hreflang && npm run test:schema && npm run test:page-types && npm run test:makers && npm run test:favicons && npm run test:sitemap && npm run test:og && npm run test:origins"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",

@@ -76,6 +76,30 @@ const gaId = analyticsEnabled() ? GA_MEASUREMENT_ID : '';
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    {/*
+      Content-Security-Policy. Declared in a meta tag because GitHub Pages
+      serves static files and gives us no way to set response headers; that
+      rules out frame-ancestors and report-uri, which are header-only.
+
+      The directive that matters most here is not script-src but connect-src
+      and form-action. Google Analytics is a script we choose to run, so the
+      realistic risk is not Google serving malware — it is that any script
+      running in this page can read the DOM and post it anywhere. Pinning where
+      data is allowed to go is what limits the damage.
+
+      'unsafe-inline' is unavoidable: the consent bootstrap, the anti-flash
+      theme script and the JSON-LD block are all inline, and Pages cannot
+      generate per-request nonces.
+
+      Keep this in sync with scripts/check-external-origins.mjs, which fails the
+      build when dist/ references an origin that is not listed in both places.
+    */}
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://www.google-analytics.com https://www.googletagmanager.com; font-src 'self'; connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com https://api.staticforms.dev; form-action 'self' https://api.staticforms.dev; base-uri 'self'; object-src 'none'; frame-src 'none'"
+    />
+
     <title>{title}</title>
     <meta name="description" content={description} />
 
