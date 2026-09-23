@@ -7,10 +7,12 @@ on:
   pull_request:
     branches: [main]
 
+# Workflow-level default is read-only. Only the deploy job gets pages:write and
+# id-token:write, so the five test/build jobs -- which are the ones that execute
+# third-party code from node_modules -- cannot publish to Pages or mint an OIDC
+# token even if one of them is compromised.
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
   group: pages
@@ -21,12 +23,14 @@ jobs:
     name: Static tests (types + i18n)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version: '22'
           cache: 'npm'
-      - run: npm ci
+      - run: npm run ci:install
       - run: npx astro sync
       - run: npm run check
       - run: npm run test:i18n
@@ -42,33 +46,36 @@ jobs:
       # commit that touched its sources. A shallow clone would collapse every
       # date onto the tip commit, and scripts/lastmod.mjs would (correctly)
       # warn and fall back to meaningless mtimes.
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          persist-credentials: false
           fetch-depth: 0
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version: '22'
           cache: 'npm'
-      - run: npm ci
+      - run: npm run ci:install
       - run: npm run build
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: site-dist
           path: ./dist
           retention-days: 7
 
   post-build-tests:
-    name: Post-build tests (hreflang + schema + sitemap + og + links)
+    name: Post-build tests (hreflang + schema + sitemap + og + origins + links)
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version: '22'
           cache: 'npm'
-      - run: npm ci
-      - uses: actions/download-artifact@v4
+      - run: npm run ci:install
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
           name: site-dist
           path: ./dist
@@ -76,6 +83,9 @@ jobs:
       - run: npm run test:schema
       - run: npm run test:sitemap
       - run: npm run test:og
+      # Fails if dist/ references a third-party origin that is not on the
+      # allowlist, which is the only check that sees SaaS dependencies.
+      - run: npm run test:origins
       - name: Link check (internal links only)
         run: npm run test:links
 
@@ -84,19 +94,21 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version: '22'
           cache: 'npm'
-      - run: npm ci
+      - run: npm run ci:install
       - run: npx playwright install --with-deps chromium
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
           name: site-dist
           path: ./dist
       - run: npm run test:axe
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         if: failure()
         with:
           name: playwright-report
@@ -108,13 +120,15 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version: '22'
           cache: 'npm'
-      - run: npm ci
-      - uses: actions/download-artifact@v4
+      - run: npm run ci:install
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
           name: site-dist
           path: ./dist
@@ -124,20 +138,24 @@ jobs:
     name: Deploy to GitHub Pages
     if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
     needs: [post-build-tests, a11y, lighthouse]
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
           name: site-dist
           path: ./dist
-      - uses: actions/configure-pages@v5
+      - uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
         with:
           enablement: true
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         with:
           path: ./dist
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1

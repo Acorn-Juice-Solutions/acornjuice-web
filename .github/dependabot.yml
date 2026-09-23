@@ -1,0 +1,61 @@
+version: 2
+
+# The cooldown windows are the point of this file, more than the updates.
+#
+# Malicious npm releases (the Shai-Hulud waves of 2025 and their successors)
+# are published from stolen maintainer tokens, so they are correctly signed and
+# pass every signature check. What kills them is time: they get caught and
+# yanked within hours to days. Refusing to adopt anything younger than a week
+# sidesteps most of that class of attack without depending on anyone having
+# catalogued the compromise yet.
+#
+# Security updates deliberately ignore cooldown -- we do not want to sit on a
+# critical CVE for 30 days. Verify that behaviour holds before relying on it.
+
+updates:
+  - package-ecosystem: npm
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    cooldown:
+      default-days: 7
+      semver-major-days: 30
+      semver-minor-days: 14
+      semver-patch-days: 7
+    groups:
+      # Astro and its first-party integrations move together; separate PRs for
+      # each just means several broken builds instead of one.
+      astro:
+        patterns:
+          - "astro"
+          - "@astrojs/*"
+      fonts:
+        patterns:
+          - "@fontsource-variable/*"
+      # Test tooling never ships to the site, so it can be batched freely.
+      test-tooling:
+        patterns:
+          - "@playwright/*"
+          - "playwright"
+          - "axe-core"
+          - "@axe-core/*"
+          - "@lhci/*"
+          - "linkinator"
+          - "typescript"
+
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    cooldown:
+      # github-actions has no parseable semver for Dependabot, so only
+      # default-days applies here.
+      default-days: 7
+    groups:
+      actions:
+        patterns:
+          - "*"
