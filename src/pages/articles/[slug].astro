@@ -1,0 +1,177 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import { getArticlePairs, type ArticleEntry } from '~/utils/articles';
+import { interpolate, useTranslator } from '~/utils/i18n';
+import { ORG_ID } from '~/utils/seo';
+
+export async function getStaticPaths() {
+  const pairs = await getArticlePairs();
+  return pairs.map((pair) => ({
+    params: { slug: pair.en.data.slug },
+    props: { entry: pair.en },
+  }));
+}
+
+interface Props {
+  entry: ArticleEntry;
+}
+
+const { entry }: Props = Astro.props;
+const locale = 'en' as const;
+const t = useTranslator(locale);
+
+const { Content } = await render(entry);
+
+const url = `https://www.acornjuice.com/articles/${entry.data.slug}/`;
+const published = entry.data.date.toISOString().slice(0, 10);
+const modified = (entry.data.updated ?? entry.data.date)
+  .toISOString()
+  .slice(0, 10);
+
+const formatter = new Intl.DateTimeFormat('en-GB', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+const articleNode = {
+  '@type': 'BlogPosting',
+  '@id': `${url}#article`,
+  headline: entry.data.title,
+  description: entry.data.summary,
+  datePublished: published,
+  dateModified: modified,
+  inLanguage: 'en',
+  mainEntityOfPage: url,
+  author: { '@id': ORG_ID },
+  publisher: { '@id': ORG_ID },
+};
+---
+
+<BaseLayout
+  title={`${entry.data.title} — Acorn Juice Solutions`}
+  description={entry.data.summary}
+  extraGraphNodes={[articleNode]}
+  ogType="article"
+  pageType="article_detail"
+>
+  <article class="article-page">
+    <div class="container">
+      <p class="back-link">
+        <a href="/articles/">{t('articles.back_to_index')}</a>
+      </p>
+
+      <h1>{entry.data.title}</h1>
+      <p class="date">
+        <time datetime={published}>
+          {
+            interpolate(t('articles.published_on'), {
+              date: formatter.format(entry.data.date),
+            })
+          }
+        </time>
+        {
+          entry.data.updated && (
+            <span>
+              {' · '}
+              {interpolate(t('articles.updated_on'), {
+                date: formatter.format(entry.data.updated),
+              })}
+            </span>
+          )
+        }
+      </p>
+
+      <div class="prose">
+        <Content />
+      </div>
+
+      {
+        entry.data.sources.length > 0 && (
+          <section class="sources">
+            <h2>{t('articles.sources_heading')}</h2>
+            <ul>
+              {entry.data.sources.map((source) => (
+                <li>
+                  <a href={source.url} rel="noopener noreferrer" target="_blank">
+                    {source.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )
+      }
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .article-page {
+    padding-block: var(--space-6);
+  }
+
+  .back-link {
+    font-size: var(--text-sm);
+    margin-bottom: var(--space-3);
+  }
+
+  h1 {
+    font-size: var(--text-3xl);
+    line-height: var(--leading-tight);
+    max-width: var(--reading-max);
+    margin-bottom: var(--space-2);
+  }
+
+  .date {
+    font-size: var(--text-sm);
+    color: var(--color-ink-soft);
+    margin-bottom: var(--space-5);
+  }
+
+  .prose {
+    max-width: var(--reading-max);
+  }
+
+  .prose :global(h2) {
+    font-size: var(--text-xl);
+    line-height: var(--leading-snug);
+    margin-top: var(--space-5);
+    margin-bottom: var(--space-2);
+  }
+
+  .prose :global(p) {
+    margin-bottom: var(--space-3);
+  }
+
+  .prose :global(ul),
+  .prose :global(ol) {
+    margin-bottom: var(--space-3);
+    padding-left: var(--space-4);
+  }
+
+  .prose :global(li) {
+    margin-bottom: var(--space-1);
+  }
+
+  .sources {
+    margin-top: var(--space-6);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--color-line);
+    max-width: var(--reading-max);
+  }
+
+  .sources h2 {
+    font-size: var(--text-lg);
+    margin-bottom: var(--space-2);
+  }
+
+  .sources ul {
+    padding-left: var(--space-4);
+  }
+
+  .sources li {
+    margin-bottom: var(--space-1);
+  }
+</style>

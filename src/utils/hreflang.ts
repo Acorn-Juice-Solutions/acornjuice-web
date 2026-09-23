@@ -11,13 +11,15 @@ export type PagePair = {
 };
 
 /**
- * Single source of truth for URL pairs. Adding a new page in the MVP means
- * appending one entry here — every downstream helper (hreflang tags, language
- * switcher, coverage tests) reads from this list.
+ * Fixed pages of the site. Adding one means appending an entry here; every
+ * downstream helper (hreflang tags, language switcher, coverage tests) reads
+ * from `getPagePairs()`, which is this list plus the article pairs derived
+ * from the content collection — articles are not registered by hand on
+ * purpose, because a forgotten entry ships a page without alternates.
  * All paths include the trailing slash to match `astro.config.mjs`
  * `trailingSlash: 'always'`.
  */
-export const PAGE_PAIRS: readonly PagePair[] = [
+export const STATIC_PAGE_PAIRS: readonly PagePair[] = [
   { en: '/', es: '/es/' },
   { en: '/about/', es: '/es/sobre/' },
   { en: '/products/', es: '/es/productos/' },
@@ -25,6 +27,7 @@ export const PAGE_PAIRS: readonly PagePair[] = [
   { en: '/products/sosnav/', es: '/es/productos/sosnav/' },
   { en: '/products/sweet-enough/', es: '/es/productos/sweet-enough/' },
   { en: '/products/github-counter/', es: '/es/productos/contador-github/' },
+  { en: '/articles/', es: '/es/articulos/' },
   { en: '/privacy/', es: '/es/privacidad/' },
   { en: '/cookies/', es: '/es/cookies/' },
   { en: '/legal/', es: '/es/aviso-legal/' },
@@ -33,9 +36,33 @@ export const PAGE_PAIRS: readonly PagePair[] = [
 
 const SITE_URL = 'https://www.acornjuice.com';
 
+/**
+ * Every pair the site ships: the fixed pages plus one per published article.
+ *
+ * The articles module is imported dynamically on purpose. `astro.config.mjs`
+ * imports STATIC_PAGE_PAIRS from this file, and the config is evaluated before
+ * the `astro:content` virtual module exists — a top-level import of
+ * `./articles` would crash the config with "Cannot find module 'astro:content'".
+ * Deferring it means only the code paths that actually render articles pull it
+ * in, when the module already exists. The config gets its own article pairs
+ * from `scripts/article-pairs.mjs`, which reads the same files.
+ */
+export async function getPagePairs(): Promise<PagePair[]> {
+  const { getArticlePairs } = await import('./articles');
+  const articles = await getArticlePairs();
+  return [
+    ...STATIC_PAGE_PAIRS,
+    ...articles.map((a) => ({
+      en: `/articles/${a.en.data.slug}/`,
+      es: `/es/articulos/${a.es.data.slug}/`,
+    })),
+  ];
+}
+
 /** Look up the pair (en+es paths) that contains the given path. */
-export function getPair(currentPath: string): PagePair {
-  const pair = PAGE_PAIRS.find(
+export async function getPair(currentPath: string): Promise<PagePair> {
+  const pairs = await getPagePairs();
+  const pair = pairs.find(
     (p) => p.en === currentPath || p.es === currentPath,
   );
   if (!pair) {
@@ -45,8 +72,10 @@ export function getPair(currentPath: string): PagePair {
 }
 
 /** Return the path for the opposite locale of the current URL. */
-export function getOppositeLocalePath(currentPath: string): string {
-  const pair = getPair(currentPath);
+export async function getOppositeLocalePath(
+  currentPath: string,
+): Promise<string> {
+  const pair = await getPair(currentPath);
   return currentPath === pair.en ? pair.es : pair.en;
 }
 
@@ -54,11 +83,13 @@ export function getOppositeLocalePath(currentPath: string): string {
  * Absolute URLs for all `<link rel="alternate" hreflang>` tags of a page.
  * `x-default` always points to the English variant.
  */
-export function getHreflangs(currentPath: string): Array<{
-  hreflang: string;
-  href: string;
-}> {
-  const pair = getPair(currentPath);
+export async function getHreflangs(currentPath: string): Promise<
+  Array<{
+    hreflang: string;
+    href: string;
+  }>
+> {
+  const pair = await getPair(currentPath);
   return [
     { hreflang: 'en', href: SITE_URL + pair.en },
     { hreflang: 'es', href: SITE_URL + pair.es },
@@ -72,13 +103,13 @@ export function canonicalUrl(currentPath: string): string {
 }
 
 /** True if this page should carry `<meta name="robots" content="noindex">`. */
-export function isNoindex(currentPath: string): boolean {
-  return getPair(currentPath).noindex === true;
+export async function isNoindex(currentPath: string): Promise<boolean> {
+  return (await getPair(currentPath)).noindex === true;
 }
 
 /** All paths that should appear in the sitemap (i.e. not marked noindex). */
-export function getIndexablePairs(): PagePair[] {
-  return PAGE_PAIRS.filter((p) => !p.noindex);
+export async function getIndexablePairs(): Promise<PagePair[]> {
+  return (await getPagePairs()).filter((p) => !p.noindex);
 }
 
 /**

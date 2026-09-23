@@ -109,4 +109,49 @@ const makers = defineCollection({
   }),
 });
 
-export const collections = { products, makers };
+const articleSource = z.object({
+  title: z.string().min(1),
+  url: z.url(),
+});
+
+/**
+ * One folder per piece, one file per language (`<key>/en.md`, `<key>/es.md`),
+ * so the entry id is `<key>/<locale>`. Products keep both languages in the
+ * frontmatter because their copy is four lines; an article's body *is* the
+ * content and does not fit in a YAML key.
+ *
+ * A folder missing one of the two languages throws at build time — see
+ * `getArticlePairs()` in src/utils/articles.ts. That is deliberate: hreflang
+ * reciprocity breaks silently otherwise.
+ */
+const articles = defineCollection({
+  loader: glob({
+    pattern: '**/{en,es}.md',
+    base: './src/content/articles',
+    // Without this, the glob loader takes the frontmatter `slug` as the entry
+    // id, and the folder — the thing that pairs both languages — disappears.
+    // Forcing the id to `<folder>/<locale>` is what makes keyOf()/localeOf()
+    // in src/utils/articles.ts work.
+    generateId: ({ entry }) => entry.replace(/\.md$/, ''),
+  }),
+  schema: z.object({
+    title: z.string().min(1),
+    slug: z
+      .string()
+      .regex(/^[a-z0-9-]+$/, 'slug must be lowercase kebab-case'),
+    summary: z
+      .string()
+      .min(120, 'summary doubles as the meta description: at least 120 chars')
+      .max(160, 'summary doubles as the meta description: at most 160 chars'),
+    date: z.coerce.date(),
+    updated: z.coerce.date().optional(),
+    sources: z.array(articleSource).default([]),
+    related: z
+      .string()
+      .regex(/^[a-z0-9-]+$/, 'related must be a product slug')
+      .optional(),
+    draft: z.boolean().default(false),
+  }),
+});
+
+export const collections = { products, makers, articles };

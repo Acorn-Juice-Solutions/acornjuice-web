@@ -26,6 +26,8 @@ export const PAGE_TYPES = [
   'team',
   'products',
   'product_detail',
+  'articles',
+  'article_detail',
   'privacy',
   'cookies',
   'legal',

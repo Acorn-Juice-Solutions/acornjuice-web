@@ -58,8 +58,8 @@ const {
 const locale: Locale = getLocaleFromUrl(Astro.url);
 const currentPath = Astro.url.pathname;
 const canonical = canonicalUrl(currentPath);
-const alternates = getHreflangs(currentPath);
-const noindex = isNoindex(currentPath);
+const alternates = await getHreflangs(currentPath);
+const noindex = await isNoindex(currentPath);
 
 const ogImageAbsolute = new URL(ogImage, Astro.site).toString();
 const graph: SchemaGraph = buildGraph(locale, extraGraphNodes ?? []);

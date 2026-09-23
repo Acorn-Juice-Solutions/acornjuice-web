@@ -10,7 +10,7 @@ interface Props {
 const { locale, currentPath } = Astro.props;
 const t = useTranslator(locale);
 
-const targetPath = getOppositeLocalePath(currentPath);
+const targetPath = await getOppositeLocalePath(currentPath);
 const targetLocale: Locale = locale === 'en' ? 'es' : 'en';
 const targetHreflang = targetLocale === 'es' ? 'es-ES' : 'en';
 ---

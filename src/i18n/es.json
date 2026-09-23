@@ -8,6 +8,7 @@
   "nav": {
     "home": "Inicio",
     "products": "Productos",
+    "articles": "Artículos",
     "about": "Sobre nosotros",
     "contact": "Contacto",
     "skip": "Saltar al contenido principal",
@@ -151,6 +152,16 @@
     "category_analytics": "Analíticas",
     "category_analytics_body": "Datos anónimos de uso para ayudarnos a mejorar el sitio (Google Analytics)."
   },
+  "articles": {
+    "title": "Artículos",
+    "lede": "Lo que vamos aprendiendo entregando software: regulación, infraestructura e IA aplicada, explicado para quien tiene que decidir.",
+    "sources_heading": "Fuentes",
+    "published_on": "Publicado el {date}",
+    "updated_on": "Actualizado el {date}",
+    "back_to_index": "Todos los artículos",
+    "related_product": "Producto relacionado",
+    "empty": "Todavía no hay artículos publicados."
+  },
   "meta": {
     "home_title": "Acorn Juice Solutions — Herramientas para un problema concreto",
     "home_description": "Estudio de software independiente desde Navarra. Construimos software escalable y bien resuelto para personas y equipos.",
@@ -158,6 +169,8 @@
     "about_description": "Especialistas que se complementan bien. Conoce al equipo detrás del software escalable y las herramientas de Acorn Juice Solutions.",
     "products_title": "Productos — Acorn Juice Solutions",
     "products_description": "Software de escritorio, móvil, web y servicios de Acorn Juice Solutions. Estudio con amplia experiencia en desarrollo e infraestructura escalable, desde Navarra.",
+    "articles_title": "Artículos — Acorn Juice Solutions",
+    "articles_description": "Artículos de Acorn Juice Solutions sobre regulación, cadena de suministro, infraestructura e IA aplicada, escritos desde la práctica.",
     "privacy_title": "Política de privacidad — Acorn Juice Solutions",
     "privacy_description": "Cómo Acorn Juice Solutions trata los datos personales recogidos a través de este sitio.",
     "cookies_title": "Política de cookies — Acorn Juice Solutions",

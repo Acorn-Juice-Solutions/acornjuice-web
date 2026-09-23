@@ -16,6 +16,7 @@ design spec and pending manual actions.
 | `npm run build` | Build the production site to `./dist/` |
 | `npm run preview` | Preview the built site locally |
 | `npm run check` | Type-check (Astro + TypeScript + content schemas) |
+| `npm run test:articles` | Cross-file checks on the articles collection |
 | `npm run test` | Run all static tests (`check`, `i18n`, `hreflang`, `schema`) |
 | `npm run test:links` | Link checker over the built site |
 | `npm run test:axe` | Accessibility tests with Playwright + axe-core |
@@ -23,7 +24,8 @@ design spec and pending manual actions.
 
 ## Structure
 
-- `src/content/` — typed content collections (products, makers)
+- `src/content/` — typed content collections (products, makers, articles)
+- `src/content/articles/<key>/{en,es}.md` — one folder per article, one file per language
 - `src/pages/` — routes; `es/` for Spanish variants
 - `src/components/` — reusable UI (header, footer, cards, etc.)
 - `src/layouts/BaseLayout.astro` — shell used by every page
