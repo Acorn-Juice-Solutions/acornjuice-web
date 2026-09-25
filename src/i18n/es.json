@@ -12,7 +12,8 @@
     "about": "Sobre nosotros",
     "contact": "Contacto",
     "skip": "Saltar al contenido principal",
-    "primary_label": "Navegación principal"
+    "primary_label": "Navegación principal",
+    "menu": "Menú"
   },
   "language": {
     "switcher_label": "Cambiar idioma",

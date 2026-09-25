@@ -16,6 +16,24 @@ const home = locale === 'es' ? '/es/' : '/';
 const products = locale === 'es' ? '/es/productos/' : '/products/';
 const articles = locale === 'es' ? '/es/articulos/' : '/articles/';
 const about = locale === 'es' ? '/es/sobre/' : '/about/';
+
+// Single source for both the desktop bar and the mobile menu, so the two can
+// never drift apart. Sections with sub-pages (products, articles) match by
+// prefix; home and about only match exactly.
+const navItems = [
+  { href: home, label: t('nav.home'), current: currentPath === home },
+  {
+    href: products,
+    label: t('nav.products'),
+    current: currentPath.startsWith(products),
+  },
+  {
+    href: articles,
+    label: t('nav.articles'),
+    current: currentPath.startsWith(articles),
+  },
+  { href: about, label: t('nav.about'), current: currentPath === about },
+];
 ---
 
 <a class="skip-link" href="#main">{t('nav.skip')}</a>
@@ -38,29 +56,95 @@ const about = locale === 'es' ? '/es/sobre/' : '/about/';
     </a>
 
     <nav class="site-nav" aria-label={t('nav.primary_label')}>
-      <a
-        href={home}
-        aria-current={currentPath === home ? 'page' : undefined}>{t('nav.home')}</a>
-      <a
-        href={products}
-        aria-current={currentPath.startsWith(products) ? 'page' : undefined}>{
-        t('nav.products')
-      }</a>
-      <a
-        href={articles}
-        aria-current={currentPath.startsWith(articles) ? 'page' : undefined}>{
-        t('nav.articles')
-      }</a>
-      <a
-        href={about}
-        aria-current={currentPath === about ? 'page' : undefined}>{t('nav.about')}</a>
+      {
+        navItems.map((item) => (
+          <a href={item.href} aria-current={item.current ? 'page' : undefined}>
+            {item.label}
+          </a>
+        ))
+      }
     </nav>
 
     <div class="header-actions">
       <LanguageSwitcher locale={locale} currentPath={currentPath} />
+
+      {/*
+        Mobile menu. <details> gives a working toggle with no JavaScript (and
+        no CSP exceptions); the script below only adds Escape / outside-click
+        closing. Only one of the two <nav> elements is ever displayed, so
+        assistive tech never sees duplicate landmarks.
+      */}
+      <details class="mobile-nav" data-mobile-nav>
+        <summary class="mobile-nav-toggle">
+          <svg
+            class="mobile-nav-icon"
+            aria-hidden="true"
+            focusable="false"
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
+          >
+            <path
+              class="icon-open"
+              d="M3 5h14M3 10h14M3 15h14"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"></path>
+            <path
+              class="icon-close"
+              d="M5 5l10 10M15 5L5 15"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"></path>
+          </svg>
+          <span>{t('nav.menu')}</span>
+        </summary>
+
+        <nav class="mobile-nav-panel" aria-label={t('nav.primary_label')}>
+          <ul>
+            {
+              navItems.map((item) => (
+                <li>
+                  <a
+                    href={item.href}
+                    aria-current={item.current ? 'page' : undefined}
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+      </details>
     </div>
   </div>
 </header>
+
+<script>
+  // Progressive enhancement for the mobile <details> menu: close it on Escape
+  // (returning focus to the toggle) and on clicks outside it. Without this
+  // script the menu still opens and closes via the summary.
+  function initMobileNav(menu: HTMLDetailsElement) {
+    const toggle = menu.querySelector('summary');
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key !== 'Escape' || !menu.open) return;
+      menu.open = false;
+      toggle?.focus();
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!menu.open) return;
+      if (event.target instanceof Node && menu.contains(event.target)) return;
+      menu.open = false;
+    });
+  }
+
+  document
+    .querySelectorAll<HTMLDetailsElement>('details[data-mobile-nav]')
+    .forEach(initMobileNav);
+</script>
 
 <style>
   .skip-link {
@@ -99,6 +183,7 @@ const about = locale === 'es' ? '/es/sobre/' : '/about/';
     display: inline-flex;
     align-items: center;
     gap: var(--space-2);
+    min-width: 0;
     color: var(--color-ink);
     text-decoration: none;
     font-family: var(--font-display);
@@ -112,6 +197,7 @@ const about = locale === 'es' ? '/es/sobre/' : '/about/';
 
   .brand-logo {
     display: block;
+    flex-shrink: 0;
     width: 36px;
     height: 36px;
     object-fit: contain;
@@ -134,7 +220,8 @@ const about = locale === 'es' ? '/es/sobre/' : '/about/';
     color: var(--color-ink);
   }
 
-  .site-nav a[aria-current='page'] {
+  .site-nav a[aria-current='page'],
+  .mobile-nav-panel a[aria-current='page'] {
     color: var(--color-cap);
     font-weight: 600;
   }
@@ -142,11 +229,108 @@ const about = locale === 'es' ? '/es/sobre/' : '/about/';
   .header-actions {
     display: inline-flex;
     align-items: center;
-    gap: var(--space-3);
+    gap: var(--space-2);
+    flex-shrink: 0;
+  }
+
+  /* Mobile menu — hidden on wide screens, where .site-nav is shown. */
+  .mobile-nav {
+    display: none;
+  }
+
+  .mobile-nav-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    height: 2.5rem;
+    padding: 0 var(--space-3);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+    background: var(--color-bg);
+    color: var(--color-ink);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+  }
+
+  /* Remove the default disclosure triangle (WebKit needs its own selector). */
+  .mobile-nav-toggle::-webkit-details-marker {
+    display: none;
+  }
+
+  .mobile-nav-toggle:hover,
+  .mobile-nav[open] .mobile-nav-toggle {
+    background-color: var(--color-bg-alt);
+  }
+
+  .mobile-nav-icon {
+    display: block;
+    flex-shrink: 0;
+  }
+
+  .icon-close,
+  .mobile-nav[open] .icon-open {
+    display: none;
+  }
+
+  .mobile-nav[open] .icon-close {
+    display: inline;
+  }
+
+  /* Positioned against the sticky header, so it spans the full width and
+     drops just below its bottom border. */
+  .mobile-nav-panel {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    max-height: calc(100vh - 100%);
+    max-height: calc(100dvh - 100%);
+    overflow-y: auto;
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-line);
+    box-shadow: 0 8px 16px rgba(42, 26, 16, 0.08);
+  }
+
+  .mobile-nav-panel ul {
+    list-style: none;
+    margin: 0;
+    padding: var(--space-2) var(--space-4) var(--space-3);
+  }
+
+  .mobile-nav-panel li + li {
+    border-top: 1px solid var(--color-line);
+  }
+
+  .mobile-nav-panel a {
+    display: block;
+    /* Comfortable touch target (WCAG 2.5.8 asks for at least 24px). */
+    padding: var(--space-3) var(--space-2);
+    color: var(--color-ink);
+    text-decoration: none;
+    font-size: var(--text-base);
+  }
+
+  .mobile-nav-panel a:hover {
+    color: var(--color-cap-dark);
   }
 
   @media (max-width: 640px) {
     .site-nav {
+      display: none;
+    }
+
+    .mobile-nav {
+      display: block;
+    }
+  }
+
+  /* On the narrowest phones the wordmark would push the buttons off-screen;
+     the logo stays and the link keeps its accessible name via aria-label. */
+  @media (max-width: 380px) {
+    .brand-name {
       display: none;
     }
   }

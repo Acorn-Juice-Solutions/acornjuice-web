@@ -12,7 +12,8 @@
     "about": "About",
     "contact": "Contact",
     "skip": "Skip to main content",
-    "primary_label": "Primary navigation"
+    "primary_label": "Primary navigation",
+    "menu": "Menu"
   },
   "language": {
     "switcher_label": "Change language",
