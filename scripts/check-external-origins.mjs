@@ -61,6 +61,14 @@ const LINK = new Set([
   'https://www.enisa.europa.eu',            // ENISA, Single Reporting Platform
   'https://www.helpnetsecurity.com',        // security press
   'https://www.crowell.com',                // law firm client alert
+
+  // Sources of the meeting-cost article (coste-reuniones).
+  'https://ine.es',                         // INE, Spanish statistics office (press notes)
+  'https://www.ine.es',                     // INE, INEbase tables and wage survey
+  'https://www.getmanfred.com',             // Manfred 2026 tech salary guide
+  'https://www.ibermutua.es',               // 2024 social security bases and rates
+  'https://www.asepeyo.es',                 // 2026 social security bases and rates
+  'https://www.microsoft.com',              // Microsoft WorkLab, Work Trend Index
 ]);
 
 // Contexts that make the browser fetch something, or send something out.
