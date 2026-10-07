@@ -86,6 +86,25 @@ describe('check-external-origins', () => {
     assert.equal(run(dir).status, 0);
   });
 
+  it('allows the meeting-cost article citation origins', () => {
+    const dir = tree({
+      'articles/meeting-cost/index.html': page(
+        [
+          'https://ine.es/dyngs/Prensa/ETCL2T26.htm',
+          'https://www.ine.es/jaxiT3/Tabla.htm?t=6045',
+          'https://www.getmanfred.com/en/blog/guia-salarial-2026-salarios-en-tecnologia-espana-manfred',
+          'https://www.ibermutua.es/form/bases-de-cotizacion-del-regimen-general-en-2024',
+          'https://www.asepeyo.es/wp-content/uploads/Bases-tipos-cotizacion-2026-ES.pdf',
+          'https://www.microsoft.com/en-us/worklab/work-trend-index/breaking-down-infinite-workday',
+        ]
+          .map((url) => `<a href="${url}" rel="noopener noreferrer" target="_blank">src</a>`)
+          .join(''),
+      ),
+    });
+
+    assert.equal(run(dir).status, 0);
+  });
+
   it('rejects an unknown link origin without sending anyone to the CSP', () => {
     const dir = tree({ 'index.html': page('<a href="https://example.com/post">x</a>') });
 
