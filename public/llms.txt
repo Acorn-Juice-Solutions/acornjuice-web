@@ -14,6 +14,7 @@
 
 - [Articles (index)](https://www.acornjuice.com/articles/): Long-form pieces on regulation, software supply chain, infrastructure and applied AI, written from practice.
 - [Reporting vulnerabilities under the CRA](https://www.acornjuice.com/articles/cra-vulnerability-reporting/): What the Cyber Resilience Act requires since September 2026, who counts as a manufacturer, and the 24/72-hour and 14-day deadlines.
+- [What a meeting costs](https://www.acornjuice.com/articles/meeting-cost/): What a one-hour meeting costs a Spanish IT company, worked out from public data, and why asynchronous communication makes most alignment meetings unnecessary.
 
 ## Company
 
@@ -37,6 +38,7 @@
 - [Contador de descargas de GitHub](https://www.acornjuice.com/es/productos/contador-github/): Widget Android con el total de descargas de un repositorio público.
 - [Artículos](https://www.acornjuice.com/es/articulos/): Artículos sobre regulación, cadena de suministro, infraestructura e IA aplicada.
 - [Notificar vulnerabilidades bajo el CRA](https://www.acornjuice.com/es/articulos/cra-notificacion-vulnerabilidades/): Qué obliga el Cyber Resilience Act desde septiembre de 2026, a quién alcanza y con qué plazos.
+- [Lo que cuesta una reunión](https://www.acornjuice.com/es/articulos/coste-reuniones/): Cuánto cuesta una reunión de una hora en una empresa TIC española, calculado con datos públicos, y por qué la comunicación asíncrona hace innecesarias la mayoría de las reuniones de alineamiento.
 - [Privacidad](https://www.acornjuice.com/es/privacidad/)
 - [Cookies](https://www.acornjuice.com/es/cookies/)
 - [Aviso legal](https://www.acornjuice.com/es/aviso-legal/)
