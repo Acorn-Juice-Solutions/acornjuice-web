@@ -26,7 +26,9 @@ anyone asks, because a meeting is the one company expense that gets approved
 without seeing the price.
 
 <img
-  src="/assets/articles/meeting-cost-en.png"
+  src="/assets/articles/meeting-cost-en-640.webp"
+  srcset="/assets/articles/meeting-cost-en-640.webp 640w, /assets/articles/meeting-cost-en-960.webp 960w, /assets/articles/meeting-cost-en-1280.webp 1280w"
+  sizes="(max-width: 43rem) calc(100vw - 3rem), 40rem"
   alt="A meeting table seen from above with eight people around it: six tech staff, a manager and an executive. In the middle, a cube with two screens: one reads €325.26 and the other one hour. Below, the calculation: six tech staff at €34.47 an hour, a manager at €48.05 and an executive at €70.39."
   width="1200"
   height="1200"
