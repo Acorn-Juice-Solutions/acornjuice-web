@@ -26,7 +26,9 @@ casi nadie se lo pregunta, porque la reunión es el único gasto de la empresa
 que se aprueba sin ver el precio.
 
 <img
-  src="/assets/articles/coste-reuniones-es.png"
+  src="/assets/articles/coste-reuniones-es-640.webp"
+  srcset="/assets/articles/coste-reuniones-es-640.webp 640w, /assets/articles/coste-reuniones-es-960.webp 960w, /assets/articles/coste-reuniones-es-1280.webp 1280w"
+  sizes="(max-width: 43rem) calc(100vw - 3rem), 40rem"
   alt="Mesa de reuniones vista desde arriba con ocho personas alrededor: seis técnicos, un manager y un directivo. En el centro, un cubo con dos pantallas: una marca 325,26 euros y otra una hora. Debajo, el cálculo: seis técnicos a 34,47 euros la hora, un manager a 48,05 y un directivo a 70,39."
   width="1200"
   height="1200"
