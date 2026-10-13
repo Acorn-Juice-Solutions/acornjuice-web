@@ -1,7 +1,10 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import { STATIC_PAGE_PAIRS } from './src/utils/hreflang.ts';
-import { articlePagePairs } from './scripts/article-pairs.mjs';
+import {
+  articleListingSources,
+  articlePagePairs,
+} from './scripts/article-pairs.mjs';
 import { createLastmodResolver } from './scripts/lastmod.mjs';
 
 const SITE = 'https://www.acornjuice.com';
@@ -10,7 +13,16 @@ const SITE = 'https://www.acornjuice.com';
 // from the filesystem rather than from the content collection because this
 // config is evaluated before `astro:content` exists; src/utils/articles.ts is
 // the equivalent for everything that renders.
-const PAGE_PAIRS = [...STATIC_PAGE_PAIRS, ...articlePagePairs()];
+//
+// The article listing pages change whenever an article does, so they carry
+// every article entry as a <lastmod> source on top of their own route.
+const LISTING_SOURCES = articleListingSources();
+const PAGE_PAIRS = [
+  ...STATIC_PAGE_PAIRS.map((pair) =>
+    pair.en === '/articles/' ? { ...pair, sources: LISTING_SOURCES } : pair,
+  ),
+  ...articlePagePairs(),
+];
 
 // Index PAGE_PAIRS by both of its paths so a sitemap entry can find its twin.
 const pairByPath = new Map();
@@ -52,7 +64,7 @@ export default defineConfig({
 
         return {
           ...item,
-          lastmod: lastmodFor(new URL(item.url).pathname, pair.en),
+          lastmod: lastmodFor(new URL(item.url).pathname, pair),
           links: [
             { lang: 'en', url: SITE + pair.en },
             { lang: 'es', url: SITE + pair.es },
