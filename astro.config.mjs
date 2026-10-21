@@ -1,11 +1,9 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import { STATIC_PAGE_PAIRS } from './src/utils/hreflang.ts';
-import {
-  articleListingSources,
-  articlePagePairs,
-} from './scripts/article-pairs.mjs';
+import { articlePagePairs } from './scripts/article-pairs.mjs';
 import { createLastmodResolver } from './scripts/lastmod.mjs';
+import { withListingSources } from './scripts/listing-sources.mjs';
 
 const SITE = 'https://www.acornjuice.com';
 
@@ -14,13 +12,11 @@ const SITE = 'https://www.acornjuice.com';
 // config is evaluated before `astro:content` exists; src/utils/articles.ts is
 // the equivalent for everything that renders.
 //
-// The article listing pages change whenever an article does, so they carry
-// every article entry as a <lastmod> source on top of their own route.
-const LISTING_SOURCES = articleListingSources();
+// Fixed pages that render a whole collection (articles, products, makers)
+// carry every entry of it as a <lastmod> source on top of their own route;
+// scripts/listing-sources.mjs is the registry of which page renders which.
 const PAGE_PAIRS = [
-  ...STATIC_PAGE_PAIRS.map((pair) =>
-    pair.en === '/articles/' ? { ...pair, sources: LISTING_SOURCES } : pair,
-  ),
+  ...withListingSources(STATIC_PAGE_PAIRS),
   ...articlePagePairs(),
 ];
 
