@@ -20,6 +20,7 @@ const platform = z.enum([
   'linux',
   'web',
   'github',
+  'meta-quest',
 ]);
 
 const productStatus = z.enum([
@@ -60,6 +61,13 @@ const products = defineCollection({
           github: z.url().optional(),
         })
         .default({}),
+      /** Site paths of a product-specific privacy policy, when it has one. */
+      privacyPolicy: z
+        .object({
+          en: z.string().regex(/^\/[a-z0-9/-]*\/$/, 'must be a site path'),
+          es: z.string().regex(/^\/[a-z0-9/-]*\/$/, 'must be a site path'),
+        })
+        .optional(),
       icon: z.string().min(1),
       screenshots: z.array(z.string()).default([]),
       status: productStatus,

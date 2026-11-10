@@ -83,10 +83,11 @@ function newestMtime(root, files) {
 /**
  * Source files that genuinely determine a page's content, relative to `root`.
  * `pair` is the page's hreflang pair. `pair.sources[locale]` lists the content
- * entries behind the page (see scripts/article-pairs.mjs): one file for an
- * article, every article for a listing, nothing for the rest. Product pages
- * have no registered sources, so their entry is derived from the English
- * slug: /es/productos/contador-github/ is rendered from
+ * entries behind the page: one file for an article (scripts/article-pairs.mjs),
+ * every entry of a collection for the fixed pages that render one
+ * (scripts/listing-sources.mjs), nothing for the rest. Product pages have no
+ * registered sources, so their entry is derived from the English slug:
+ * /es/productos/contador-github/ is rendered from
  * src/content/products/github-counter.md.
  *
  * Exported for the unit tests; the build only uses createLastmodResolver().

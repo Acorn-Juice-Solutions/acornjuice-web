@@ -37,6 +37,7 @@ const platformLabels: Record<string, string> = {
   linux: 'Linux',
   web: 'Web',
   github: 'GitHub',
+  'meta-quest': 'Meta Quest',
 };
 
 const urlEntries = Object.entries(data.urls).filter(([, v]) => Boolean(v)) as [
@@ -163,6 +164,16 @@ const metaDescription = tagline;
               <h2>{t('product_page.coming_soon_heading')}</h2>
               <p class="coming-soon">{t('product_page.coming_soon_body')}</p>
             </>
+          )
+        }
+
+        {
+          data.privacyPolicy && (
+            <p>
+              <a href={data.privacyPolicy[locale]}>
+                {t('product_page.privacy_link')}
+              </a>
+            </p>
           )
         }
 

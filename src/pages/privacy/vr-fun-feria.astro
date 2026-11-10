@@ -1,0 +1,155 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import { useTranslator } from '~/utils/i18n';
+import { webpageNode } from '~/utils/seo';
+
+const locale = 'en' as const;
+const t = useTranslator(locale);
+
+const title = t('meta.vr_fun_feria_privacy_title');
+const description = t('meta.vr_fun_feria_privacy_description');
+const canonical = 'https://www.acornjuice.com/privacy/vr-fun-feria/';
+
+// This URL is registered in the Meta Developer Dashboard, which checks it
+// periodically: do not move it. Restate this text before shipping any build
+// that adds internet access or the Meta Platform SDK purchase check.
+const lastUpdated = '2026-11-10';
+const supportEmail = 'vrfunferia-support@acornjuice.com';
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  hideConsentBanner={true}
+  extraGraphNodes={[
+    webpageNode({ url: canonical, name: title, description, locale }),
+  ]}
+  pageType="privacy"
+>
+  <article class="legal-page">
+    <div class="container container-narrow">
+      <header>
+        <h1>VR Fun Feria: Privacy Policy</h1>
+        <p class="last-updated">Last updated: {lastUpdated}</p>
+      </header>
+
+      <section aria-labelledby="game-summary">
+        <h2 id="game-summary">Summary</h2>
+        <p>
+          VR Fun Feria is a game for Meta Quest headsets. We do not collect,
+          receive or share any personal data through the game. It does not
+          connect to the internet and has no accounts, ads or analytics.
+        </p>
+      </section>
+
+      <section aria-labelledby="game-controller">
+        <h2 id="game-controller">Who is responsible</h2>
+        <p>
+          <strong>ACORN JUICE SOLUTIONS SL</strong>, VAT ID
+          <strong>ESB71336218</strong>, Calle Bosquecillo, 6, 31191, Beriáin
+          (Navarra), Spain.
+        </p>
+        <p>Contact: <a href={`mailto:${supportEmail}`}>{supportEmail}</a>.</p>
+      </section>
+
+      <section aria-labelledby="game-device">
+        <h2 id="game-device">Data stored on your headset</h2>
+        <p>
+          The following stays on your headset and never reaches us. The game
+          uses it to show the score boards and remember your settings:
+        </p>
+        <ul>
+          <li>The names you type on the score boards.</li>
+          <li>
+            Your scores. Daily boards restart each day; all-time best scores
+            are kept.
+          </li>
+          <li>Your language preference.</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="game-hands">
+        <h2 id="game-hands">Hand tracking</h2>
+        <p>
+          The game uses the hand positions provided by your headset, in real
+          time, so that you can play. It does not store or send them.
+        </p>
+      </section>
+
+      <section aria-labelledby="game-support">
+        <h2 id="game-support">If you write to us</h2>
+        <p>
+          If you contact support, we use your email address and your message
+          only to reply to you. We keep them for up to 2 years after our last
+          exchange, unless you ask us to delete them sooner.
+        </p>
+      </section>
+
+      <section aria-labelledby="game-meta">
+        <h2 id="game-meta">Meta</h2>
+        <p>
+          Your headset and your Meta account are governed by
+          <a
+            href="https://www.meta.com/legal/privacy-policy/"
+            target="_blank"
+            rel="noopener noreferrer">Meta's own privacy policy</a
+          >.
+        </p>
+      </section>
+
+      <section aria-labelledby="game-delete">
+        <h2 id="game-delete">Deleting your data and your rights</h2>
+        <p>
+          Uninstalling the game deletes everything it has stored. We hold no
+          copy.
+        </p>
+        <p>
+          To ask about your data or to have your support messages deleted,
+          write to <a href={`mailto:${supportEmail}`}>{supportEmail}</a>. You
+          may also file a complaint with the
+          <strong>Spanish Data Protection Agency (AEPD)</strong> at
+          <a href="https://www.aepd.es" target="_blank" rel="noopener noreferrer">www.aepd.es</a>.
+        </p>
+      </section>
+
+      <section aria-labelledby="game-children">
+        <h2 id="game-children">Children</h2>
+        <p>
+          The game does not collect personal data from anyone, including
+          children. Anyone under 14 should not write to support without the
+          authorisation of a parent or legal guardian.
+        </p>
+      </section>
+
+      <section aria-labelledby="game-changes">
+        <h2 id="game-changes">Changes</h2>
+        <p>
+          If a future version of the game handles data differently, we will
+          update this page and its date before releasing that version.
+        </p>
+      </section>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .legal-page {
+    padding-block: var(--space-8) var(--space-12);
+  }
+  .container-narrow {
+    max-width: var(--reading-max);
+    margin-inline: auto;
+  }
+  h1 {
+    font-size: var(--text-4xl);
+  }
+  h2 {
+    font-size: var(--text-xl);
+    margin-top: var(--space-6);
+  }
+  .last-updated {
+    color: var(--color-ink-soft);
+    font-size: var(--text-sm);
+    margin-bottom: var(--space-6);
+  }
+</style>

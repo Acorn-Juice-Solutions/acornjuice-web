@@ -27,8 +27,13 @@ export const STATIC_PAGE_PAIRS: readonly PagePair[] = [
   { en: '/products/sosnav/', es: '/es/productos/sosnav/' },
   { en: '/products/sweet-enough/', es: '/es/productos/sweet-enough/' },
   { en: '/products/github-counter/', es: '/es/productos/contador-github/' },
+  { en: '/products/vr-fun-feria/', es: '/es/productos/vr-fun-feria/' },
   { en: '/articles/', es: '/es/articulos/' },
   { en: '/privacy/', es: '/es/privacidad/' },
+  {
+    en: '/privacy/vr-fun-feria/',
+    es: '/es/privacidad/vr-fun-feria/',
+  },
   { en: '/cookies/', es: '/es/cookies/' },
   { en: '/legal/', es: '/es/aviso-legal/' },
   { en: '/thanks/', es: '/es/gracias/', noindex: true },
