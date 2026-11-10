@@ -1,10 +1,7 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import { STATIC_PAGE_PAIRS } from './src/utils/hreflang.ts';
-import {
-  articleListingSources,
-  articlePagePairs,
-} from './scripts/article-pairs.mjs';
+import { articlePagePairs } from './scripts/article-pairs.mjs';
 import { createLastmodResolver } from './scripts/lastmod.mjs';
 import { withListingSources } from './scripts/listing-sources.mjs';
 

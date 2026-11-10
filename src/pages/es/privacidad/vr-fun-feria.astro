@@ -1,0 +1,155 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import { useTranslator } from '~/utils/i18n';
+import { webpageNode } from '~/utils/seo';
+
+const locale = 'es' as const;
+const t = useTranslator(locale);
+
+const title = t('meta.vr_fun_feria_privacy_title');
+const description = t('meta.vr_fun_feria_privacy_description');
+const canonical = 'https://www.acornjuice.com/es/privacidad/vr-fun-feria/';
+
+// Versión española de /privacy/vr-fun-feria/. Mantener las dos iguales: la URL
+// inglesa está registrada en el Dashboard de Meta y no debe moverse.
+const lastUpdated = '10/11/2026';
+const supportEmail = 'vrfunferia-support@acornjuice.com';
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  hideConsentBanner={true}
+  extraGraphNodes={[
+    webpageNode({ url: canonical, name: title, description, locale }),
+  ]}
+  pageType="privacy"
+>
+  <article class="legal-page">
+    <div class="container container-narrow">
+      <header>
+        <h1>VR Fun Feria: Política de Privacidad</h1>
+        <p class="last-updated">Última actualización: {lastUpdated}</p>
+      </header>
+
+      <section aria-labelledby="game-summary">
+        <h2 id="game-summary">Resumen</h2>
+        <p>
+          VR Fun Feria es un juego para visores Meta Quest. A través del juego
+          no recogemos, recibimos ni compartimos ningún dato personal. No se
+          conecta a internet y no tiene cuentas, anuncios ni analítica.
+        </p>
+      </section>
+
+      <section aria-labelledby="game-controller">
+        <h2 id="game-controller">Responsable</h2>
+        <p>
+          <strong>ACORN JUICE SOLUTIONS SL</strong>, NIF
+          <strong>ESB71336218</strong>, Calle Bosquecillo, 6, 31191, Beriáin
+          (Navarra), España.
+        </p>
+        <p>Contacto: <a href={`mailto:${supportEmail}`}>{supportEmail}</a>.</p>
+      </section>
+
+      <section aria-labelledby="game-device">
+        <h2 id="game-device">Datos guardados en tu visor</h2>
+        <p>
+          Lo siguiente se queda en tu visor y nunca nos llega. El juego lo usa
+          para mostrar los tablones y recordar tus ajustes:
+        </p>
+        <ul>
+          <li>Los nombres que escribes en los tablones de puntuación.</li>
+          <li>
+            Tus puntuaciones. Los tablones diarios empiezan de cero cada día;
+            los récords de siempre se conservan.
+          </li>
+          <li>Tu preferencia de idioma.</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="game-hands">
+        <h2 id="game-hands">Seguimiento de manos</h2>
+        <p>
+          El juego usa en tiempo real las posiciones de las manos que le da tu
+          visor, para que puedas jugar. No las guarda ni las envía.
+        </p>
+      </section>
+
+      <section aria-labelledby="game-support">
+        <h2 id="game-support">Si nos escribes</h2>
+        <p>
+          Si contactas con soporte, usamos tu dirección de correo y tu mensaje
+          solo para responderte. Los conservamos hasta 2 años desde nuestro
+          último intercambio, salvo que nos pidas borrarlos antes.
+        </p>
+      </section>
+
+      <section aria-labelledby="game-meta">
+        <h2 id="game-meta">Meta</h2>
+        <p>
+          Tu visor y tu cuenta de Meta se rigen por la
+          <a
+            href="https://www.meta.com/legal/privacy-policy/"
+            target="_blank"
+            rel="noopener noreferrer">política de privacidad de Meta</a
+          >.
+        </p>
+      </section>
+
+      <section aria-labelledby="game-delete">
+        <h2 id="game-delete">Borrar tus datos y tus derechos</h2>
+        <p>
+          Al desinstalar el juego se borra todo lo que ha guardado. Nosotros no
+          tenemos ninguna copia.
+        </p>
+        <p>
+          Para preguntar por tus datos o pedir que borremos tus mensajes a
+          soporte, escribe a
+          <a href={`mailto:${supportEmail}`}>{supportEmail}</a>. También puedes
+          presentar una reclamación ante la
+          <strong>Agencia Española de Protección de Datos (AEPD)</strong> en
+          <a href="https://www.aepd.es" target="_blank" rel="noopener noreferrer">www.aepd.es</a>.
+        </p>
+      </section>
+
+      <section aria-labelledby="game-children">
+        <h2 id="game-children">Menores</h2>
+        <p>
+          El juego no recoge datos personales de nadie, tampoco de menores. Las
+          personas menores de 14 años no deben escribir a soporte sin la
+          autorización de su madre, padre o representante legal.
+        </p>
+      </section>
+
+      <section aria-labelledby="game-changes">
+        <h2 id="game-changes">Cambios</h2>
+        <p>
+          Si una versión futura del juego trata los datos de otra forma,
+          actualizaremos esta página y su fecha antes de publicarla.
+        </p>
+      </section>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .legal-page {
+    padding-block: var(--space-8) var(--space-12);
+  }
+  .container-narrow {
+    max-width: var(--reading-max);
+    margin-inline: auto;
+  }
+  h1 {
+    font-size: var(--text-4xl);
+  }
+  h2 {
+    font-size: var(--text-xl);
+    margin-top: var(--space-6);
+  }
+  .last-updated {
+    color: var(--color-ink-soft);
+    font-size: var(--text-sm);
+    margin-bottom: var(--space-6);
+  }
+</style>

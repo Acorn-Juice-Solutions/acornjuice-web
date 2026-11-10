@@ -8,6 +8,7 @@
 - [SOSNav](https://www.acornjuice.com/products/sosnav/): Mobile utility that shows on-call pharmacies and emergency service locations in Navarra, Spain. iOS and Android.
 - [Sweet Enough](https://www.acornjuice.com/products/sweet-enough/): Minimal home-screen widget for iOS and Android that shows your current blood glucose reading at a glance.
 - [GitHub Download Counter](https://www.acornjuice.com/products/github-counter/): Android home-screen widget that shows the total download count of any public GitHub repository's releases.
+- [VR Fun Feria](https://www.acornjuice.com/products/vr-fun-feria/): A whole funfair played with bare hands on Meta Quest. Coming soon.
 - [All products (index)](https://www.acornjuice.com/products/): Full product catalogue.
 
 ## Articles
@@ -24,6 +25,7 @@
 ## Legal
 
 - [Privacy policy](https://www.acornjuice.com/privacy/)
+- [VR Fun Feria privacy policy](https://www.acornjuice.com/privacy/vr-fun-feria/)
 - [Cookie policy](https://www.acornjuice.com/cookies/)
 - [Legal notice](https://www.acornjuice.com/legal/)
 
@@ -36,10 +38,12 @@
 - [SOSNav](https://www.acornjuice.com/es/productos/sosnav/): Farmacias de guardia y servicios de emergencia en Navarra (iOS y Android).
 - [Sweet Enough](https://www.acornjuice.com/es/productos/sweet-enough/): Widget para pantalla de inicio con tu glucosa actual (iOS y Android).
 - [Contador de descargas de GitHub](https://www.acornjuice.com/es/productos/contador-github/): Widget Android con el total de descargas de un repositorio público.
+- [VR Fun Feria](https://www.acornjuice.com/es/productos/vr-fun-feria/): Una feria entera que se juega con las manos en Meta Quest. Próximamente.
 - [Artículos](https://www.acornjuice.com/es/articulos/): Artículos sobre regulación, cadena de suministro, infraestructura e IA aplicada.
 - [Notificar vulnerabilidades bajo el CRA](https://www.acornjuice.com/es/articulos/cra-notificacion-vulnerabilidades/): Qué obliga el Cyber Resilience Act desde septiembre de 2026, a quién alcanza y con qué plazos.
 - [Lo que cuesta una reunión](https://www.acornjuice.com/es/articulos/coste-reuniones/): Cuánto cuesta una reunión de una hora en una empresa TIC española, calculado con datos públicos, y por qué la comunicación asíncrona hace innecesarias la mayoría de las reuniones de alineamiento.
 - [Privacidad](https://www.acornjuice.com/es/privacidad/)
+- [Privacidad de VR Fun Feria](https://www.acornjuice.com/es/privacidad/vr-fun-feria/)
 - [Cookies](https://www.acornjuice.com/es/cookies/)
 - [Aviso legal](https://www.acornjuice.com/es/aviso-legal/)
 

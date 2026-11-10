@@ -54,6 +54,7 @@ const LINK = new Set([
   'https://vimeo.com',
   'https://www.producthunt.com',
   'https://www.aepd.es',               // privacy policy reference
+  'https://www.meta.com',              // Meta privacy policy, VR Fun Feria policy
 
   // Cited in the "sources" block of an article; rendered only as <a href>,
   // never fetched. Keep alongside the article that introduced them.
